@@ -1,0 +1,5 @@
+import 'dart:async';import 'dart:html' as html;import 'package:flutter/services.dart';import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+
+    /// Plugin Class to show a toast message on screen for webclass FluttertoastWebPlugin {/// Constructor class/// which calls the metohd to inject JS and CSS in to domFluttertoastWebPlugin() {injectCssAndJSLibraries();}
+
+    /// Registers [MethodChannel] used to communicate with the platfo

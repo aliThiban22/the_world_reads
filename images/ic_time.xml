@@ -1,0 +1,2 @@
+## To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html#Pod::Spec.new do |s|s.name             = 'fluttertoast's.version          = '0.0.2's.summary          = 'Toast Library for Flutter's.description      =
+<<-DESCToast Library for FLutterDESCs.homepage         = 'http://example.com's.license          = { :file => '../LICENSE' }s.author           = { 'Karthik Ponnam' => 'ponnamkarthik3@g

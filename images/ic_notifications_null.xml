@@ -1,0 +1,21 @@
+#include "win32_window.h"
+
+    #include
+<flutter_windows.h>
+
+    #include "resource.h"
+
+    namespace {
+
+    constexpr const wchar_t kWindowClassName[] = L"FLUTTER_RUNNER_WIN32_WINDOW";
+
+    // The number of Win32Window objects that currently exist.
+    static int g_active_window_count = 0;
+
+    using EnableNonClientDpiScaling = BOOL __stdcall(HWND hwnd);
+
+    // Scale helper to convert logical scaler values to physical using passed in
+    // scale factor
+    int Scale(int source, double scale_factor) {
+    return static_cast
+    <int>(source * scale_factor

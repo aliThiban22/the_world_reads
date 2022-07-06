@@ -1,0 +1,11 @@
+package io.github.ponnamkarthik.toast.fluttertoast
+
+    import android.content.Contextimport io.flutter.embedding.engine.plugins.FlutterPluginimport io.flutter.plugin.common.BinaryMessengerimport io.flutter.plugin.common.MethodChannelimport io.flutter.plugin.common.PluginRegistry.Registrar
+
+    /** FlutterToastPlugin */public class FlutterToastPlugin: FlutterPlugin {
+
+    private var channel : MethodChannel? = null
+
+    companion object {@JvmStaticfun registerWith(registrar: Registrar) {val plugin = FlutterToastPlugin()plugin.setupChannel(registrar.messenger(), registrar.context())}}
+
+    override fun onAttachedToEngine(binding:
