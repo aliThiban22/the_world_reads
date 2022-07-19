@@ -28,7 +28,7 @@ class User_Item {
       name: json['name'],
       about: json['about'],
       email: json['email'],
-      password: json['password'],
+      password: json['password'].toString(),
       sex: json['sex'],
       age: json['age'],
       city: json['city'],

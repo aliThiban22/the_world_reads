@@ -44,14 +44,9 @@ dependencies:
   flutter_progress_button:
   fluttertoast:
   webviewx:
-#  pointer_interceptor: ^0.9.0+1
-#  uuid: ^3.0.4
-#  webview_flutter: ^2.0.13
   flutter_rating_bar:
   toggle_bar:
-#  audioplayers:
-#  path_provider:
-#  image_picker:
+  audioplayers: ^0.20.1
 
 dev_dependencies:
   flutter_test:

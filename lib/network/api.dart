@@ -8,6 +8,7 @@ import '../Admin/app_data.dart';
 import '../Comment/comment_item.dart';
 import '../Kadamat/kadamat_item.dart';
 import '../Loves/like_item.dart';
+import '../Media_Audio/audio_item.dart';
 import '../Media_Book/book_item.dart';
 import '../Quotes/quotes_item.dart';
 import '../Stars/stars_item.dart';
@@ -57,10 +58,12 @@ class API {
         }));
 
     if (response.statusCode == 200) {
-//      print(response.body);
-      App_Data.user_item = User_Item.fromJson(json.decode(response.body));
+      print(response.body);
+
       if (User_Item.fromJson(json.decode(response.body)).id != null) {
+
         return User_Item.fromJson(json.decode(response.body));
+
       } else {
         Fluttertoast.showToast(
             msg: 'الايميل او كلمة المرور غير صحيحة!',
@@ -69,6 +72,7 @@ class API {
             backgroundColor: Colors.red,
             textColor: Colors.yellow);
       }
+
     } else {
       Fluttertoast.showToast(
           msg: _erorr,
@@ -122,6 +126,48 @@ class API {
     }
   }
 
+  // تعديل بيانات المستخدم
+  static Future<User_Item> User_Updata(String name, String email, String password, int age, String country) async {
+    final Response response = await post(Uri.parse('$MAIN_URL/User_Updata.php'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          "id": await User_Data.getUserDataId(),
+          "name": name,
+          "about": " ",
+          "email": email,
+          "password": password,
+          "sex": 1,
+          "age": age,
+          "city": " ",
+          "country": country,
+          "img": " ",
+        }));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      if (User_Item.fromJson(json.decode(response.body)).id != null) {
+        return User_Item.fromJson(json.decode(response.body));
+      } else {
+        Fluttertoast.showToast(
+            msg: 'الايميل او كلمة المرور غير صحيحة!',
+            toastLength: Toast.LENGTH_SHORT,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.red,
+            textColor: Colors.yellow);
+      }
+    } else {
+      Fluttertoast.showToast(
+          msg: _erorr,
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+    }
+  }
+
+
 //    // --------------------------------| عمليات الشراء |-----------------------------
   static Future<PayItem> Pay_Real_Get() async {
     final Response response = await post(
@@ -130,7 +176,7 @@ class API {
           'Content-Type': 'application/json;charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          "key_user": App_Data.getUserID(),
+          "key_user": await User_Data.getUserDataId(),
         }));
 
     if (response.statusCode == 200) {
@@ -166,7 +212,7 @@ class API {
           'Content-Type': 'application/json;charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          "key_user": App_Data.getUserID(),
+          "key_user": await User_Data.getUserDataId(),
         }));
 
     if (response.statusCode == 200) {
@@ -206,7 +252,7 @@ class API {
           "number_song_year": number_song_year,
           "number_song_year_done": 0,
           "number_year": number_year,
-          "key_user": App_Data.getUserID()
+          "key_user": await User_Data.getUserDataId()
         }));
 
     if (response.statusCode == 200) {
@@ -252,7 +298,7 @@ class API {
           "number_song_year": number_song_year,
           "number_song_year_done": number_song_year_done,
           "number_year": number_year,
-          "key_user": App_Data.getUserID()
+          "key_user": await User_Data.getUserDataId()
         }));
 
     if (response.statusCode == 200) {
@@ -285,7 +331,7 @@ class API {
         headers: <String, String>{
           'Content-Type': 'application/json;charset=UTF-8'
         },
-        body: jsonEncode(<String, dynamic>{"key_user": App_Data.getUserID()}));
+        body: jsonEncode(<String, dynamic>{"key_user": await User_Data.getUserDataId()}));
 
     if (response.statusCode == 200) {
 //      print(response.body);
@@ -319,7 +365,7 @@ class API {
           "start_date": start_date,
           "number_pages_end": 0,
           "done": 1,
-          "key_user": App_Data.getUserID()
+          "key_user": await User_Data.getUserDataId()
         }));
 
     if (response.statusCode == 200) {
@@ -389,7 +435,7 @@ class API {
         headers: <String, String>{
           'Content-Type': 'application/json;charset=UTF-8'
         },
-        body: jsonEncode(<String, dynamic>{"key_user": App_Data.getUserID()}));
+        body: jsonEncode(<String, dynamic>{"key_user": await User_Data.getUserDataId()}));
 
     if (response.statusCode == 200) {
 //      print(response.body);
@@ -430,7 +476,7 @@ class API {
           "start_date": start_date,
           "time_end": 0,
           "done": 1,
-          "key_user": App_Data.getUserID()
+          "key_user": await User_Data.getUserDataId()
         }));
 
     if (response.statusCode == 200) {
@@ -566,7 +612,7 @@ class API {
           'Content-Type': 'application/json;charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          "key_user": App_Data.getUserID(),
+          "key_user": await User_Data.getUserDataId(),
         }));
 
     if (response.statusCode == 200) {
@@ -610,7 +656,7 @@ class API {
           "number_search": number_search,
           "number_book": number_book,
           "number_year": number_year,
-          "key_user": App_Data.getUserID()
+          "key_user": await User_Data.getUserDataId()
         }));
 
     if (response.statusCode == 200) {
@@ -656,7 +702,7 @@ class API {
           "number_search": number_search,
           "number_book": number_book,
           "number_year": number_year,
-          "key_user": App_Data.getUserID()
+          "key_user": await User_Data.getUserDataId()
         }));
 
     if (response.statusCode == 200) {
@@ -733,7 +779,7 @@ class API {
         headers: <String, String>{
           'Content-Type': 'application/json;charset=UTF-8'
         },
-        body: jsonEncode(<String, dynamic>{"key_user": App_Data.getUserID()}));
+        body: jsonEncode(<String, dynamic>{"key_user": await User_Data.getUserDataId()}));
 
     if (response.statusCode == 200) {
 //      print(response.body);
@@ -765,7 +811,7 @@ class API {
           "title": title,
           "number_page": number_page,
           "start_date": start_date,
-          "key_user": App_Data.getUserID()
+          "key_user": await User_Data.getUserDataId()
         }));
 
     if (response.statusCode == 200) {
@@ -807,7 +853,7 @@ class API {
           "number_page_end": number_page_end,
           "done": done,
           "start_date": start_date,
-          "key_user": App_Data.getUserID()
+          "key_user": await User_Data.getUserDataId()
         }));
 
     if (response.statusCode == 200) {
@@ -841,7 +887,7 @@ class API {
         headers: <String, String>{
           'Content-Type': 'application/json;charset=UTF-8'
         },
-        body: jsonEncode(<String, dynamic>{"key_user": App_Data.getUserID()}));
+        body: jsonEncode(<String, dynamic>{"key_user": await User_Data.getUserDataId()}));
 
     if (response.statusCode == 200) {
 //      print(response.body);
@@ -867,7 +913,7 @@ class API {
         headers: <String, String>{
           'Content-Type': 'application/json;charset=UTF-8'
         },
-        body: jsonEncode(<String, dynamic>{"key_user": App_Data.getUserID()}));
+        body: jsonEncode(<String, dynamic>{"key_user": await User_Data.getUserDataId()}));
 
     if (response.statusCode == 200) {
 //      print(response.body);
@@ -899,7 +945,7 @@ class API {
           "number_book": number_book,
           "number_minutes": number_minutes,
           "store_date": store_date,
-          "key_user": App_Data.getUserID()
+          "key_user": await User_Data.getUserDataId()
         }));
 
     if (response.statusCode == 200) {
@@ -944,7 +990,7 @@ class API {
           "number_pages": number_pages,
           "number_hours": 0,
           "store_date": store_date,
-          "key_user": App_Data.getUserID()
+          "key_user": await User_Data.getUserDataId()
         }));
 
     if (response.statusCode == 200) {
@@ -996,6 +1042,32 @@ class API {
   }
 
 //    // --------------------------------| الكتب |-----------------------------
+  // البحث للكتب
+  static Future<List<Book_Item>> Book_Find(String title) async {
+    final Response response = await post(
+        Uri.parse('$MAIN_URL/Book_Find.php'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{"title": title}));
+
+    if (response.statusCode == 200) {
+     print(response.body);
+//    return FoodItemApi.fromJson(json.decode(response.body));
+      final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+      return parsed.map<Book_Item>((item) => Book_Item.fromJson(item)).toList();
+    } else {
+      Fluttertoast.showToast(
+          msg: _erorr,
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+    }
+  }
+
+
+
   // جميع الكتب
   static Future<List<Book_Item>> Book_Get_All() async {
     final Response response = await post(
@@ -1110,7 +1182,7 @@ class API {
         body: jsonEncode(<String, dynamic>{
           "comments": comment,
           "key_book": key_book,
-          "key_user": App_Data.getUserID(),
+          "key_user": await User_Data.getUserDataId(),
           "type": 1
         }));
 
@@ -1174,7 +1246,7 @@ class API {
         body: jsonEncode(<String, dynamic>{
           "comments": comment,
           "key_book": key_book,
-          "key_user": App_Data.getUserID(),
+          "key_user": await User_Data.getUserDataId(),
           "type": 1
         }));
 
@@ -1207,7 +1279,7 @@ class API {
           'Content-Type': 'application/json;charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          "key_user": App_Data.getUserID(),
+          "key_user": await User_Data.getUserDataId(),
           "key_book": keyBook
         }));
 
@@ -1234,7 +1306,7 @@ class API {
         },
         body: jsonEncode(<String, dynamic>{
           "love": 1,
-          "key_user": keyUser,
+          "key_user": await User_Data.getUserDataId(),
           "key_book": key_book,
         }));
 
@@ -1263,7 +1335,7 @@ class API {
         },
         body: jsonEncode(<String, dynamic>{
           "star": star,
-          "key_user": keyUser,
+          "key_user": await User_Data.getUserDataId(),
           "key_book": key_book,
         }));
 
@@ -1314,4 +1386,29 @@ class API {
       }
     }
   }
+
+//    // --------------------------------| الصوتيات |-----------------------------
+  static Future<Audio_item> Song_Get(int keyBook) async {
+    final Response response = await post(Uri.parse('$MAIN_URL/Song_Get.php'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{"key_book": keyBook}));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+//    return FoodItemApi.fromJson(json.decode(response.body));
+      if (Audio_item.fromJson(json.decode(response.body)) != null) {
+        return Audio_item.fromJson(json.decode(response.body));
+      } else {
+        Fluttertoast.showToast(
+            msg: "لا توجد تقييمات للكتاب",
+            toastLength: Toast.LENGTH_SHORT,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.red,
+            textColor: Colors.yellow);
+      }
+    }
+  }
+
 }

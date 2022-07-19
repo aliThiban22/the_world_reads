@@ -15,6 +15,7 @@ class User_Data {
       String img) async {
     // تخزين البيانات
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
 
     prefs.setInt("id", id);
     prefs.setString("name", name);
@@ -52,7 +53,7 @@ class User_Data {
     item.sex = prefs.getInt("sex");
     item.age = prefs.getInt("age");
     item.city = prefs.getString("city");
-    item.country = prefs.getString(prefs.getString("country"));
+    item.country = prefs.getString("country");
     item.img = prefs.getString("img");
 
     return item;

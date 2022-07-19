@@ -1,7 +1,8 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webviewx/webviewx.dart';
 
+import '../Media_Audio/audio_item.dart';
 import '../network/api.dart';
 import 'book_item.dart';
 
@@ -18,10 +19,48 @@ class _Book_ReadState extends State<Book_Read> {
   Size get screenSize => MediaQuery.of(context).size;
   WebViewXController webviewController;
 
+  // خاص بالصوت
+  Audio_item audio_item = new Audio_item();
+  String Url ='';
+  AudioPlayer player;
+  bool isPlaying =false;
+  Duration currentPostion = Duration();
+  Duration musicLength = Duration();
 
   @override
   void initState() {
     super.initState();
+    player = AudioPlayer();
+    setUp();
+    get_data_audio();
+  }
+
+  get_data_audio() async {
+    audio_item = await API.Song_Get(widget._book_item.id);
+    Url = API.URL_SONG + audio_item.url ;
+    setState(() {
+
+    });
+  }
+
+
+  setUp(){
+    player.onAudioPositionChanged.listen((d) {
+      // Give us the current position of the Audio file
+      setState(() {
+        currentPostion = d;
+      });
+
+      player.onDurationChanged.listen((d) {
+        //Returns the duration of the audio file
+        setState(() {
+          musicLength = d;
+        });
+
+      });
+
+    });
+
   }
 
 
@@ -65,13 +104,11 @@ class _Book_ReadState extends State<Book_Read> {
               child: Column(
                 children: [
                   Expanded(
-                      flex: 6,
+                      flex: 5,
                       child: WebViewX(
                         initialContent:
-                        // "http://www.storys.esy.es/book/reading/reader.php?id=%D8%A7%D9%84%D8%B5%D8%AD%D8%A7%D9%81%D8%A9_%D8%A7%D9%84%D9%85%D8%AA%D8%AE%D8%B5%D8%B5%D8%A9.epub",
-//                        "http://www.storys.esy.es/book/reading/reader.php?id=${widget._book_item.book_url.toString()}",
-//          'https://flutter.dev',
-         'https://c-yemhs.org/test/QiuReader/reader.html',
+//                         "http://www.storys.esy.es/book/reading/reader.php?id=%D8%A7%D9%84%D8%B5%D8%AD%D8%A7%D9%81%D8%A9_%D8%A7%D9%84%D9%85%D8%AA%D8%AE%D8%B5%D8%B5%D8%A9.epub",
+                        "http://www.storys.esy.es/book/reading/reader.php?id=${widget._book_item.book_url.toString()}",
                         initialSourceType: SourceType.url,
                         height: MediaQuery.of(context).size.height,
                         width: MediaQuery.of(context).size.width,
@@ -110,11 +147,11 @@ class _Book_ReadState extends State<Book_Read> {
                         //   return NavigationDecision.navigate;
                         // },
                       )),
-//TODO
-//                  Expanded(
-//                    flex: 1,
-//                    child: get_AudioPlayers(),
-//                  )
+
+                  Expanded(
+                    flex: 1,
+                    child: get_AudioPlayers(),
+                  )
                 ],
               )),
         ),
@@ -133,5 +170,101 @@ class _Book_ReadState extends State<Book_Read> {
       );
   }
 
+  Widget get_AudioPlayers(){
+    return Container(
+      child: Card(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        elevation: 10,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Center(child: Text('${currentPostion.inSeconds}')),
+                Container(
+                  width: 260,
+                    child: Slider(
+                        value: currentPostion.inSeconds.toDouble(),
+                        max: musicLength.inSeconds.toDouble(),
+                        onChanged: (val) {
+                          seekTo(val.toInt());
+                        })
+                ),
+                Center(child: Text('${musicLength.inSeconds}')),
+              ],
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.first_page), iconSize: 35,
+                  onPressed: () {
+                    if (currentPostion.inSeconds == 0 ||
+                        currentPostion.inSeconds < 10) {
+                      seekTo(0);
+                    } else if (currentPostion.inSeconds > 10) {
+                      seekTo(currentPostion.inSeconds - 10);
+                    }
+                  },),
+                IconButton(onPressed: () {
+                  if (isPlaying) {
+                    setState(() {
+                      isPlaying = false;
+                    });
+                    stopMusic();
+                  }
+                  else {
+                    setState(() {
+                      isPlaying = true;
+                    });
+                    playMusic(Url);
+                  }
+                },
+                  icon: isPlaying ? Icon(Icons.pause) :
+                  Icon(Icons.play_arrow), iconSize: 35,),
+
+                IconButton(
+                  icon: Icon(Icons.last_page), iconSize: 35,
+                  onPressed: () {
+                    if (currentPostion < musicLength - Duration(seconds: 10)) {
+                      seekTo(currentPostion.inSeconds + 10);
+                    } else {}
+                  },
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+
+  playMusic(String song)
+  { // to play the Audio
+//    await player.play(Url);
+
+    player.play(song);
+  }
+  stopMusic()
+  {// to pause the Audio
+    player.pause();
+  }
+  seekTo(int sec)
+  {// To seek the audio to a new position
+    player.seek(Duration(seconds: sec));
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    player.dispose();
+  }
 
 }

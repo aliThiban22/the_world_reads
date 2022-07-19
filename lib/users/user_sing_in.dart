@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:the_world_reads/Admin/privacy_policy.dart';
 import 'package:the_world_reads/users/user_data.dart';
 import 'package:the_world_reads/users/user_sign_up.dart';
 import 'package:the_world_reads/users/user_updata.dart';
@@ -59,18 +60,19 @@ class _UserSingInState extends State<UserSingIn> {
 
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Center(
-                  child: Image.asset(
-                    'images/icon_app_type_b.png',
-                  ),
-                ),
-              ),
+//              Padding(
+//                padding: const EdgeInsets.all(20.0),
+//                child: Center(
+//                  child: Image.asset(
+//                    'images/icon_app_type_b.png',
+//                    height: 40,
+//                  ),
+//                ),
+//              ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: IconButton(
@@ -86,10 +88,12 @@ class _UserSingInState extends State<UserSingIn> {
           SizedBox(
             height: 20,
           ),
-          Image.asset(
-            'images/ic_users.png',
-          ),
+          Image.asset('images/ic_users.png',),
+
           Text(name, style: TextStyle(color: Colors.teal, fontSize: 20)),
+
+          const Divider(),
+
           Directionality(
               textDirection: TextDirection.rtl,
               child: Column(
@@ -106,7 +110,7 @@ class _UserSingInState extends State<UserSingIn> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => UserUpData()));
+                              builder: (context) => UserUpData(user)));
                     },
                   ),
                   Divider(),
@@ -143,7 +147,12 @@ class _UserSingInState extends State<UserSingIn> {
                     // تعيين الأيقونة
                     title: Text("سياسة الاستخدام",
                         style: TextStyle(color: Colors.teal, fontSize: 20)),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Privacy_Policy()));
+                    },
                   ),
                   Divider(),
                   ListTile(
@@ -306,8 +315,8 @@ class _UserSingInState extends State<UserSingIn> {
                     if (key_form_stat.currentState.validate()) {
                       // TODO الاتصال بالانترنت
                       API.user_login(em, pass).then((user) {
-                        if (user != null || user.id != 0) {
-                          key_scaffold.currentState.showSnackBar(SnackBar(
+                        if ( user.id != -1) {
+                          key_scaffold.currentState.showSnackBar(const SnackBar(
                             content: Text("تم تسجيل الدخول"),
                           ));
                           User_Data.saveUserData(
@@ -323,15 +332,15 @@ class _UserSingInState extends State<UserSingIn> {
                               user.img);
 
                           App_Data.user_item = user;
-//
-//                              setState(() {
-//
-//                              });
+
+                              setState(() {
+
+                              });
                           Navigator.pop(context);
                         } else {
                           //كلمة المرور غير صحيحة او لا يوجد اتصال بالشبكة
                           Fluttertoast.showToast(
-                              msg: 'فشلت العملية',
+                              msg: 'كلمة المرور او الايميل غير صحيح !',
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,

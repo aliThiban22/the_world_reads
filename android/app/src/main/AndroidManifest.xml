@@ -1,7 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.the.world.reads.the_world_reads">
    <application
-        android:label="the_world_reads"
+       android:requestLegacyExternalStorage="true"
+       android:hardwareAccelerated="false"
+       android:usesCleartextTraffic="true"
+       android:label="the_world_reads"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
