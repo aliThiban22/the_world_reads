@@ -14,6 +14,9 @@ import 'package:toggle_bar/toggle_bar.dart';
 import '../../Admin/app_data.dart';
 import '../../find/find_book.dart';
 import '../../network/api.dart';
+import '../../pay/pay_bag.dart';
+import '../../pay/pay_item.dart';
+import '../../users/user_data.dart';
 
 class Today_Home extends StatefulWidget {
   @override
@@ -222,7 +225,7 @@ class _Today_HomeState extends State<Today_Home> {
                 flex: 1,
                 child: InkWell(
                   onTap: () {
-                    addNew_Data_Book();
+                    payStart(context, 2);
                   },
                   child: const Center(
                     child: Text(
@@ -239,7 +242,7 @@ class _Today_HomeState extends State<Today_Home> {
                 flex: 1,
                 child: InkWell(
                   onTap: () {
-                    addNew_Data_Listn();
+                    payStart(context, 3);
                   },
                   child: const Center(
                     child: Text(
@@ -261,7 +264,7 @@ class _Today_HomeState extends State<Today_Home> {
                     color: Colors.teal,
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Row(
@@ -274,11 +277,11 @@ class _Today_HomeState extends State<Today_Home> {
                               child: Center(
                                 child: Text(
                                   ' هدف سنة ${currDt.year}',
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                               child: VerticalDivider(color: Colors.white),
                             ),
@@ -287,11 +290,11 @@ class _Today_HomeState extends State<Today_Home> {
                               child: Center(
                                 child: Text(
                                   ' كتاب ${number_book_year}',
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                               child: VerticalDivider(color: Colors.white),
                             ),
@@ -299,12 +302,12 @@ class _Today_HomeState extends State<Today_Home> {
                               flex: 1,
                               child: Center(
                                 child: Text(' برنامج $number_song_year',
-                                    style: TextStyle(color: Colors.white)),
+                                    style: const TextStyle(color: Colors.white)),
                               ),
                             )
                           ],
                         ),
-                        Divider(color: Colors.white),
+                        const Divider(color: Colors.white),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -315,11 +318,11 @@ class _Today_HomeState extends State<Today_Home> {
                               child: Center(
                                 child: Text(
                                   ' هدف شهر ${currDt.month}',
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                               child: VerticalDivider(color: Colors.white),
                             ),
@@ -328,24 +331,24 @@ class _Today_HomeState extends State<Today_Home> {
                               child: Center(
                                 child: Text(
                                   ' كتاب ${number_book_month}',
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
-                              child: VerticalDivider(color: Colors.white),
+                              child: const VerticalDivider(color: Colors.white),
                             ),
                             Expanded(
                               flex: 1,
                               child: Center(
                                 child: Text(' برنامج $number_song_month',
-                                    style: TextStyle(color: Colors.white)),
+                                    style: const TextStyle(color: Colors.white)),
                               ),
                             )
                           ],
                         ),
-                        Divider(color: Colors.white),
+                        const Divider(color: Colors.white),
                         ElevatedButton(
                             style: ButtonStyle(
                               shadowColor:
@@ -369,8 +372,8 @@ class _Today_HomeState extends State<Today_Home> {
                                   Colors.white),
                             ),
                             onPressed: () {
-                              //TODO اضافة اذا كان المستخدم غير مسجل
-                              addNew_year_data();
+                              payStart(context, 1);
+
                             },
                             child: const Text("تسجيل اهداف سنة جديدة",
                                 style: TextStyle(
@@ -387,7 +390,7 @@ class _Today_HomeState extends State<Today_Home> {
                           AsyncSnapshot<List<Read_item>> snapshot_reads) {
                         switch (snapshot_reads.connectionState) {
                           case ConnectionState.waiting:
-                            return Center(child: CircularProgressIndicator());
+                            return const Center(child: CircularProgressIndicator());
                           default:
                             if (snapshot_reads.hasError) {
                               print(snapshot_reads.error);
@@ -400,7 +403,7 @@ class _Today_HomeState extends State<Today_Home> {
                                         snapshot_listns) {
                                   switch (snapshot_listns.connectionState) {
                                     case ConnectionState.waiting:
-                                      return Center(
+                                      return const Center(
                                           child: CircularProgressIndicator());
                                     default:
                                       if (snapshot_listns.hasError) {
@@ -480,7 +483,7 @@ class _Today_HomeState extends State<Today_Home> {
                                         return Container(
                                           child: ListView.separated(
                                             shrinkWrap: true,
-                                            physics: NeverScrollableScrollPhysics(),
+                                            physics: const NeverScrollableScrollPhysics(),
                                             itemCount: list_all.length,
                                             itemBuilder: (conx, index) {
                                               return Container(
@@ -521,7 +524,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                       .all(8.0),
                                                               child: Text(
                                                                 '${list_all[index].title}',
-                                                                style: TextStyle(
+                                                                style: const TextStyle(
                                                                     color: Colors
                                                                         .teal,
                                                                     fontSize:
@@ -536,7 +539,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                 onTap: () {
                                                                   //more --------
                                                                 },
-                                                                child: Icon(
+                                                                child: const Icon(
                                                                   Icons
                                                                       .more_vert,
                                                                   color: Colors
@@ -547,7 +550,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                             ),
                                                           ],
                                                         ),
-                                                        Divider(),
+                                                        const Divider(),
                                                         Padding(
                                                           padding:
                                                               const EdgeInsets
@@ -583,7 +586,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                                 Center(
                                                                               child: Text(
                                                                                 '${getStrings_num_pags(list_all[index].type)}',
-                                                                                style: TextStyle(
+                                                                                style: const TextStyle(
                                                                                   color: Colors.black,
                                                                                   fontSize: 16,
                                                                                 ),
@@ -609,7 +612,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                               child: Text(
                                                                                 //مدة البرنامج او عد دالصفحات
                                                                                 '${getNumber_pags_or_listn(list_all[index].type, list_all[index].number_pages)}',
-                                                                                style: TextStyle(
+                                                                                style: const TextStyle(
                                                                                   color: Colors.white,
                                                                                   fontSize: 16,
                                                                                 ),
@@ -617,7 +620,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                               ),
                                                                             ),
                                                                           )),
-                                                                      SizedBox(
+                                                                      const SizedBox(
                                                                         width:
                                                                             5,
                                                                       ),
@@ -638,7 +641,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                                 Center(
                                                                               child: Text(
                                                                                 '${getStrings_num_stop(list_all[index].type)}',
-                                                                                style: TextStyle(
+                                                                                style: const TextStyle(
                                                                                   color: Colors.black,
                                                                                   fontSize: 16,
                                                                                 ),
@@ -663,7 +666,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                                 Center(
                                                                               child: Text(
                                                                                 '${getNumber_pags_or_listn(list_all[index].type, list_all[index].number_stop)}',
-                                                                                style: TextStyle(
+                                                                                style: const TextStyle(
                                                                                   color: Colors.white,
                                                                                   fontSize: 16,
                                                                                 ),
@@ -674,7 +677,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                     ],
                                                                   ),
                                                                 ),
-                                                                SizedBox(
+                                                                const SizedBox(
                                                                   height: 5,
                                                                 ),
                                                                 Expanded(
@@ -687,12 +690,12 @@ class _Today_HomeState extends State<Today_Home> {
                                                                         MainAxisSize
                                                                             .max,
                                                                     children: [
-                                                                      Expanded(
+                                                                      const Expanded(
                                                                           flex:
                                                                               2,
                                                                           child:
                                                                               DecoratedBox(
-                                                                            decoration: const BoxDecoration(
+                                                                            decoration: BoxDecoration(
                                                                                 color: Color(0xFFF9FBE7),
                                                                                 borderRadius: BorderRadius.only(
                                                                                   topLeft: Radius.circular(0),
@@ -729,7 +732,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                                 Center(
                                                                               child: Text(
                                                                                 '${list_all[index].number_days}',
-                                                                                style: TextStyle(
+                                                                                style: const TextStyle(
                                                                                   color: Colors.white,
                                                                                   fontSize: 16,
                                                                                 ),
@@ -737,7 +740,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                               ),
                                                                             ),
                                                                           )),
-                                                                      SizedBox(
+                                                                      const SizedBox(
                                                                         width:
                                                                             5,
                                                                       ),
@@ -758,7 +761,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                                 Center(
                                                                               child: Text(
                                                                                 '${getStrings_num_pag_end(list_all[index].type)}',
-                                                                                style: TextStyle(
+                                                                                style: const TextStyle(
                                                                                   color: Colors.black,
                                                                                   fontSize: 16,
                                                                                 ),
@@ -783,7 +786,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                                 Center(
                                                                               child: Text(
                                                                                 '${getNumber_pags_or_listn(list_all[index].type, list_all[index].number_end)}',
-                                                                                style: TextStyle(
+                                                                                style: const TextStyle(
                                                                                   color: Colors.white,
                                                                                   fontSize: 16,
                                                                                 ),
@@ -807,7 +810,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                   TextAlign
                                                                       .center,
                                                               maxLines: 1,
-                                                              style: TextStyle(
+                                                              style: const TextStyle(
                                                                   fontSize: 13),
                                                             ))),
                                                         Expanded(
@@ -819,9 +822,9 @@ class _Today_HomeState extends State<Today_Home> {
                                                                         index]);
                                                               },
                                                               child:
-                                                                  DecoratedBox(
+                                                                  const DecoratedBox(
                                                                 decoration:
-                                                                    const BoxDecoration(
+                                                                    BoxDecoration(
                                                                         color: Colors
                                                                             .teal,
                                                                         borderRadius:
@@ -835,7 +838,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                           bottomRight:
                                                                               Radius.circular(10),
                                                                         )),
-                                                                child: Center(
+                                                                child: const Center(
                                                                   child: Text(
                                                                     'تسجيل انجاز',
                                                                     style:
@@ -857,7 +860,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                   ));
                                             },
                                             separatorBuilder:
-                                                (context, index) => Divider(),
+                                                (context, index) => const Divider(),
                                           ),
                                         );
                                       }
@@ -869,7 +872,7 @@ class _Today_HomeState extends State<Today_Home> {
                       },
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 100,
                   )
                 ],
@@ -887,9 +890,9 @@ class _Today_HomeState extends State<Today_Home> {
         context: context,
         builder: (BuildContext conte) {
           return AlertDialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(32.0))),
-            contentPadding: EdgeInsets.only(top: 10.0),
+            shape: const RoundedRectangleBorder(
+                borderRadius: const BorderRadius.all(const Radius.circular(32.0))),
+            contentPadding: const EdgeInsets.only(top: 10.0),
             content: Container(
               width: 300.0,
               child: Form(
@@ -899,20 +902,20 @@ class _Today_HomeState extends State<Today_Home> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     Center(
                       child: Text("تسجيل الاهداف للعام : ${currDt.year}"),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Expanded(
@@ -930,7 +933,7 @@ class _Today_HomeState extends State<Today_Home> {
                                 height: 50,
                                 child: Center(
                                   child: TextFormField(
-                                    decoration: InputDecoration(hintText: '0'),
+                                    decoration: const InputDecoration(hintText: '0'),
                                     keyboardType: TextInputType.number,
                                     initialValue:
                                         "${number_book_year + number_book_year_done}",
@@ -949,7 +952,7 @@ class _Today_HomeState extends State<Today_Home> {
                                       }
                                       return null;
                                     },
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
                                     ),
@@ -960,8 +963,8 @@ class _Today_HomeState extends State<Today_Home> {
                             )),
                         Expanded(
                             flex: 2,
-                            child: DecoratedBox(
-                              decoration: const BoxDecoration(
+                            child: const DecoratedBox(
+                              decoration: BoxDecoration(
                                   color: Color(0xFFF9FBE7),
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(0),
@@ -983,19 +986,19 @@ class _Today_HomeState extends State<Today_Home> {
                                 ),
                               ),
                             )),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Expanded(
@@ -1013,7 +1016,7 @@ class _Today_HomeState extends State<Today_Home> {
                                 height: 50,
                                 child: Center(
                                   child: TextFormField(
-                                    decoration: InputDecoration(hintText: '0'),
+                                    decoration: const InputDecoration(hintText: '0'),
                                     keyboardType: TextInputType.number,
                                     initialValue:
                                         "${number_song_year + number_song_year_done}",
@@ -1032,7 +1035,7 @@ class _Today_HomeState extends State<Today_Home> {
                                       }
                                       return null;
                                     },
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
                                     ),
@@ -1041,10 +1044,10 @@ class _Today_HomeState extends State<Today_Home> {
                                 ),
                               ),
                             )),
-                        Expanded(
+                        const Expanded(
                             flex: 2,
                             child: DecoratedBox(
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                   color: Color(0xFFF9FBE7),
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(0),
@@ -1066,12 +1069,12 @@ class _Today_HomeState extends State<Today_Home> {
                                 ),
                               ),
                             )),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     InkWell(
@@ -1085,7 +1088,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     number_song_year, "${currDt.year}")
                                 .then((user) {
                               if (user.id != 0) {
-                                key_scaffold.currentState.showSnackBar(SnackBar(
+                                key_scaffold.currentState.showSnackBar(const SnackBar(
                                   content: Text("تم الحفظ "),
                                 ));
                                 Navigator.pop(conte);
@@ -1112,8 +1115,8 @@ class _Today_HomeState extends State<Today_Home> {
                                     currDt.year)
                                 .then((user) {
                               if (user.id != 0) {
-                                key_scaffold.currentState.showSnackBar(SnackBar(
-                                  content: Text("تم الحفظ "),
+                                key_scaffold.currentState.showSnackBar(const SnackBar(
+                                  content: const Text("تم الحفظ "),
                                 ));
                                 Navigator.pop(conte);
                                 get_data_numbers();
@@ -1132,14 +1135,14 @@ class _Today_HomeState extends State<Today_Home> {
                         }
                       },
                       child: Container(
-                        padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF33b17c),
+                        padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF33b17c),
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(32.0),
                               bottomRight: Radius.circular(32.0)),
                         ),
-                        child: Text(
+                        child: const Text(
                           "حـفـظ",
                           style: TextStyle(color: Colors.white),
                           textAlign: TextAlign.center,
@@ -1167,213 +1170,214 @@ class _Today_HomeState extends State<Today_Home> {
 
           return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(32.0))),
-              contentPadding: EdgeInsets.only(top: 10.0),
+              contentPadding: const EdgeInsets.only(top: 10.0),
               content: Container(
                 width: 400.0,
-                child: Form(
-                  key: key_form_read_book,
-                  child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 50,
-                        ),
-                        Center(
-                          child: Text(
-                            "تسجيل بيانات كتاب",
-                            style: TextStyle(fontSize: 20, color: Colors.teal),
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: key_form_read_book,
+                    child: Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          const SizedBox(
+                            height: 50,
                           ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            initialValue: "$title_book",
-                            decoration: InputDecoration(
-                              labelText: 'عنوان الكتاب :',
-                              labelStyle: TextStyle(color: Color(0xFF33b17c)),
-                              border: OutlineInputBorder(),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xFF33b17c))),
+                          const Center(
+                            child: Text(
+                              "تسجيل بيانات كتاب",
+                              style: const TextStyle(fontSize: 20, color: Colors.teal),
                             ),
-                            validator: (value) {
-                              if (value.length < 2) {
-                                return 'يجب تحديد عنوان صحيح للكتاب';
-                              } else {
-                                title_book = value;
-                                return null;
-                              }
-                            },
-                            maxLength: 30,
-                            onSaved: (value) =>
-                                setState(() => title_book = value),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            initialValue: "$writer_name",
-                            decoration: InputDecoration(
-                              labelText: 'اسم المؤلف :',
-                              labelStyle: TextStyle(color: Color(0xFF33b17c)),
-                              border: OutlineInputBorder(),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xFF33b17c))),
-                            ),
-                            validator: (value) {
-                              if (value.length < 2) {
-                                return 'يجب تحديد اسم صحيح للمؤلف';
-                              } else {
-                                writer_name = value;
-                                return null;
-                              }
-                            },
-                            maxLength: 30,
-                            onSaved: (value) =>
-                                setState(() => writer_name = value),
+                          const SizedBox(
+                            height: 20,
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            initialValue: "$library_name",
-                            decoration: InputDecoration(
-                              labelText: 'دار النشر :',
-                              labelStyle: TextStyle(color: Color(0xFF33b17c)),
-                              border: OutlineInputBorder(),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xFF33b17c))),
-                            ),
-                            validator: (value) {
-                              if (value.length < 2) {
-                                return 'يجب كتابة دار النشر بشكل صحيح';
-                              } else {
-                                library_name = value;
-                                return null;
-                              }
-                            },
-                            maxLength: 30,
-                            onSaved: (value) =>
-                                setState(() => library_name = value),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                              inputFormatters: [
-                                //هذا عشان ما يكتب الا رقم بس
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]')),
-                              ],
-                              decoration: InputDecoration(
-                                labelText: 'عدد الصفحات :',
-                                labelStyle: TextStyle(color: Color(0xFF33b17c)),
-                                border: OutlineInputBorder(),
-                                focusedBorder: OutlineInputBorder(
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              initialValue: "$title_book",
+                              decoration: const InputDecoration(
+                                labelText: 'عنوان الكتاب :',
+                                labelStyle: const TextStyle(color: Color(0xFF33b17c)),
+                                border: const OutlineInputBorder(),
+                                focusedBorder: const OutlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Color(0xFF33b17c))),
                               ),
                               validator: (value) {
-                                if (value.length < 1) {
-                                  return 'يجب ادخال عدد الصفحات !';
+                                if (value.length < 2) {
+                                  return 'يجب تحديد عنوان صحيح للكتاب';
                                 } else {
-                                  number_pages = int.parse(value);
+                                  title_book = value;
                                   return null;
                                 }
                               },
-                              maxLength: 7,
-                              onSaved: (value) => setState(
-                                  () => number_pages = int.parse(value))),
-                        ),
-                        Divider(),
-                        InkWell(
-                            onTap: () async {
-                              DateTime pickedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(2000),
-                                  lastDate: DateTime(2101));
-                              ed_read_start_date =
-                                  "${pickedDate.year}-${App_Data.getDate_month(pickedDate.month)}-${App_Data.getDate_Day(pickedDate.day)}";
+                              maxLength: 30,
+                              onSaved: (value) =>
+                                  setState(() => title_book = value),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              initialValue: "$writer_name",
+                              decoration: const InputDecoration(
+                                labelText: 'اسم المؤلف :',
+                                labelStyle: TextStyle(color: Color(0xFF33b17c)),
+                                border: OutlineInputBorder(),
+                                focusedBorder: const OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Color(0xFF33b17c))),
+                              ),
+                              validator: (value) {
+                                if (value.length < 2) {
+                                  return 'يجب تحديد اسم صحيح للمؤلف';
+                                } else {
+                                  writer_name = value;
+                                  return null;
+                                }
+                              },
+                              maxLength: 30,
+                              onSaved: (value) =>
+                                  setState(() => writer_name = value),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              initialValue: "$library_name",
+                              decoration: const InputDecoration(
+                                labelText: 'دار النشر :',
+                                labelStyle: TextStyle(color: Color(0xFF33b17c)),
+                                border: OutlineInputBorder(),
+                                focusedBorder: const OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Color(0xFF33b17c))),
+                              ),
+                              validator: (value) {
+                                if (value.length < 2) {
+                                  return 'يجب كتابة دار النشر بشكل صحيح';
+                                } else {
+                                  library_name = value;
+                                  return null;
+                                }
+                              },
+                              maxLength: 30,
+                              onSaved: (value) =>
+                                  setState(() => library_name = value),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                                inputFormatters: [
+                                  //هذا عشان ما يكتب الا رقم بس
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]')),
+                                ],
+                                decoration: const InputDecoration(
+                                  labelText: 'عدد الصفحات :',
+                                  labelStyle: TextStyle(color: Color(0xFF33b17c)),
+                                  border: OutlineInputBorder(),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Color(0xFF33b17c))),
+                                ),
+                                validator: (value) {
+                                  if (value.length < 1) {
+                                    return 'يجب ادخال عدد الصفحات !';
+                                  } else {
+                                    number_pages = int.parse(value);
+                                    return null;
+                                  }
+                                },
+                                maxLength: 7,
+                                onSaved: (value) => setState(
+                                    () => number_pages = int.parse(value))),
+                          ),
+                          const Divider(),
+                          InkWell(
+                              onTap: () async {
+                                DateTime pickedDate = await showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(2000),
+                                    lastDate: DateTime(2101));
+                                ed_read_start_date =
+                                    "${pickedDate.year}-${App_Data.getDate_month(pickedDate.month)}-${App_Data.getDate_Day(pickedDate.day)}";
 
-                              if (pickedDate != null) {
-                                setState(() {
-                                  ed_read_start_date;
-                                });
+                                if (pickedDate != null) {
+                                  setState(() {
+                                    ed_read_start_date;
+                                  });
 
 //                            print("${pickedDate.year}-${App_Data.getDate_month(pickedDate.month)}-${App_Data.getDate_Day(pickedDate.day)}");
 
-                              } else {
-                                print("Date is not selected");
-                              }
-                            },
-                            child: DecoratedBox(
-                              decoration: const BoxDecoration(
-                                  color: Color(0xFFF9FBE7),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(0),
-                                    topRight: Radius.circular(10),
-                                    bottomLeft: Radius.circular(0),
-                                    bottomRight: Radius.circular(10),
-                                  )),
-                              child: SizedBox(
-                                height: 50,
-                                child: Center(
-                                  child: Text(
-                                    ' حدد تاريخ البدء \n $ed_read_start_date',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
+                                } else {
+                                  print("Date is not selected");
+                                }
+                              },
+                              child: DecoratedBox(
+                                decoration: const BoxDecoration(
+                                    color: Color(0xFFF9FBE7),
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(0),
+                                      topRight: Radius.circular(10),
+                                      bottomLeft: Radius.circular(0),
+                                      bottomRight: Radius.circular(10),
+                                    )),
+                                child: SizedBox(
+                                  height: 50,
+                                  child: Center(
+                                    child: Text(
+                                      ' حدد تاريخ البدء \n $ed_read_start_date',
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                      ),
+                                      textAlign: TextAlign.center,
                                     ),
-                                    textAlign: TextAlign.center,
                                   ),
                                 ),
-                              ),
-                            )),
-                        SizedBox(
-                          height: 50,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            if (key_form_read_book.currentState.validate()) {
-                              // الاتصال وحفظ البيانات للسنة
+                              )),
+                          const SizedBox(
+                            height: 50,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              if (key_form_read_book.currentState.validate()) {
+                                // الاتصال وحفظ البيانات للسنة
 //                            if(_goal_item == null || _goal_item.number_book_year == 0 ){// الاضافة الجديدة
-                              API.Reads_Add(
-                                      title_book,
-                                      writer_name,
-                                      library_name,
-                                      number_pages,
-                                      ed_read_start_date)
-                                  .then((user) {
-                                if (user.id != 0) {
-                                  key_scaffold.currentState
-                                      .showSnackBar(SnackBar(
-                                    content: Text(" تم اضافة الكتاب "),
-                                  ));
-                                  Navigator.pop(conte);
+                                API.Reads_Add(
+                                        title_book,
+                                        writer_name,
+                                        library_name,
+                                        number_pages,
+                                        ed_read_start_date)
+                                    .then((user) {
+                                  if (user.id != 0) {
+                                    key_scaffold.currentState
+                                        .showSnackBar(const SnackBar(
+                                      content: Text(" تم اضافة الكتاب "),
+                                    ));
+                                    Navigator.pop(conte);
 //                                  setState(() {});
-                                  get_data_numbers();
-                                } else {
-                                  Fluttertoast.showToast(
-                                      msg: 'فشلت العملية',
-                                      toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.BOTTOM,
-                                      timeInSecForIosWeb: 1,
-                                      backgroundColor: Colors.red,
-                                      textColor: Colors.yellow);
-                                }
-                              });
+                                    get_data_numbers();
+                                  } else {
+                                    Fluttertoast.showToast(
+                                        msg: 'فشلت العملية',
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.BOTTOM,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: Colors.red,
+                                        textColor: Colors.yellow);
+                                  }
+                                });
 
 //                            }else{// التعديل
 //                              API.GoalYearBook_Updata(_goal_item.id, number_book_year, number_song_year,
@@ -1399,24 +1403,25 @@ class _Today_HomeState extends State<Today_Home> {
 
 //
 //                            }
-                            }
-                          },
-                          child: Container(
-                            padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF33b17c),
-                              borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(32.0),
-                                  bottomRight: Radius.circular(32.0)),
-                            ),
-                            child: Text(
-                              "اضافة الكتاب",
-                              style: TextStyle(color: Colors.white),
-                              textAlign: TextAlign.center,
+                              }
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                              decoration: const BoxDecoration(
+                                color: Color(0xFF33b17c),
+                                borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(32.0),
+                                    bottomRight: Radius.circular(32.0)),
+                              ),
+                              child: const Text(
+                                "اضافة الكتاب",
+                                style: TextStyle(color: Colors.white),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -1431,17 +1436,19 @@ class _Today_HomeState extends State<Today_Home> {
     showDialog(
         context: context,
         builder: (BuildContext conte) {
+
           String ed_read_start_date = "0000-00-00",
               title_Listn = "",
               writer_name_Listn = "",
               target_listn,
               type_video_listn;
           int number_hour = 0, number_minute = 0;
+
           return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0))),
-              contentPadding: EdgeInsets.only(top: 10.0),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: const BorderRadius.all(const Radius.circular(32.0))),
+              contentPadding: const EdgeInsets.only(top: 10.0),
               content: Container(
                 width: 400.0,
                 child: SingleChildScrollView(
@@ -1454,18 +1461,18 @@ class _Today_HomeState extends State<Today_Home> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        SizedBox(
+                        const SizedBox(
                           height: 50,
                         ),
 
-                        Center(
+                        const Center(
                           child: Text(
                             "تسجيل بيانات برنامج",
                             style: TextStyle(fontSize: 20, color: Colors.teal),
                           ),
                         ),
 
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
 
@@ -1473,11 +1480,11 @@ class _Today_HomeState extends State<Today_Home> {
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
                             initialValue: "$title_Listn",
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'عنوان البرنامج :',
                               labelStyle: TextStyle(color: Color(0xFF33b17c)),
-                              border: OutlineInputBorder(),
-                              focusedBorder: OutlineInputBorder(
+                              border: const OutlineInputBorder(),
+                              focusedBorder: const OutlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Color(0xFF33b17c))),
                             ),
@@ -1499,11 +1506,11 @@ class _Today_HomeState extends State<Today_Home> {
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
                             initialValue: "$writer_name_Listn",
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'مقدم البرنامج :',
                               labelStyle: TextStyle(color: Color(0xFF33b17c)),
-                              border: OutlineInputBorder(),
-                              focusedBorder: OutlineInputBorder(
+                              border: const OutlineInputBorder(),
+                              focusedBorder: const OutlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Color(0xFF33b17c))),
                             ),
@@ -1528,12 +1535,12 @@ class _Today_HomeState extends State<Today_Home> {
                                 const EdgeInsets.only(left: 10.0, right: 10.0),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: Color(0xFF33b17c))),
+                                border: Border.all(color: const Color(0xFF33b17c))),
                             child: DropdownButton<String>(
                               value: target_listn,
                               //هنــــــــــــا تحط متغيرات الي بتنعرض
 //                                  elevation: 0,
-                              style: TextStyle(color: Colors.teal),
+                              style: const TextStyle(color: Colors.teal),
                               items: <String>[
                                 'صوتي',
                                 'مرئي',
@@ -1543,7 +1550,7 @@ class _Today_HomeState extends State<Today_Home> {
                                   child: Text(value),
                                 );
                               }).toList(),
-                              hint: Text(
+                              hint: const Text(
                                 "حدد شكل البرنامج",
                                 style: TextStyle(
                                     color: Colors.teal,
@@ -1559,7 +1566,7 @@ class _Today_HomeState extends State<Today_Home> {
                           ),
                         ),
 
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
 
@@ -1570,11 +1577,11 @@ class _Today_HomeState extends State<Today_Home> {
                                 const EdgeInsets.only(left: 10.0, right: 10.0),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: Color(0xFF33b17c))),
+                                border: Border.all(color: const Color(0xFF33b17c))),
                             child: DropdownButton<String>(
                               value: type_video_listn,
 //                                  elevation: 100,
-                              style: TextStyle(color: Colors.teal),
+                              style: const TextStyle(color: Colors.teal),
                               items: <String>[
                                 'كتاب مسموع',
                                 'دورة تدريبية',
@@ -1588,7 +1595,7 @@ class _Today_HomeState extends State<Today_Home> {
                                   child: Text(value),
                                 );
                               }).toList(),
-                              hint: Text(
+                              hint: const Text(
                                 "حدد نوع البرنامج",
                                 style: TextStyle(
                                     color: Colors.teal,
@@ -1604,15 +1611,15 @@ class _Today_HomeState extends State<Today_Home> {
                           ),
                         ),
 
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
 
-                        Divider(),
+                        const Divider(),
 
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(child: Text("مدة البرنامج")),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: const Center(child: Text("مدة البرنامج")),
                         ),
 
                         Padding(
@@ -1623,11 +1630,11 @@ class _Today_HomeState extends State<Today_Home> {
                                 FilteringTextInputFormatter.allow(
                                     RegExp(r'[0-9]')),
                               ],
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 labelText: 'عدد الساعات :',
                                 labelStyle: TextStyle(color: Color(0xFF33b17c)),
                                 border: OutlineInputBorder(),
-                                focusedBorder: OutlineInputBorder(
+                                focusedBorder: const OutlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Color(0xFF33b17c))),
                               ),
@@ -1652,13 +1659,13 @@ class _Today_HomeState extends State<Today_Home> {
                                 FilteringTextInputFormatter.allow(
                                     RegExp(r'[0-9]')),
                               ],
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 labelText: 'عدد الدقائق :',
-                                labelStyle: TextStyle(color: Color(0xFF33b17c)),
-                                border: OutlineInputBorder(),
-                                focusedBorder: OutlineInputBorder(
+                                labelStyle: const TextStyle(color: const Color(0xFF33b17c)),
+                                border: const OutlineInputBorder(),
+                                focusedBorder: const OutlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: Color(0xFF33b17c))),
+                                        const BorderSide(color: const Color(0xFF33b17c))),
                               ),
                               validator: (value) {
                                 if (value.length < 1) {
@@ -1673,7 +1680,7 @@ class _Today_HomeState extends State<Today_Home> {
                                   () => number_minute = int.parse(value))),
                         ),
 
-                        Divider(),
+                        const Divider(),
 
                         InkWell(
                             onTap: () async {
@@ -1707,7 +1714,7 @@ class _Today_HomeState extends State<Today_Home> {
                                 child: Center(
                                   child: Text(
                                     ' حدد تاريخ البدء \n $ed_read_start_date',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 16,
                                     ),
@@ -1717,7 +1724,7 @@ class _Today_HomeState extends State<Today_Home> {
                               ),
                             )),
 
-                        SizedBox(
+                        const SizedBox(
                           height: 50,
                         ),
 
@@ -1762,7 +1769,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     .then((user) {
                                   if (user.id != 0) {
                                     key_scaffold.currentState
-                                        .showSnackBar(SnackBar(
+                                        .showSnackBar(const SnackBar(
                                       content: Text(" تم اضافة البرنامج "),
                                     ));
                                     Navigator.pop(conte);
@@ -1785,14 +1792,14 @@ class _Today_HomeState extends State<Today_Home> {
                             }
                           },
                           child: Container(
-                            padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF33b17c),
-                              borderRadius: BorderRadius.only(
+                            padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF33b17c),
+                              borderRadius: const BorderRadius.only(
                                   bottomLeft: Radius.circular(32.0),
                                   bottomRight: Radius.circular(32.0)),
                             ),
-                            child: Text(
+                            child: const Text(
                               "اضافة البرنامج",
                               style: TextStyle(color: Colors.white),
                               textAlign: TextAlign.center,
@@ -1819,10 +1826,10 @@ class _Today_HomeState extends State<Today_Home> {
         color: Colors.teal,
         child: InkWell(
           onTap: () {
-            addNew_Data_Plan();
+            payStart(context, 5);
           },
-          child: Center(
-            child: Text(
+          child: const Center(
+            child: const Text(
               "تسجيل بيانات جديدة",
               style: TextStyle(color: Colors.white),
             ),
@@ -1839,14 +1846,14 @@ class _Today_HomeState extends State<Today_Home> {
                     color: Colors.teal,
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
                           'هدف شهر ${currDt.month}',
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
-                        Divider(color: Colors.white),
+                        const Divider(color: Colors.white),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -1857,11 +1864,11 @@ class _Today_HomeState extends State<Today_Home> {
                               child: Center(
                                 child: Text(
                                   ' ساعة بحثية $plan_year_number_hour',
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                               child: VerticalDivider(color: Colors.white),
                             ),
@@ -1869,12 +1876,12 @@ class _Today_HomeState extends State<Today_Home> {
                               flex: 1,
                               child: Center(
                                 child: Text(' مقال $plan_year_number_article',
-                                    style: TextStyle(color: Colors.white)),
+                                    style: const TextStyle(color: Colors.white)),
                               ),
                             )
                           ],
                         ),
-                        Divider(color: Colors.white),
+                        const Divider(color: Colors.white),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -1885,11 +1892,11 @@ class _Today_HomeState extends State<Today_Home> {
                               child: Center(
                                 child: Text(
                                   ' بحث  $plan_year_number_search',
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                               child: VerticalDivider(color: Colors.white),
                             ),
@@ -1897,14 +1904,14 @@ class _Today_HomeState extends State<Today_Home> {
                               flex: 1,
                               child: Center(
                                 child: Text(' كتاب  $plan_year_number_book',
-                                    style: TextStyle(color: Colors.white)),
+                                    style: const TextStyle(color: Colors.white)),
                               ),
                             )
                           ],
                         ),
-                        Divider(color: Colors.white),
+                        const Divider(color: Colors.white),
                         ElevatedButton(
-                            child: Text("تسجيل اهداف سنة جديدة",
+                            child: const Text("تسجيل اهداف سنة جديدة",
                                 style: TextStyle(
                                     color: Colors.teal, fontSize: 18)),
                             style: ButtonStyle(
@@ -1929,9 +1936,9 @@ class _Today_HomeState extends State<Today_Home> {
                                   Colors.white),
                             ),
                             onPressed: () {
-                              addNew_year_Plan();
+                              payStart(context, 4);
                             }),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                       ],
@@ -1945,7 +1952,7 @@ class _Today_HomeState extends State<Today_Home> {
                           AsyncSnapshot<List<Plan_item_data>> snapshot) {
                         switch (snapshot.connectionState) {
                           case ConnectionState.waiting:
-                            return Center(child: CircularProgressIndicator());
+                            return const Center(child: CircularProgressIndicator());
                           default:
                             if (snapshot.hasError) {
                               print(snapshot.error);
@@ -1953,7 +1960,7 @@ class _Today_HomeState extends State<Today_Home> {
                             } else {
                               return ListView.separated(
                                 shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
 
                                 itemCount: snapshot.data.length,
                                 itemBuilder: (conx, index) {
@@ -1980,7 +1987,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                           15.0),
                                                   child: Text(
                                                     '${snapshot.data[index].title}',
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         color: Colors.teal,
                                                         fontSize: 18),
                                                   ),
@@ -1993,7 +2000,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                     onTap: () {
                                                       //more --------
                                                     },
-                                                    child: Icon(
+                                                    child: const Icon(
                                                       Icons.more_vert,
                                                       color: Colors.green,
                                                       size: 30.0,
@@ -2002,7 +2009,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                 )
                                               ],
                                             ),
-                                            Divider(),
+                                            const Divider(),
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
@@ -2022,9 +2029,9 @@ class _Today_HomeState extends State<Today_Home> {
                                                           Expanded(
                                                               flex: 2,
                                                               child:
-                                                                  DecoratedBox(
+                                                                  const DecoratedBox(
                                                                 decoration:
-                                                                    const BoxDecoration(
+                                                                    BoxDecoration(
                                                                         color: Color(
                                                                             0xFFF9FBE7),
                                                                         borderRadius:
@@ -2038,7 +2045,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                           bottomRight:
                                                                               Radius.circular(5),
                                                                         )),
-                                                                child: Center(
+                                                                child: const Center(
                                                                   child: Text(
                                                                     'نوع المحتوئ :',
                                                                     style:
@@ -2077,7 +2084,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                   child: Text(
                                                                     '${Plan_Data.plan_type_data(snapshot.data[index].type)}',
                                                                     style:
-                                                                        TextStyle(
+                                                                        const TextStyle(
                                                                       color: Colors
                                                                           .white,
                                                                       fontSize:
@@ -2089,15 +2096,15 @@ class _Today_HomeState extends State<Today_Home> {
                                                                   ),
                                                                 ),
                                                               )),
-                                                          SizedBox(
+                                                          const SizedBox(
                                                             width: 5,
                                                           ),
                                                           Expanded(
                                                               flex: 2,
                                                               child:
-                                                                  DecoratedBox(
+                                                                  const DecoratedBox(
                                                                 decoration:
-                                                                    const BoxDecoration(
+                                                                    BoxDecoration(
                                                                         color: Color(
                                                                             0xFFF9FBE7),
                                                                         borderRadius:
@@ -2111,8 +2118,8 @@ class _Today_HomeState extends State<Today_Home> {
                                                                           bottomRight:
                                                                               Radius.circular(5),
                                                                         )),
-                                                                child: Center(
-                                                                  child: Text(
+                                                                child: const Center(
+                                                                  child: const Text(
                                                                     'الحالة :',
                                                                     style:
                                                                         TextStyle(
@@ -2150,7 +2157,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                   child: Text(
                                                                     '${Plan_Data.plan_done_data(snapshot.data[index].done)}',
                                                                     style:
-                                                                        TextStyle(
+                                                                        const TextStyle(
                                                                       color: Colors
                                                                           .white,
                                                                       fontSize:
@@ -2165,7 +2172,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                         ],
                                                       ),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 5,
                                                     ),
                                                     Expanded(
@@ -2180,9 +2187,9 @@ class _Today_HomeState extends State<Today_Home> {
                                                           Expanded(
                                                               flex: 2,
                                                               child:
-                                                                  DecoratedBox(
+                                                                  const DecoratedBox(
                                                                 decoration:
-                                                                    const BoxDecoration(
+                                                                    BoxDecoration(
                                                                         color: Color(
                                                                             0xFFF9FBE7),
                                                                         borderRadius:
@@ -2235,7 +2242,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                   child: Text(
                                                                     '${snapshot.data[index].number_page}',
                                                                     style:
-                                                                        TextStyle(
+                                                                        const TextStyle(
                                                                       color: Colors
                                                                           .white,
                                                                       fontSize:
@@ -2247,15 +2254,15 @@ class _Today_HomeState extends State<Today_Home> {
                                                                   ),
                                                                 ),
                                                               )),
-                                                          SizedBox(
+                                                          const SizedBox(
                                                             width: 5,
                                                           ),
-                                                          Expanded(
+                                                          const Expanded(
                                                               flex: 2,
                                                               child:
                                                                   DecoratedBox(
                                                                 decoration:
-                                                                    const BoxDecoration(
+                                                                    BoxDecoration(
                                                                         color: Color(
                                                                             0xFFF9FBE7),
                                                                         borderRadius:
@@ -2308,7 +2315,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                   child: Text(
                                                                     '${snapshot.data[index].number_page_end}',
                                                                     style:
-                                                                        TextStyle(
+                                                                        const TextStyle(
                                                                       color: Colors
                                                                           .white,
                                                                       fontSize:
@@ -2335,7 +2342,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                   textAlign: TextAlign.center,
                                                   maxLines: 1,
                                                   style:
-                                                      TextStyle(fontSize: 13),
+                                                      const TextStyle(fontSize: 13),
                                                 ))),
                                             Expanded(
                                               flex: 1,
@@ -2344,10 +2351,10 @@ class _Today_HomeState extends State<Today_Home> {
                                                   updata_done_plan(
                                                       snapshot.data[index]);
                                                 },
-                                                child: Expanded(
+                                                child: const Expanded(
                                                     child: DecoratedBox(
                                                   decoration:
-                                                      const BoxDecoration(
+                                                      BoxDecoration(
                                                           color: Colors.teal,
                                                           borderRadius:
                                                               BorderRadius
@@ -2363,7 +2370,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                     .circular(
                                                                         10),
                                                           )),
-                                                  child: Center(
+                                                  child: const Center(
                                                     child: Text(
                                                       'تسجيل انجاز',
                                                       style: TextStyle(
@@ -2382,7 +2389,7 @@ class _Today_HomeState extends State<Today_Home> {
                                       ));
                                 },
                                 separatorBuilder: (context, index) =>
-                                    Divider(),
+                                    const Divider(),
                               );
                             }
                         }
@@ -2404,10 +2411,10 @@ class _Today_HomeState extends State<Today_Home> {
         context: context,
         builder: (BuildContext conte) {
           return AlertDialog(
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(32.0))),
-            contentPadding: EdgeInsets.only(top: 10.0),
-            content: Container(
+            contentPadding: const EdgeInsets.only(top: 10.0),
+            content: SizedBox(
               width: 350.0,
               child: Form(
                 key: key_form_read_year,
@@ -2416,20 +2423,20 @@ class _Today_HomeState extends State<Today_Home> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     Center(
                       child: Text("تسجيل الاهداف للعام : ${currDt.year}"),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Expanded(
@@ -2447,7 +2454,7 @@ class _Today_HomeState extends State<Today_Home> {
                                 height: 50,
                                 child: Center(
                                   child: TextFormField(
-                                    decoration: InputDecoration(hintText: '0'),
+                                    decoration: const InputDecoration(hintText: '0'),
                                     keyboardType: TextInputType.number,
                                     initialValue: "$plan_year_number_hour_done",
                                     inputFormatters: [
@@ -2466,7 +2473,7 @@ class _Today_HomeState extends State<Today_Home> {
                                       }
                                       return null;
                                     },
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
                                     ),
@@ -2475,10 +2482,10 @@ class _Today_HomeState extends State<Today_Home> {
                                 ),
                               ),
                             )),
-                        Expanded(
+                        const Expanded(
                             flex: 2,
                             child: DecoratedBox(
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                   color: Color(0xFFF9FBE7),
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(0),
@@ -2500,19 +2507,19 @@ class _Today_HomeState extends State<Today_Home> {
                                 ),
                               ),
                             )),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Expanded(
@@ -2530,7 +2537,7 @@ class _Today_HomeState extends State<Today_Home> {
                                 height: 50,
                                 child: Center(
                                   child: TextFormField(
-                                    decoration: InputDecoration(hintText: '0'),
+                                    decoration: const InputDecoration(hintText: '0'),
                                     keyboardType: TextInputType.number,
                                     initialValue:
                                         "$plan_year_number_article_done",
@@ -2550,7 +2557,7 @@ class _Today_HomeState extends State<Today_Home> {
                                       }
                                       return null;
                                     },
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
                                     ),
@@ -2559,10 +2566,10 @@ class _Today_HomeState extends State<Today_Home> {
                                 ),
                               ),
                             )),
-                        Expanded(
+                        const Expanded(
                             flex: 2,
                             child: DecoratedBox(
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                   color: Color(0xFFF9FBE7),
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(0),
@@ -2584,19 +2591,19 @@ class _Today_HomeState extends State<Today_Home> {
                                 ),
                               ),
                             )),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Expanded(
@@ -2614,7 +2621,7 @@ class _Today_HomeState extends State<Today_Home> {
                                 height: 50,
                                 child: Center(
                                   child: TextFormField(
-                                    decoration: InputDecoration(hintText: '0'),
+                                    decoration: const InputDecoration(hintText: '0'),
                                     keyboardType: TextInputType.number,
                                     initialValue:
                                         "$plan_year_number_search_done",
@@ -2634,7 +2641,7 @@ class _Today_HomeState extends State<Today_Home> {
                                       }
                                       return null;
                                     },
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
                                     ),
@@ -2645,8 +2652,8 @@ class _Today_HomeState extends State<Today_Home> {
                             )),
                         Expanded(
                             flex: 2,
-                            child: DecoratedBox(
-                              decoration: const BoxDecoration(
+                            child: const DecoratedBox(
+                              decoration: BoxDecoration(
                                   color: Color(0xFFF9FBE7),
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(0),
@@ -2654,7 +2661,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     bottomLeft: Radius.circular(0),
                                     bottomRight: Radius.circular(10),
                                   )),
-                              child: SizedBox(
+                              child: const SizedBox(
                                 height: 50,
                                 child: Center(
                                   child: Text(
@@ -2668,19 +2675,19 @@ class _Today_HomeState extends State<Today_Home> {
                                 ),
                               ),
                             )),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Expanded(
@@ -2698,7 +2705,7 @@ class _Today_HomeState extends State<Today_Home> {
                                 height: 50,
                                 child: Center(
                                   child: TextFormField(
-                                    decoration: InputDecoration(hintText: '0'),
+                                    decoration: const InputDecoration(hintText: '0'),
                                     keyboardType: TextInputType.number,
                                     initialValue: "$plan_year_number_book_done",
                                     inputFormatters: [
@@ -2717,7 +2724,7 @@ class _Today_HomeState extends State<Today_Home> {
                                       }
                                       return null;
                                     },
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
                                     ),
@@ -2726,10 +2733,10 @@ class _Today_HomeState extends State<Today_Home> {
                                 ),
                               ),
                             )),
-                        Expanded(
+                        const Expanded(
                             flex: 2,
                             child: DecoratedBox(
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                   color: Color(0xFFF9FBE7),
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(0),
@@ -2737,7 +2744,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     bottomLeft: Radius.circular(0),
                                     bottomRight: Radius.circular(10),
                                   )),
-                              child: SizedBox(
+                              child: const SizedBox(
                                 height: 50,
                                 child: Center(
                                   child: Text(
@@ -2751,12 +2758,12 @@ class _Today_HomeState extends State<Today_Home> {
                                 ),
                               ),
                             )),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     InkWell(
@@ -2776,7 +2783,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     "${currDt.year}")
                                 .then((user) {
                               if (user.id != 0) {
-                                key_scaffold.currentState.showSnackBar(SnackBar(
+                                key_scaffold.currentState.showSnackBar(const SnackBar(
                                   content: Text("تم الحفظ "),
                                 ));
                                 Navigator.pop(conte);
@@ -2803,7 +2810,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     "${currDt.year}")
                                 .then((user) {
                               if (user.id != 0) {
-                                key_scaffold.currentState.showSnackBar(SnackBar(
+                                key_scaffold.currentState.showSnackBar(const SnackBar(
                                   content: Text("تم الحفظ "),
                                 ));
                                 Navigator.pop(conte);
@@ -2823,14 +2830,14 @@ class _Today_HomeState extends State<Today_Home> {
                         }
                       },
                       child: Container(
-                        padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF33b17c),
+                        padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF33b17c),
                           borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(32.0),
-                              bottomRight: Radius.circular(32.0)),
+                              bottomLeft: const Radius.circular(32.0),
+                              bottomRight: const Radius.circular(32.0)),
                         ),
-                        child: Text(
+                        child: const Text(
                           "حـفـظ",
                           style: TextStyle(color: Colors.white),
                           textAlign: TextAlign.center,
@@ -2855,107 +2862,79 @@ class _Today_HomeState extends State<Today_Home> {
 
           return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(32.0))),
-              contentPadding: EdgeInsets.only(top: 10.0),
+              contentPadding: const EdgeInsets.only(top: 10.0),
               content: Container(
                 width: 400.0,
-                child: Form(
-                  key: key_form_read_book,
-                  child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 50,
-                        ),
-                        Center(
-                          child: Text(
-                            "تسجيل البيانات ",
-                            style: TextStyle(fontSize: 20, color: Colors.teal),
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: key_form_read_book,
+                    child: Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          const SizedBox(
+                            height: 50,
                           ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            padding:
-                                const EdgeInsets.only(left: 10.0, right: 10.0),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: Color(0xFF33b17c))),
-                            child: DropdownButton<String>(
-                              value: v_type,
+                          const Center(
+                            child: Text(
+                              "تسجيل البيانات ",
+                              style: TextStyle(fontSize: 20, color: Colors.teal),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.only(left: 10.0, right: 10.0),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(color: const Color(0xFF33b17c))),
+                              child: DropdownButton<String>(
+                                value: v_type,
 //                                  elevation: 100,
-                              style: TextStyle(color: Colors.teal),
-                              items: <String>[
-                                'كتاب',
-                                'بحث',
-                                'مقال',
-                                'أخرئ',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                              hint: Text(
-                                "حدد نوع الحتوئ",
-                                style: TextStyle(
-                                    color: Colors.teal,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              onChanged: (String value) {
-                                setState(() {
-                                  type_plan = getType_plan(value);
-                                  v_type = value;
+                                style: const TextStyle(color: Colors.teal),
+                                items: <String>[
+                                  'كتاب',
+                                  'بحث',
+                                  'مقال',
+                                  'أخرئ',
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                hint: const Text(
+                                  "حدد نوع الحتوئ",
+                                  style: TextStyle(
+                                      color: Colors.teal,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                onChanged: (String value) {
+                                  setState(() {
+                                    type_plan = getType_plan(value);
+                                    v_type = value;
 //                                      print(type_plan);
-                                });
-                              },
+                                  });
+                                },
+                              ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            initialValue: "$title_book",
-                            decoration: InputDecoration(
-                              labelText: 'العنوان :',
-                              labelStyle: TextStyle(color: Color(0xFF33b17c)),
-                              border: OutlineInputBorder(),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xFF33b17c))),
-                            ),
-                            validator: (value) {
-                              if (value.length < 2) {
-                                return 'يجب تحديد عنوان صحيح ';
-                              } else {
-                                title_book = value;
-                                return null;
-                              }
-                            },
-                            maxLength: 30,
-                            onSaved: (value) =>
-                                setState(() => title_book = value),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                              inputFormatters: [
-                                //هذا عشان ما يكتب الا رقم بس
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]')),
-                              ],
-                              decoration: InputDecoration(
-                                labelText: 'عدد الصفحات :',
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              initialValue: "$title_book",
+                              decoration: const InputDecoration(
+                                labelText: 'العنوان :',
                                 labelStyle: TextStyle(color: Color(0xFF33b17c)),
                                 border: OutlineInputBorder(),
                                 focusedBorder: OutlineInputBorder(
@@ -2963,121 +2942,150 @@ class _Today_HomeState extends State<Today_Home> {
                                         BorderSide(color: Color(0xFF33b17c))),
                               ),
                               validator: (value) {
-                                if (value.length < 1) {
-                                  return 'يجب ادخال عدد الصفحات !';
+                                if (value.length < 2) {
+                                  return 'يجب تحديد عنوان صحيح ';
                                 } else {
-                                  number_pages = int.parse(value);
+                                  title_book = value;
                                   return null;
                                 }
                               },
-                              maxLength: 7,
-                              onSaved: (value) => setState(
-                                  () => number_pages = int.parse(value))),
-                        ),
-                        Divider(),
-                        InkWell(
-                            onTap: () async {
-                              DateTime pickedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(2000),
-                                  lastDate: DateTime(2101));
-                              ed_read_start_date =
-                                  "${pickedDate.year}-${App_Data.getDate_month(pickedDate.month)}-${App_Data.getDate_Day(pickedDate.day)}";
-
-                              if (pickedDate != null) {
-                                setState(() {
-                                  ed_read_start_date;
-                                });
-                              } else {
-                                print("Date is not selected");
-                              }
-                            },
-                            child: DecoratedBox(
-                              decoration: const BoxDecoration(
-                                  color: Color(0xFFF9FBE7),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(0),
-                                    topRight: Radius.circular(10),
-                                    bottomLeft: Radius.circular(0),
-                                    bottomRight: Radius.circular(10),
-                                  )),
-                              child: SizedBox(
-                                height: 50,
-                                child: Center(
-                                  child: Text(
-                                    ' حدد تاريخ البدء \n $ed_read_start_date',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
-                            )),
-                        SizedBox(
-                          height: 50,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            if (key_form_read_book.currentState.validate()) {
-                              // الاتصال وحفظ البيانات للسنة
-                              if (ed_read_start_date == null ||
-                                  ed_read_start_date.compareTo("0000-00-00") ==
-                                      0) {
-                                // الاضافة الجديدة
-
-                                Fluttertoast.showToast(
-                                    msg: 'يجب اضافة الناريخ',
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.BOTTOM,
-                                    timeInSecForIosWeb: 1,
-                                    backgroundColor: Colors.red,
-                                    textColor: Colors.yellow);
-                              } else {
-                                API.Plan_Data_Add(type_plan, title_book,
-                                        number_pages, ed_read_start_date)
-                                    .then((user) {
-                                  if (user.id != 0) {
-                                    key_scaffold.currentState
-                                        .showSnackBar(SnackBar(
-                                      content: Text(" تم اضافة الكتاب "),
-                                    ));
-                                    Navigator.pop(conte);
-//                                        setState(() {});
-                                    get_data_numbers();
-                                  } else {
-                                    Fluttertoast.showToast(
-                                        msg: 'فشلت العملية',
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.BOTTOM,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: Colors.red,
-                                        textColor: Colors.yellow);
-                                  }
-                                });
-                              }
-                            } else {
-                              print("no");
-                            }
-                          },
-                          child: Container(
-                            padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF33b17c),
-                              borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(32.0),
-                                  bottomRight: Radius.circular(32.0)),
-                            ),
-                            child: Text(
-                              "حــفـظ",
-                              style: TextStyle(color: Colors.white),
-                              textAlign: TextAlign.center,
+                              maxLength: 30,
+                              onSaved: (value) =>
+                                  setState(() => title_book = value),
                             ),
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                                inputFormatters: [
+                                  //هذا عشان ما يكتب الا رقم بس
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]')),
+                                ],
+                                decoration: const InputDecoration(
+                                  labelText: 'عدد الصفحات :',
+                                  labelStyle: TextStyle(color: Color(0xFF33b17c)),
+                                  border: OutlineInputBorder(),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Color(0xFF33b17c))),
+                                ),
+                                validator: (value) {
+                                  if (value.length < 1) {
+                                    return 'يجب ادخال عدد الصفحات !';
+                                  } else {
+                                    number_pages = int.parse(value);
+                                    return null;
+                                  }
+                                },
+                                maxLength: 7,
+                                onSaved: (value) => setState(
+                                    () => number_pages = int.parse(value))),
+                          ),
+                          const Divider(),
+                          InkWell(
+                              onTap: () async {
+                                DateTime pickedDate = await showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(2000),
+                                    lastDate: DateTime(2101));
+                                ed_read_start_date =
+                                    "${pickedDate.year}-${App_Data.getDate_month(pickedDate.month)}-${App_Data.getDate_Day(pickedDate.day)}";
+
+                                if (pickedDate != null) {
+                                  setState(() {
+                                    ed_read_start_date;
+                                  });
+                                } else {
+                                  print("Date is not selected");
+                                }
+                              },
+                              child: DecoratedBox(
+                                decoration: const BoxDecoration(
+                                    color: Color(0xFFF9FBE7),
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(0),
+                                      topRight: Radius.circular(10),
+                                      bottomLeft: Radius.circular(0),
+                                      bottomRight: Radius.circular(10),
+                                    )),
+                                child: SizedBox(
+                                  height: 50,
+                                  child: Center(
+                                    child: Text(
+                                      ' حدد تاريخ البدء \n $ed_read_start_date',
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              )),
+
+                          const SizedBox(height: 50,),
+
+                          InkWell(
+                            onTap: () {
+                              if (key_form_read_book.currentState.validate()) {
+                                // الاتصال وحفظ البيانات للسنة
+                                if (ed_read_start_date == null ||
+                                    ed_read_start_date.compareTo("0000-00-00") == 0) {
+                                  // الاضافة الجديدة
+
+                                  Fluttertoast.showToast(
+                                      msg: 'يجب اضافة الناريخ',
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.red,
+                                      textColor: Colors.yellow);
+                                } else {
+                                  API.Plan_Data_Add(type_plan, title_book,
+                                          number_pages, ed_read_start_date)
+                                      .then((user) {
+                                    if (user.id != 0) {
+                                      key_scaffold.currentState
+                                          .showSnackBar(const SnackBar(
+                                        content: Text(" تم اضافة الكتاب "),
+                                      ));
+                                      Navigator.pop(conte);
+//                                        setState(() {});
+                                      get_data_numbers();
+                                    } else {
+                                      Fluttertoast.showToast(
+                                          msg: 'فشلت العملية',
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.BOTTOM,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor: Colors.red,
+                                          textColor: Colors.yellow);
+                                    }
+                                  });
+                                }
+                              } else {
+                                print("no");
+                              }
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                              decoration: const BoxDecoration(
+                                color: Color(0xFF33b17c),
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(32.0),
+                                    bottomRight: Radius.circular(32.0)),
+                              ),
+                              child: const Text(
+                                "حــفـظ",
+                                style: TextStyle(color: Colors.white),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -3102,10 +3110,10 @@ class _Today_HomeState extends State<Today_Home> {
         context: context,
         builder: (BuildContext conte) {
           return AlertDialog(
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(32.0))),
-            contentPadding: EdgeInsets.only(top: 10.0),
-            content: Container(
+            contentPadding: const EdgeInsets.only(top: 10.0),
+            content: SizedBox(
               width: 250.0,
               child: Form(
                 key: key_form_read_year,
@@ -3114,14 +3122,14 @@ class _Today_HomeState extends State<Today_Home> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Expanded(
@@ -3139,7 +3147,7 @@ class _Today_HomeState extends State<Today_Home> {
                                 height: 50,
                                 child: Center(
                                   child: TextFormField(
-                                    decoration: InputDecoration(hintText: '0'),
+                                    decoration: const InputDecoration(hintText: '0'),
                                     keyboardType: TextInputType.number,
                                     initialValue: "$ed_num",
                                     inputFormatters: [
@@ -3157,7 +3165,7 @@ class _Today_HomeState extends State<Today_Home> {
                                       }
                                       return null;
                                     },
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
                                     ),
@@ -3182,7 +3190,7 @@ class _Today_HomeState extends State<Today_Home> {
                                 child: Center(
                                   child: Text(
                                     ' $name_ed ',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 16,
                                     ),
@@ -3191,12 +3199,12 @@ class _Today_HomeState extends State<Today_Home> {
                                 ),
                               ),
                             )),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     InkWell(
@@ -3222,7 +3230,7 @@ class _Today_HomeState extends State<Today_Home> {
                                   .then((user) {
                                 if (user.id != 0) {
                                   key_scaffold.currentState
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     content: Text("تم الحفظ "),
                                   ));
                                 } else {
@@ -3241,7 +3249,7 @@ class _Today_HomeState extends State<Today_Home> {
                                   .then((user) {
                                 if (user.id != 0) {
                                   key_scaffold.currentState
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     content: Text("تم الحفظ "),
                                   ));
                                 } else {
@@ -3265,7 +3273,7 @@ class _Today_HomeState extends State<Today_Home> {
                                   .then((user) {
                                 if (user.id != 0) {
                                   key_scaffold.currentState
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     content: Text("تم الحفظ "),
                                   ));
                                   Navigator.pop(conte);
@@ -3288,7 +3296,7 @@ class _Today_HomeState extends State<Today_Home> {
                                   .then((user) {
                                 if (user.id != 0) {
                                   key_scaffold.currentState
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     content: Text("تم الحفظ "),
                                   ));
                                 } else {
@@ -3307,7 +3315,7 @@ class _Today_HomeState extends State<Today_Home> {
                                   .then((user) {
                                 if (user.id != 0) {
                                   key_scaffold.currentState
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     content: Text("تم الحفظ "),
                                   ));
                                 } else {
@@ -3331,7 +3339,7 @@ class _Today_HomeState extends State<Today_Home> {
                                   .then((user) {
                                 if (user.id != 0) {
                                   key_scaffold.currentState
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     content: Text("تم الحفظ "),
                                   ));
                                   Navigator.pop(conte);
@@ -3358,7 +3366,7 @@ class _Today_HomeState extends State<Today_Home> {
                                   .then((user) {
                                 if (user.id != 0) {
                                   key_scaffold.currentState
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     content: Text("تم الحفظ "),
                                   ));
                                 } else {
@@ -3377,7 +3385,7 @@ class _Today_HomeState extends State<Today_Home> {
                                   .then((user) {
                                 if (user.id != 0) {
                                   key_scaffold.currentState
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     content: Text("تم الحفظ "),
                                   ));
                                   Navigator.pop(conte);
@@ -3400,7 +3408,7 @@ class _Today_HomeState extends State<Today_Home> {
                                   .then((user) {
                                 if (user.id != 0) {
                                   key_scaffold.currentState
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     content: Text("تم الحفظ "),
                                   ));
                                 } else {
@@ -3419,7 +3427,7 @@ class _Today_HomeState extends State<Today_Home> {
                                   .then((user) {
                                 if (user.id != 0) {
                                   key_scaffold.currentState
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     content: Text("تم الحفظ "),
                                   ));
                                   Navigator.pop(conte);
@@ -3439,14 +3447,14 @@ class _Today_HomeState extends State<Today_Home> {
                         }
                       },
                       child: Container(
-                        padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF33b17c),
+                        padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF33b17c),
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(32.0),
                               bottomRight: Radius.circular(32.0)),
                         ),
-                        child: Text(
+                        child: const Text(
                           "تـم",
                           style: TextStyle(color: Colors.white),
                           textAlign: TextAlign.center,
@@ -3469,10 +3477,10 @@ class _Today_HomeState extends State<Today_Home> {
         context: context,
         builder: (BuildContext conte) {
           return AlertDialog(
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(32.0))),
-            contentPadding: EdgeInsets.only(top: 10.0),
-            content: Container(
+            contentPadding: const EdgeInsets.only(top: 10.0),
+            content: SizedBox(
               width: 250.0,
               child: Form(
                 key: key_form_read_year,
@@ -3481,14 +3489,14 @@ class _Today_HomeState extends State<Today_Home> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Expanded(
@@ -3506,7 +3514,7 @@ class _Today_HomeState extends State<Today_Home> {
                                 height: 50,
                                 child: Center(
                                   child: TextFormField(
-                                    decoration: InputDecoration(hintText: '0'),
+                                    decoration: const InputDecoration(hintText: '0'),
                                     keyboardType: TextInputType.number,
                                     initialValue: "$ed_num",
                                     inputFormatters: [
@@ -3524,7 +3532,7 @@ class _Today_HomeState extends State<Today_Home> {
                                       }
                                       return null;
                                     },
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
                                     ),
@@ -3533,10 +3541,10 @@ class _Today_HomeState extends State<Today_Home> {
                                 ),
                               ),
                             )),
-                        Expanded(
+                        const Expanded(
                             flex: 2,
                             child: DecoratedBox(
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                   color: Color(0xFFF9FBE7),
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(0),
@@ -3558,12 +3566,12 @@ class _Today_HomeState extends State<Today_Home> {
                                 ),
                               ),
                             )),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     InkWell(
@@ -3599,7 +3607,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     number_book_done)
                                 .then((user) {
                               if (user.id != 0) {
-                                key_scaffold.currentState.showSnackBar(SnackBar(
+                                key_scaffold.currentState.showSnackBar(const SnackBar(
                                   content: Text("تم الحفظ "),
                                 ));
                               } else {
@@ -3647,7 +3655,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     "${currDt.year}-${App_Data.getDate_month(currDt.month)}-${App_Data.getDate_Day(currDt.day)}")
                                 .then((user) {
                               if (user.id != 0) {
-                                key_scaffold.currentState.showSnackBar(SnackBar(
+                                key_scaffold.currentState.showSnackBar(const SnackBar(
                                   content: Text("تم الحفظ "),
                                 ));
                               } else {
@@ -3671,7 +3679,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     item.start_date)
                                 .then((user) {
                               if (user.id != 0) {
-                                key_scaffold.currentState.showSnackBar(SnackBar(
+                                key_scaffold.currentState.showSnackBar(const SnackBar(
                                   content: Text("تم الحفظ "),
                                 ));
                                 Navigator.pop(conte);
@@ -3696,7 +3704,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     "${currDt.year}-${App_Data.getDate_month(currDt.month)}-${App_Data.getDate_Day(currDt.day)}")
                                 .then((user) {
                               if (user.id != 0) {
-                                key_scaffold.currentState.showSnackBar(SnackBar(
+                                key_scaffold.currentState.showSnackBar(const SnackBar(
                                   content: Text("تم الحفظ "),
                                 ));
                               } else {
@@ -3720,7 +3728,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     item.start_date)
                                 .then((user) {
                               if (user.id != 0) {
-                                key_scaffold.currentState.showSnackBar(SnackBar(
+                                key_scaffold.currentState.showSnackBar(const SnackBar(
                                   content: Text("تم الحفظ "),
                                 ));
                                 Navigator.pop(conte);
@@ -3739,14 +3747,14 @@ class _Today_HomeState extends State<Today_Home> {
                         }
                       },
                       child: Container(
-                        padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF33b17c),
+                        padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF33b17c),
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(32.0),
                               bottomRight: Radius.circular(32.0)),
                         ),
-                        child: Text(
+                        child: const Text(
                           "تـم",
                           style: TextStyle(color: Colors.white),
                           textAlign: TextAlign.center,
@@ -3760,8 +3768,192 @@ class _Today_HomeState extends State<Today_Home> {
           );
         });
   }
-//
 
+
+  // عرض رسالة الاشتراك
+  pay_Message(BuildContext context_main, int num_bag){
+
+    showDialog<String>(
+        context: context_main,
+        builder: (BuildContext con) => SimpleDialog(
+            children: [
+
+              FutureBuilder<PayItem>(
+                future: API.Pay_Real_Get(),
+                builder: (con, snapshot) {
+                  if (snapshot.hasData) {
+
+                    if (snapshot.data.type == 1) { //تم الاشتراك
+                      // الدخول
+
+                      Navigator.pop(con);
+
+                      go_bag(num_bag);
+                      return null ;
+
+                    } else { //لم يشترك
+                      // عرض الرسالة للاشتراك
+                      return Column(
+                        children: [
+
+                          Text("مرحبا بك في تطبيق العالم يقرأ"),
+                          Text("تمتع بكافة مميزات التطبيق بجميع اقسامة"),
+                          Text("يمكنك البدء بتجربة مجانية لمدة 3 ايام"),
+
+                          SizedBox(height: 30,),
+
+                          Row(
+                            children: [
+                              // الخطة المجانية
+                              Container(
+                                margin: const EdgeInsets.all(5),
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  color: Colors.green[800],
+                                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: InkWell(
+                                    onTap: () {
+
+                                      API.Pay_Free_Get().then((pay) {
+                                        if ( pay.id != 0) {
+
+                                          if(pay.type == 1){
+                                            // الدخول ............
+
+                                            Navigator.pop(con);
+
+                                            go_bag(num_bag);
+
+
+                                          }else{
+                                            Navigator.pop(con);
+
+                                            Fluttertoast.showToast(
+                                                msg: 'انتهت الخطة المجانية',
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                gravity: ToastGravity.BOTTOM,
+                                                timeInSecForIosWeb: 1,
+                                                backgroundColor: Colors.red,
+                                                textColor: Colors.yellow);
+
+                                          }
+
+                                        } else {
+                                          Fluttertoast.showToast(
+                                              msg: 'فشل الاتصال بالشبكة!',
+                                              toastLength: Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.BOTTOM,
+                                              timeInSecForIosWeb: 1,
+                                              backgroundColor: Colors.red,
+                                              textColor: Colors.yellow);
+                                        }
+                                      });
+                                    },
+                                    child: const Text(
+                                      "المتابعة بالخطة المجانية",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 14),
+                                    )),
+                              ),
+
+
+                              // الشراء الحقيقي
+                              Container(
+                                margin: const EdgeInsets.all(5),
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  color: Colors.green[800],
+                                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: InkWell(
+                                    onTap: () {
+                                      // TODO
+                                      Navigator.pop(con);
+
+                                      Navigator.push(
+                                          con, MaterialPageRoute(
+                                          builder: (context) => Pay_Bag()));
+
+                                    },
+                                    child: const Text(
+                                      "البدء بالاشتراك الشهري",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 14),
+                                    )),
+                              ),
+
+                            ],
+                          )
+                        ],
+                      );
+                    }
+
+                  } else if (snapshot.hasError) {
+                    return Text('${snapshot.error}');
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
+            ]));
+  }
+
+  // البدء بتحقق من الاشتراك
+  Future<void> payStart(BuildContext context, int num_bag) async {
+    int id_user = await User_Data.getUserDataId() ;
+
+    if(id_user != 0 ) {// المستخدم مسجل الدخول
+
+      API.Pay_Real_Get().then((pay) {
+        if (pay != null || pay.id != 0) {
+          if(pay.type == 1){
+            go_bag(num_bag);
+
+          }else{
+            pay_Message(context, num_bag);
+
+          }
+        } else {
+          pay_Message(context, num_bag);
+
+        }
+      });
+
+
+
+    }else{
+      // رسالة يجب تسجيل الدخول
+      Fluttertoast.showToast(
+          msg: "يجب تسجيل الدخول اولاً",
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+    }
+  }
+
+  go_bag(int num_bag){
+    if(num_bag == 1 ){
+      addNew_year_data();// تعديل السنة للقراءة و الاستامع
+
+    }else if (num_bag == 2 ){
+      addNew_Data_Book(); // اضافة كتاب
+
+    }else if (num_bag == 3 ){
+      addNew_Data_Listn(); // اضافة برنامج
+
+    }else if (num_bag == 4 ){
+      addNew_year_Plan(); // تعديل الخطة البحثية
+
+    }else if (num_bag == 5 ){
+      addNew_Data_Plan(); // اضافة بيانات الخطة البحثية
+
+    }
+  }
 // مكتبتي
 
 }

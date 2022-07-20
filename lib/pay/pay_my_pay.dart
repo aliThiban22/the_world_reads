@@ -18,25 +18,26 @@ class PayMyPay {
                 future: API.Pay_Real_Get(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
+
                     return Column(
                       children: [
-                        Text(' ينتهي الاشتراك الشهري الخاص بك في '),
-                        Divider(),
-                        SizedBox(),
+                        const Text(' ينتهي الاشتراك الشهري الخاص بك في '),
+                        const Divider(),
+                        const SizedBox(),
                         Text('${snapshot.data.date_end}'),
-                        SizedBox(),
+                        const SizedBox(),
                         Container(
-                          margin: EdgeInsets.all(10),
-                          padding: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             color: Colors.green[800],
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderRadius: const BorderRadius.all(Radius.circular(10)),
                           ),
                           child: InkWell(
                               onTap: () {
                                 Navigator.pop(context);
                               },
-                              child: Text(
+                              child: const Text(
                                 "موافق",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -48,7 +49,7 @@ class PayMyPay {
                   } else if (snapshot.hasError) {
                     return Text('${snapshot.error}');
                   }
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 },

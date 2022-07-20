@@ -169,6 +169,7 @@ class API {
 
 
 //    // --------------------------------| عمليات الشراء |-----------------------------
+  // جلب الشراء الحقيقي
   static Future<PayItem> Pay_Real_Get() async {
     final Response response = await post(
         Uri.parse('$MAIN_URL/Pay_Real_Get.php'),
@@ -201,6 +202,78 @@ class API {
 //      throw Exception('فشل الاتصال بالانترنت !');
     }
   }
+
+  // اضافة شراء حقيقي
+  static Future<PayItem> Pay_Real_Add() async {
+    final Response response = await post(
+        Uri.parse('$MAIN_URL/Pay_Real_Add.php'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          "key_user": await User_Data.getUserDataId(),
+        }));
+
+    if (response.statusCode == 200) {
+//      print(response.body);
+      if (PayItem.fromJson(json.decode(response.body)).id != null) {
+        return PayItem.fromJson(json.decode(response.body));
+      } else {
+        Fluttertoast.showToast(
+            msg: 'لا توجد بيانات اشتراك للمستخدم',
+            toastLength: Toast.LENGTH_SHORT,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.red,
+            textColor: Colors.yellow);
+      }
+    } else {
+      Fluttertoast.showToast(
+          msg: _erorr,
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+//      throw Exception('فشل الاتصال بالانترنت !');
+    }
+  }
+
+
+
+  // جلب بيانات الخطة المجانية
+  static Future<PayItem> Pay_Free_Get() async {
+    final Response response = await post(
+        Uri.parse('$MAIN_URL/Pay_Free_Get.php'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          "key_user": await User_Data.getUserDataId(),
+        }));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      if (PayItem.fromJson(json.decode(response.body)).id != null) {
+        return PayItem.fromJson(json.decode(response.body));
+      } else {
+        Fluttertoast.showToast(
+            msg: 'لا توجد بيانات اشتراك للمستخدم',
+            toastLength: Toast.LENGTH_SHORT,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.red,
+            textColor: Colors.yellow);
+      }
+    } else {
+      Fluttertoast.showToast(
+          msg: _erorr,
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+//      throw Exception('فشل الاتصال بالانترنت !');
+    }
+  }
+
+
 
 //    // --------------------------------| القراءة و الاستماع |-----------------------------
   //-----------السنة

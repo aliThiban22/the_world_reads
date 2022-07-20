@@ -9,6 +9,9 @@ import '../Loves/like_item.dart';
 import '../Quotes/quotes_item.dart';
 import '../Stars/stars_item.dart';
 import '../network/api.dart';
+import '../pay/pay_bag.dart';
+import '../pay/pay_item.dart';
+import '../users/user_data.dart';
 import 'book_item.dart';
 import 'book_read.dart';
 
@@ -180,11 +183,14 @@ class _Book_PagState extends State<Book_Pag> {
                                 Colors.green[700]),
                           ),
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        Book_Read(widget._book_item)));
+                            // TODO
+                            payStart(context);
+
+//                            Navigator.push(
+//                                context,
+//                                MaterialPageRoute(
+//                                    builder: (context) =>
+//                                        Book_Read(widget._book_item)));
                           },
                           child: const Text("قراءة      |      استماع",
                               style:
@@ -550,8 +556,9 @@ class _Book_PagState extends State<Book_Pag> {
             return const Center(child: CircularProgressIndicator());
           default:
             if (snapshot.hasError) {
-              // print(snapshot.error);
-              return Text('Error: ${snapshot.error}');
+               print(snapshot.error);
+              return SizedBox();
+//              return Text('Error: ${snapshot.error}');
             } else {
               if (snapshot.data == null) {
                 numbers = 1;
@@ -703,4 +710,174 @@ class _Book_PagState extends State<Book_Pag> {
       }
     });
   }
+
+  // عرض رسالة الاشتراك
+  pay_Message(BuildContext context_main){
+
+    showDialog<String>(
+        context: context_main,
+        builder: (BuildContext con) => SimpleDialog(
+            children: [
+
+              FutureBuilder<PayItem>(
+                future: API.Pay_Real_Get(),
+                builder: (con, snapshot) {
+                  if (snapshot.hasData) {
+
+                    if (snapshot.data.type == 1) { //تم الاشتراك
+                      // الدخول
+                      Navigator.push(
+                          context_main, MaterialPageRoute(
+                          builder: (context_main) => Book_Read(widget._book_item)));
+
+
+                      Navigator.pop(context_main);
+
+                    } else { //لم يشترك
+                      // عرض الرسالة للاشتراك
+                      return Column(
+                        children: [
+
+                          Text("مرحبا بك في تطبيق العالم يقرأ"),
+                          Text("تمتع بكافة مميزات التطبيق بجميع اقسامة"),
+                          Text("يمكنك البدء بتجربة مجانية لمدة 3 ايام"),
+
+                          SizedBox(height: 30,),
+
+                          Row(
+                            children: [
+                              // الخطة المجانية
+                              Container(
+                                margin: const EdgeInsets.all(5),
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  color: Colors.green[800],
+                                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: InkWell(
+                                    onTap: () {
+
+                                      API.Pay_Free_Get().then((pay) {
+                                        if ( pay.id != 0) {
+
+                                          if(pay.type == 1){
+                                            // الدخول ............
+
+                                            Navigator.pop(con);
+
+                                            Navigator.push(
+                                                con, MaterialPageRoute(
+                                                builder: (context) => Book_Read(widget._book_item)));
+
+
+                                          }else{
+                                            Navigator.pop(con);
+
+                                            Fluttertoast.showToast(
+                                                msg: 'انتهت الخطة المجانية',
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                gravity: ToastGravity.BOTTOM,
+                                                timeInSecForIosWeb: 1,
+                                                backgroundColor: Colors.red,
+                                                textColor: Colors.yellow);
+
+                                          }
+
+                                        } else {
+                                          Fluttertoast.showToast(
+                                              msg: 'فشل الاتصال بالشبكة!',
+                                              toastLength: Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.BOTTOM,
+                                              timeInSecForIosWeb: 1,
+                                              backgroundColor: Colors.red,
+                                              textColor: Colors.yellow);
+                                        }
+                                      });
+                                    },
+                                    child: const Text(
+                                      "المتابعة بالخطة المجانية",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 14),
+                                    )),
+                              ),
+
+
+                              // الشراء الحقيقي
+                              Container(
+                                margin: const EdgeInsets.all(5),
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  color: Colors.green[800],
+                                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: InkWell(
+                                    onTap: () {
+                                      // TODO
+                                      Navigator.pop(con);
+
+                                      Navigator.push(
+                                          con, MaterialPageRoute(
+                                          builder: (context) => Pay_Bag()));
+
+                                    },
+                                    child: const Text(
+                                      "البدء بالاشتراك الشهري",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 14),
+                                    )),
+                              ),
+
+                            ],
+                          )
+                        ],
+                      );
+                    }
+
+                  } else if (snapshot.hasError) {
+                    return Text('${snapshot.error}');
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
+            ]));
+  }
+
+  // البدء بتحقق من الاشتراك
+  Future<void> payStart(BuildContext context) async {
+    int id_user = await User_Data.getUserDataId() ;
+
+    if(id_user != 0 ) {// المستخدم مسجل الدخول
+
+      API.Pay_Real_Get().then((pay) {
+        if (pay != null || pay.id != 0) {
+          if(pay.type == 1){
+            Navigator.push(
+                context, MaterialPageRoute(
+                builder: (context_main) => Book_Read(widget._book_item)));
+
+          }else{
+            pay_Message(context);
+
+          }
+        } else {
+          pay_Message(context);
+
+        }
+      });
+
+    }else{
+      // رسالة يجب تسجيل الدخول
+      Fluttertoast.showToast(
+          msg: "يجب تسجيل الدخول اولاً",
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+    }
+  }
+
 }
