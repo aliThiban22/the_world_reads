@@ -191,7 +191,7 @@ class _Today_HomeState extends State<Today_Home> {
                       setState(() => currentIndex = index),
                 ),
 
-              Expanded(flex: 9, child: get_select_tap(currentIndex)),
+              Expanded(flex: 1, child: get_select_tap(currentIndex)),
             ],
           ),
             ),
