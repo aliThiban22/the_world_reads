@@ -47,6 +47,7 @@ dependencies:
   flutter_rating_bar:
   toggle_bar:
   audioplayers: ^0.20.1
+  image_picker:
 
 dev_dependencies:
   flutter_test:

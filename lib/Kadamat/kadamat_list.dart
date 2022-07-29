@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../network/api.dart';
+import 'kadamat_add.dart';
 import 'kadamat_item.dart';
 import 'kadamat_page.dart';
 
@@ -51,10 +52,10 @@ class _Kadamat_ListState extends State<Kadamat_List> {
                         flex: 1,
                         child: InkWell(
                           onTap: () {
-//                            Navigator.push(
-//                                context,
-//                                MaterialPageRoute(
-//                                    builder: (context) => Kadamat_Add()));
+                           Navigator.push(
+                               context,
+                               MaterialPageRoute(
+                                   builder: (context) => Kadamat_add()));
                           },
                           child: const Icon(
                             Icons.add_circle,
@@ -94,7 +95,7 @@ class _Kadamat_ListState extends State<Kadamat_List> {
                     return Directionality(
                         textDirection: TextDirection.rtl,
                         child: Container(
-                          height: 150,
+                          height: 190,
                           child: InkWell(
                             onTap: () {
                               Navigator.push(

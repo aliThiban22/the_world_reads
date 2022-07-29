@@ -167,6 +167,42 @@ class API {
     }
   }
 
+  // حذف المستخدم
+  static Future<User_Item> User_delete(int id) async {
+    final Response response = await post(Uri.parse('$MAIN_URL/User_delete.php'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: jsonEncode(<String, int>{
+          "id": id
+        }));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+
+      if (User_Item.fromJson(json.decode(response.body)).id != null) {
+
+        return User_Item.fromJson(json.decode(response.body));
+
+      } else {
+        Fluttertoast.showToast(
+            msg: 'الايميل او كلمة المرور غير صحيحة!',
+            toastLength: Toast.LENGTH_SHORT,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.red,
+            textColor: Colors.yellow);
+      }
+
+    } else {
+      Fluttertoast.showToast(
+          msg: _erorr,
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+//      throw Exception('فشل الاتصال بالانترنت !');
+    }
+  }
 
 //    // --------------------------------| عمليات الشراء |-----------------------------
   // جلب الشراء الحقيقي
@@ -237,8 +273,6 @@ class API {
     }
   }
 
-
-
   // جلب بيانات الخطة المجانية
   static Future<PayItem> Pay_Free_Get() async {
     final Response response = await post(
@@ -272,7 +306,39 @@ class API {
 //      throw Exception('فشل الاتصال بالانترنت !');
     }
   }
+  // التاكد بيانات الخطة المجانية
+  static Future<PayItem> Pay_Free_Get_user() async {
+    final Response response = await post(
+        Uri.parse('$MAIN_URL/Pay_Free_Get_user.php'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          "key_user": await User_Data.getUserDataId(),
+        }));
 
+    if (response.statusCode == 200) {
+      print(response.body);
+      if (PayItem.fromJson(json.decode(response.body)).id != null) {
+        return PayItem.fromJson(json.decode(response.body));
+      } else {
+        Fluttertoast.showToast(
+            msg: 'لا توجد بيانات اشتراك للمستخدم',
+            toastLength: Toast.LENGTH_SHORT,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.red,
+            textColor: Colors.yellow);
+      }
+    } else {
+      Fluttertoast.showToast(
+          msg: _erorr,
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+//      throw Exception('فشل الاتصال بالانترنت !');
+    }
+  }
 
 
 //    // --------------------------------| القراءة و الاستماع |-----------------------------
@@ -420,6 +486,30 @@ class API {
           textColor: Colors.yellow);
     }
   }
+  // جلب بيانات لاقراءة المنجزة
+  static Future<List<Read_item>> Reads_Get_Done() async {
+    final Response response = await post(Uri.parse('$MAIN_URL/Reads_Get_Done.php'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          "key_user": await User_Data.getUserDataId()
+        }));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+//    return FoodItemApi.fromJson(json.decode(response.body));
+      final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+      return parsed.map<Read_item>((item) => Read_item.fromJson(item)).toList();
+    } else {
+      Fluttertoast.showToast(
+          msg: _erorr,
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+    }
+  }
 
   // اضافة كتاب للقراءة
   static Future<Read_item> Reads_Add(String title, String writer_name,
@@ -464,6 +554,85 @@ class API {
     }
   }
 
+  // تعديل كتاب
+  static Future<Read_item> Reads_Updata_All(
+      int id, String title, String writer_name, String library_name,
+      int number_pages, String start_date ) async {
+
+    final Response response = await post(
+        Uri.parse('$MAIN_URL/Reads_Updata_All.php'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          "id": id,
+          "title": title,
+          "writer_name": writer_name,
+          "library_name": library_name,
+          "writer_date": "no",
+          "number_pages": number_pages,
+          "start_date": start_date,
+        }));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      if (Read_item.fromJson(json.decode(response.body)).id != null) {
+        return Read_item.fromJson(json.decode(response.body));
+      } else {
+        Fluttertoast.showToast(
+            msg: 'لا توجد بيانات اشتراك للمستخدم',
+            toastLength: Toast.LENGTH_SHORT,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.red,
+            textColor: Colors.yellow);
+      }
+    } else {
+      Fluttertoast.showToast(
+          msg: _erorr,
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+//      throw Exception('فشل الاتصال بالانترنت !');
+    }
+  }
+
+  // حذف كتاب
+  static Future<Read_item> Reads_Delete(int id) async {
+
+    final Response response = await post(
+        Uri.parse('$MAIN_URL/Reads_Delete.php'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          "id": id
+        }));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      if (Read_item.fromJson(json.decode(response.body)).id != null) {
+        return Read_item.fromJson(json.decode(response.body));
+      } else {
+        Fluttertoast.showToast(
+            msg: 'لا توجد بيانات اشتراك للمستخدم',
+            toastLength: Toast.LENGTH_SHORT,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.red,
+            textColor: Colors.yellow);
+      }
+    } else {
+      Fluttertoast.showToast(
+          msg: _erorr,
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+//      throw Exception('فشل الاتصال بالانترنت !');
+    }
+  }
+
+
   // تعديل  انجاز كتاب للقراءة
   static Future<Read_item> Reads_Updata(
       int id, int done, int number_pages_end) async {
@@ -501,7 +670,7 @@ class API {
     }
   }
 
-  //------------ البيانات الاستماع
+  //-------------------------- البيانات الاستماع
   // جلب بيانات الاستماع
   static Future<List<Listen_Item>> Listen_Get() async {
     final Response response = await post(Uri.parse('$MAIN_URL/Listen_Get.php'),
@@ -526,6 +695,31 @@ class API {
           textColor: Colors.yellow);
     }
   }
+  // جلب بيانات الاستماع المنجزة
+  static Future<List<Listen_Item>> Listen_Get_Done() async {
+    final Response response = await post(Uri.parse('$MAIN_URL/Listen_Get_Done.php'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          "key_user": await User_Data.getUserDataId()
+        }));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+//    return FoodItemApi.fromJson(json.decode(response.body));
+      final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+      return parsed.map<Listen_Item>((item) => Listen_Item.fromJson(item)).toList();
+    } else {
+      Fluttertoast.showToast(
+          msg: _erorr,
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+    }
+  }
+
 
   // اضافة استماع جديد
   static Future<Read_item> Listen_Add(
@@ -575,7 +769,92 @@ class API {
     }
   }
 
-  // تعديل  انجاز برنامج صوتي
+  // تعديل بيانات استماع
+  static Future<Read_item> Listen_Updata_All( int id ,
+      String title,
+      String target,
+      String type_video,
+      String writer_name,
+      int time_video,
+      String start_date) async {
+    final Response response = await post(Uri.parse('$MAIN_URL/Listen_Updata_All.php'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          "id": id,
+          "title": title,
+          "type": 2,
+          "target": target,
+          "type_video": type_video,
+          "writer_name": writer_name,
+          "time_video": time_video,
+          "start_date": start_date,
+          "time_end": 0,
+          "done": 1,
+          "key_user": await User_Data.getUserDataId()
+        }));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      if (Read_item.fromJson(json.decode(response.body)).id != null) {
+        return Read_item.fromJson(json.decode(response.body));
+      } else {
+        Fluttertoast.showToast(
+            msg: 'لا توجد بيانات اشتراك للمستخدم',
+            toastLength: Toast.LENGTH_SHORT,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.red,
+            textColor: Colors.yellow);
+      }
+    } else {
+      Fluttertoast.showToast(
+          msg: _erorr,
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+//      throw Exception('فشل الاتصال بالانترنت !');
+    }
+  }
+
+  // حذف استماع
+  static Future<Read_item> Listen_Delete(int id) async {
+
+    final Response response = await post(
+        Uri.parse('$MAIN_URL/Listen_Delete.php'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          "id": id
+        }));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      if (Read_item.fromJson(json.decode(response.body)).id != null) {
+        return Read_item.fromJson(json.decode(response.body));
+      } else {
+        Fluttertoast.showToast(
+            msg: 'لا توجد بيانات اشتراك للمستخدم',
+            toastLength: Toast.LENGTH_SHORT,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.red,
+            textColor: Colors.yellow);
+      }
+    } else {
+      Fluttertoast.showToast(
+          msg: _erorr,
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+//      throw Exception('فشل الاتصال بالانترنت !');
+    }
+  }
+
+
+  // تعديل انجاز برنامج صوتي
   static Future<Read_item> Listen_Updata(int id, int done, int time_end) async {
     final Response response = await post(
         Uri.parse('$MAIN_URL/Listen_Updata.php'),
@@ -640,40 +919,50 @@ class API {
     }
   }
 
-//   // اضافة تعليق
-//   static Future<Kadamat_Item> Kadamat_Add(String comment, int key_book) async {
-//     final Response response = await post(Uri.parse('$MAIN_URL/Kadamat_Add.php'),
-//         headers: <String, String>{
-//           'Content-Type': 'application/json;charset=UTF-8'
-//         },
-//         body: jsonEncode(<String, dynamic>{
-//           "comments": comment,
-//           "key_book": key_book,
-//           "key_user": App_Data.getUserID(),
-//           "type": 1
-//         }));
-//
-//     if (response.statusCode == 200) {
-//       print(response.body);
-//       if (Kadamat_Item.fromJson(json.decode(response.body)) != null) {
-//         return Kadamat_Item.fromJson(json.decode(response.body));
-//       } else {
-//         Fluttertoast.showToast(
-//             msg: 'الايميل او كلمة المرور غير صحيحة!',
-//             toastLength: Toast.LENGTH_SHORT,
-//             timeInSecForIosWeb: 3,
-//             backgroundColor: Colors.red,
-//             textColor: Colors.yellow);
-//       }
-//     } else {
-//       Fluttertoast.showToast(
-//           msg: _erorr,
-//           toastLength: Toast.LENGTH_SHORT,
-//           timeInSecForIosWeb: 3,
-//           backgroundColor: Colors.red,
-//           textColor: Colors.yellow);
-//     }
-//   }
+  static Future<Kadamat_Item> Kadamat_Add(String title, String body,
+      String img, int price, int type, int number_day, String time_post, BuildContext cxn) async {
+    final Response response = await post(Uri.parse('$MAIN_URL/Kadamat_Add.php'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          "title": title,
+          "body": body,
+          "img": img,
+          "price": price,
+          "type": type,
+          "number_day": number_day,
+          "Done": 0,
+          "time_post": time_post,
+          "city": " ",
+          "country": " ",
+          "key_user": App_Data.getUserID()
+        }));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      Navigator.pop(cxn);
+
+      if (Kadamat_Item.fromJson(json.decode(response.body)) != null) {
+        return Kadamat_Item.fromJson(json.decode(response.body));
+
+      } else {
+        Fluttertoast.showToast(
+            msg: _erorr,
+            toastLength: Toast.LENGTH_SHORT,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.red,
+            textColor: Colors.yellow);
+      }
+    } else {
+      Fluttertoast.showToast(
+          msg: _erorr,
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+    }
+  }
 
 //    // --------------------------------| الخطة البحثية |-----------------------------
   //-----------السنة
@@ -844,7 +1133,7 @@ class API {
     }
   }
 
-  //------------ البيانات
+  //------------------------------ البيانات
   // جلب بيانات الخطة البحثية
   static Future<List<Plan_item_data>> Plan_Data_Get() async {
     final Response response = await post(
@@ -856,6 +1145,34 @@ class API {
 
     if (response.statusCode == 200) {
 //      print(response.body);
+//    return FoodItemApi.fromJson(json.decode(response.body));
+      final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+      return parsed
+          .map<Plan_item_data>((item) => Plan_item_data.fromJson(item))
+          .toList();
+    } else {
+      Fluttertoast.showToast(
+          msg: _erorr,
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+    }
+  }
+
+  // جلب بيانات الخطة البحثية المنجزة
+  static Future<List<Plan_item_data>> Plan_Data_Get_Done() async {
+    final Response response = await post(
+        Uri.parse('$MAIN_URL/Plan_Data_Get_Done.php'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          "key_user": await User_Data.getUserDataId()
+        }));
+
+    if (response.statusCode == 200) {
+      print(response.body);
 //    return FoodItemApi.fromJson(json.decode(response.body));
       final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
       return parsed

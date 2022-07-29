@@ -32,12 +32,6 @@ class _HomeState extends State<Home> {
   }
 
   List<Banner_Item> list_banner = new List.from([]);
-  List<Book_Item> listMainBook = List.from([]),
-      listA = new List.from([]),
-      listB = new List.from([]),
-      listC = new List.from([]),
-      listD = new List.from([]),
-      listE = new List.from([]);
   int number_list_banner = 1;
   List<String> images = ['img1.jpg'];
 
@@ -129,9 +123,19 @@ class _HomeState extends State<Home> {
 //                            return Center(child: CircularProgressIndicator());
           default:
             if (snapshot.hasError) {
-              print(snapshot.error);
-              return Text('Error: لا يوجد اتصال بالانترنت');
+//              print(snapshot.error);
+              return  book();
+
+//              return Text('Error: لا يوجد اتصال بالانترنت');
             } else {
+
+              List<Book_Item> listMainBook = List.from([]),
+                  listA = new List.from([]),
+                  listB = new List.from([]),
+                  listC = new List.from([]),
+                  listD = new List.from([]),
+                  listE = new List.from([]);
+
               for (int i = 0; i < snapshot.data.length; i++) {
                 if (snapshot.data[i].name_list_main.compareTo("خلاصة العلم") ==
                     0) {
@@ -215,18 +219,28 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                       Divider(),
-                      Row(
-                        children: [
-                          Image.asset(
-                            'images/img_esdarat_b.png',
-                            width: 50.0,
-                            height: 50.0,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text('الموجز في العلوم'),
-                          ),
-                        ],
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Book_Lists('الموجز في العلوم')));
+
+                        },
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              'images/img_esdarat_b.png',
+                              width: 50.0,
+                              height: 50.0,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('الموجز في العلوم'),
+                            ),
+                          ],
+                        ),
                       ),
                       Container(
                         margin: const EdgeInsets.all(50.0),
@@ -244,18 +258,28 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                       Divider(),
-                      Row(
-                        children: [
-                          Image.asset(
-                            'images/img_esdarat_d.png',
-                            width: 50.0,
-                            height: 50.0,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text('المنتخب من كتب الادب'),
-                          ),
-                        ],
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Book_Lists('المنتخب من كتب الادب')));
+
+                        },
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              'images/img_esdarat_d.png',
+                              width: 50.0,
+                              height: 50.0,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('المنتخب من كتب الادب'),
+                            ),
+                          ],
+                        ),
                       ),
                       Container(
                         margin: const EdgeInsets.all(50.0),
@@ -273,18 +297,28 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                       Divider(),
-                      Row(
-                        children: [
-                          Image.asset(
-                            'images/img_esdarat_a.png',
-                            width: 50.0,
-                            height: 50.0,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text('المستعذب من كتب الادب'),
-                          ),
-                        ],
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Book_Lists('المستعذب من كتب الادب')));
+
+                        },
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              'images/img_esdarat_a.png',
+                              width: 50.0,
+                              height: 50.0,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('المستعذب من كتب الادب'),
+                            ),
+                          ],
+                        ),
                       ),
                       Container(
                         margin: const EdgeInsets.all(50.0),
@@ -302,18 +336,28 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                       Divider(),
-                      Row(
-                        children: [
-                          Image.asset(
-                            'images/back_item_home_pag_ff.png',
-                            width: 50.0,
-                            height: 50.0,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text('الخلاصة الثقافية'),
-                          ),
-                        ],
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Book_Lists('الخلاصة الثقافية')));
+
+                        },
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              'images/back_item_home_pag_ff.png',
+                              width: 50.0,
+                              height: 50.0,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('الخلاصة الثقافية'),
+                            ),
+                          ],
+                        ),
                       ),
                       Container(
                         margin: const EdgeInsets.all(50.0),

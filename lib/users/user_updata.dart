@@ -34,7 +34,9 @@ class _UserUpDataState extends State<UserUpData> {
     name = widget._user_item.name ;
     email = widget._user_item.email ;
     age = widget._user_item.age ;
-    country = widget._user_item.country ;
+    if(widget._user_item.country.length > 2){
+      country = widget._user_item.country ;
+    }
     password = widget._user_item.password;
 
     setState(() {

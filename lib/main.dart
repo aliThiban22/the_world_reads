@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:the_world_reads/find/find_book.dart';
-import 'package:the_world_reads/pay/pay_bag.dart';
 import 'package:the_world_reads/pay/pay_my_pay.dart';
 import 'package:the_world_reads/users/user_sing_in.dart';
 
 import 'Admin/app_data.dart';
-import 'Media_Audio/play_music.dart';
 import 'main/home/home.dart';
 import 'main/store/store_home.dart';
 import 'main/today/today_home.dart';
@@ -80,20 +78,17 @@ class _MyHomePageState extends State<MyHomePage> {
                       flex: 1,
                       child: InkWell(
                           onTap: () {
-                            Navigator.push(
-                                context, MaterialPageRoute(
-                                builder: (context) => Pay_Bag()));
 
-//                            if (App_Data.getUserID() == 0) {
-//                              Fluttertoast.showToast(
-//                                  msg: 'يجب تسجيل الدخول اولاً !',
-//                                  toastLength: Toast.LENGTH_SHORT,
-//                                  timeInSecForIosWeb: 3,
-//                                  backgroundColor: Colors.red,
-//                                  textColor: Colors.yellow);
-//                            } else {
-//                              PayMyPay.payMessage(context);
-//                            }
+                            if (App_Data.getUserID() == 0) {
+                              Fluttertoast.showToast(
+                                  msg: 'يجب تسجيل الدخول اولاً !',
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  timeInSecForIosWeb: 3,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.yellow);
+                            } else {
+                              PayMyPay.payMessage(context);
+                            }
                           },
                           child: const Icon(
                             Icons.shopping_cart,

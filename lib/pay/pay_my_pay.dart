@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_world_reads/pay/pay_bag.dart';
 import 'package:the_world_reads/pay/pay_item.dart';
 
 import '../network/api.dart';
@@ -21,11 +22,13 @@ class PayMyPay {
 
                     return Column(
                       children: [
+                        const SizedBox(height: 20,),
+
                         const Text(' ينتهي الاشتراك الشهري الخاص بك في '),
                         const Divider(),
                         const SizedBox(),
-                        Text('${snapshot.data.date_end}'),
-                        const SizedBox(),
+                        no_pay_or_end_pay(snapshot.data.date_end, snapshot.data.type, context),
+                        const SizedBox(height: 20,),
                         Container(
                           margin: const EdgeInsets.all(10),
                           padding: const EdgeInsets.all(10),
@@ -38,7 +41,7 @@ class PayMyPay {
                                 Navigator.pop(context);
                               },
                               child: const Text(
-                                "موافق",
+                                "اخفاء",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20),
@@ -55,6 +58,29 @@ class PayMyPay {
                 },
               ),
             ]));
+  }
+
+  static Widget no_pay_or_end_pay(String date_end, int type, BuildContext context){
+    if(type == null || type != 1){
+
+      return InkWell(
+        onTap: (){
+          Navigator.push(
+              context, MaterialPageRoute(
+              builder: (context) => Pay_Bag()));
+
+        },
+        child: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(" لا يوجد لديك اشتراكات نشطة اضغط هنا للتجديد",
+            style: TextStyle(color: Colors.teal, fontSize: 20,),textAlign: TextAlign.center),
+        ),
+      );
+
+    }else {
+      return Text(date_end);
+
+    }
   }
 
   // التحقق من الاشتراك الشهري

@@ -860,11 +860,49 @@ class _Book_PagState extends State<Book_Pag> {
                 builder: (context_main) => Book_Read(widget._book_item)));
 
           }else{
-            pay_Message(context);
+            API.Pay_Free_Get_user().then((pay) { // فحص الاشتراك التجريبي
+              if (pay != null || pay.id != 0) {
+                if(pay.type == 1){ // مشترك
+                  Navigator.push(
+                      context, MaterialPageRoute(
+                      builder: (context_main) => Book_Read(widget._book_item)));
+                  Fluttertoast.showToast(
+                      msg: "ينتهي الاشتراك التجريبي في تاريخ \n ${pay.date_end}",
+                      toastLength: Toast.LENGTH_SHORT,
+                      timeInSecForIosWeb: 3,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.yellow);
+
+                }else{
+                  pay_Message(context);
+                }
+              } else {
+                pay_Message(context);
+              }
+            });
 
           }
         } else {
-          pay_Message(context);
+          API.Pay_Free_Get_user().then((pay) { // فحص الاشتراك التجريبي
+            if (pay != null || pay.id != 0) {
+              if(pay.type == 1){ // مشترك
+                Navigator.push(
+                    context, MaterialPageRoute(
+                    builder: (context_main) => Book_Read(widget._book_item)));
+                Fluttertoast.showToast(
+                    msg: "ينتهي الاشتراك التجريبي في تاريخ \n ${pay.date_end}",
+                    toastLength: Toast.LENGTH_SHORT,
+                    timeInSecForIosWeb: 3,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.yellow);
+
+              }else{
+                pay_Message(context);
+              }
+            } else {
+              pay_Message(context);
+            }
+          });
 
         }
       });

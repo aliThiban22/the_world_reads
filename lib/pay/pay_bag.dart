@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../network/api.dart';
+import '../users/user_data.dart';
 
 class Pay_Bag extends StatefulWidget {
   @override
@@ -68,44 +69,58 @@ class _Pay_BagState extends State<Pay_Bag> {
 
 
                     onPressed: () {
-                      // TODO بش مهندس عبدالله هنا بتتم عملية الاشتراك
-                      // TODO سعر الاشتراك  7  دولار
+                      // TODO هنا يتم التحقق من وجود المستخدم
+                      if(User_Data.getUserDataId == 0){
+                        Fluttertoast.showToast(
+                            msg: 'يجب تسجيل الدخول اولاً ..',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.yellow);
+
+                      }else{ // المستخدم موجود
+
+                        // TODO بش مهندس عبدالله هنا بتتم عملية الاشتراك
+                        // TODO سعر الاشتراك  7  دولار
 
 
-                      // TODO اذا نجح الاشتراك يتم تسجيل البيانات بهذا الكود
-                      API.Pay_Real_Add().then((pay) {
-                        if ( pay.id != 0) {
-                          if(pay.type == 1){
-                            Fluttertoast.showToast(
-                                msg: 'تم الاشتراك بنجاح',
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.red,
-                                textColor: Colors.yellow);
+                        // TODO اذا نجح الاشتراك يتم تسجيل البيانات بهذا الكود
+//                        API.Pay_Real_Add().then((pay) {
+//                          if ( pay.id != 0) {
+//                            if(pay.type == 1){
+//                              Fluttertoast.showToast(
+//                                  msg: 'تم الاشتراك بنجاح',
+//                                  toastLength: Toast.LENGTH_SHORT,
+//                                  gravity: ToastGravity.BOTTOM,
+//                                  timeInSecForIosWeb: 1,
+//                                  backgroundColor: Colors.red,
+//                                  textColor: Colors.yellow);
+//
+//                              Navigator.pop(context);
+//
+//                            }else{
+//                              Fluttertoast.showToast(
+//                                  msg: 'فشلت العملية !!!',
+//                                  toastLength: Toast.LENGTH_SHORT,
+//                                  gravity: ToastGravity.BOTTOM,
+//                                  timeInSecForIosWeb: 1,
+//                                  backgroundColor: Colors.red,
+//                                  textColor: Colors.yellow);
+//                            }
+//
+//                          } else {
+//                            Fluttertoast.showToast(
+//                                msg: 'فشل الاتصال بالشبكة!',
+//                                toastLength: Toast.LENGTH_SHORT,
+//                                gravity: ToastGravity.BOTTOM,
+//                                timeInSecForIosWeb: 1,
+//                                backgroundColor: Colors.red,
+//                                textColor: Colors.yellow);
+//                          }
+//                        });
 
-                            Navigator.pop(context);
-
-                          }else{
-                            Fluttertoast.showToast(
-                                msg: 'فشلت العملية !!!',
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.red,
-                                textColor: Colors.yellow);
-                          }
-
-                        } else {
-                          Fluttertoast.showToast(
-                              msg: 'فشل الاتصال بالشبكة!',
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.BOTTOM,
-                              timeInSecForIosWeb: 1,
-                              backgroundColor: Colors.red,
-                              textColor: Colors.yellow);
-                        }
-                      });
+                      }
 
 
 

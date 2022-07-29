@@ -170,6 +170,35 @@ class _UserSingInState extends State<UserSingIn> {
                     },
                   ),
                   Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.folder_delete_outlined , color: Colors.grey),
+                    // تعيين الأيقونة
+                    title: const Text(
+                      "حذف الحساب",
+                      style: TextStyle(color: Colors.grey, fontSize: 20),
+                    ),
+                    onTap: () {
+
+                      API.User_delete(user.id).then((user_delete) {
+                        
+                        User_Data.removeValues();
+                        App_Data.user_item = null;
+                        setState(() {});
+                        Navigator.pop(context);
+
+                        Fluttertoast.showToast(
+                            msg: "تم حذف الحساب !",
+                            toastLength: Toast.LENGTH_SHORT,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.yellow);
+
+
+                      });
+
+                    },
+                  ),
+
                 ],
               )),
         ],
