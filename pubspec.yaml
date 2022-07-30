@@ -48,6 +48,8 @@ dependencies:
   toggle_bar:
   audioplayers: ^0.20.1
   image_picker:
+  pay: ^1.0.10
+  in_app_purchase: ^3.0.6
 
 dev_dependencies:
   flutter_test:
