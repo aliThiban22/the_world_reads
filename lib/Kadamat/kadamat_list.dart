@@ -76,124 +76,150 @@ class _Kadamat_ListState extends State<Kadamat_List> {
   }
 
   Widget book() {
-    return FutureBuilder(
-        future: API.Kadamat_Get(widget.type),
-        // async work
-        builder: (BuildContext contextBook,
-            AsyncSnapshot<List<Kadamat_Item>> snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return const Center(child: CircularProgressIndicator());
-            default:
-              if (snapshot.hasError) {
-                print(snapshot.error);
-                return Text('Error: ${snapshot.error}');
-              } else {
-                return ListView.separated(
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (context, index) {
-                    return Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: Container(
-                          height: 190,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          Kadamat_pags(snapshot.data[index])));
-                            },
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
+    if(widget.type == 0){
+      return FutureBuilder(
+          future: API.Kadamat_Get_All(widget.type),
+          // async work
+          builder: (BuildContext contextBook,
+              AsyncSnapshot<List<Kadamat_Item>> snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return const Center(child: CircularProgressIndicator());
+              default:
+                if (snapshot.hasError) {
+                  print(snapshot.error);
+                  return book();
+                } else {
+                  return list(snapshot.data);
+                }
+            }
+          });
+
+    }else{
+      return FutureBuilder(
+          future: API.Kadamat_Get(widget.type),
+          // async work
+          builder: (BuildContext contextBook,
+              AsyncSnapshot<List<Kadamat_Item>> snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return const Center(child: CircularProgressIndicator());
+              default:
+                if (snapshot.hasError) {
+                  print(snapshot.error);
+                  return book();
+                } else {
+                  return list(snapshot.data);
+                }
+            }
+          });
+
+    }
+  }
+
+  Widget list(List<Kadamat_Item> snapshot){
+    return ListView.separated(
+      itemCount: snapshot.length,
+      itemBuilder: (context, index) {
+        return Directionality(
+            textDirection: TextDirection.rtl,
+            child: Container(
+              height: 190,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Kadamat_pags(snapshot[index])));
+                },
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  elevation: 10,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                            children: [
+                              Center(
+                                  child: Text(
+                                    snapshot[index].title,
+                                    style:
+                                    TextStyle(color: Colors.teal),
+                                  )),
+                              Text(
+                                " ${snapshot[index].body}",
+                                maxLines: 3,
+                                style: const TextStyle(
+                                  fontSize: 13,
+                                ),
                               ),
-                              elevation: 10,
-                              child: Row(
+                              Text(
+                                "تاريخ النشر : ${snapshot[index].time_post}",
+                                style: const TextStyle(fontSize: 12),
+                              ),
+                              Row(
                                 children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Center(
-                                              child: Text(
-                                            snapshot.data[index].title,
-                                            style:
-                                                TextStyle(color: Colors.teal),
-                                          )),
-                                          Text(
-                                            " ${snapshot.data[index].body}",
-                                            maxLines: 3,
-                                            style: const TextStyle(
-                                              fontSize: 13,
-                                            ),
-                                          ),
-                                          Text(
-                                            "تاريخ النشر : ${snapshot.data[index].time_post}",
-                                            style: const TextStyle(fontSize: 12),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Image.network(
-                                                API.URL_IMG_USERS +
-                                                    snapshot.data[index]
-                                                        .user_items.img,
-                                                width: 20,
-                                                height: 20,
-                                                errorBuilder:
-                                                    (BuildContext context,
-                                                        Object exception,
-                                                        StackTrace stackTrace) {
-                                                  return Image.network(
-                                                    "http://storys.esy.es/images/users/reading.png",
-                                                    width: 20,
-                                                    height: 20,
-                                                  );
-                                                },
-                                              ),
-                                              const SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                  snapshot.data[index]
-                                                      .user_items.name,
-                                                  style: const TextStyle(
-                                                      fontSize: 12,
-                                                      color:
-                                                          Colors.blueAccent)),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
+                                  Image.network(
+                                    API.URL_IMG_USERS +
+                                        snapshot[index]
+                                            .user_items.img,
+                                    width: 20,
+                                    height: 20,
+                                    errorBuilder:
+                                        (BuildContext context,
+                                        Object exception,
+                                        StackTrace stackTrace) {
+                                      return Image.network(
+                                        "http://storys.esy.es/images/users/reading.png",
+                                        width: 20,
+                                        height: 20,
+                                      );
+                                    },
                                   ),
-                                  Expanded(
-                                      flex: 1,
-                                      child: Image.network(
-                                        API.URL_IMG_KADAMAT +
-                                            snapshot.data[index].img,
-                                        fit: BoxFit.cover,
-                                        height: double.infinity,
-                                        width: double.infinity,
-                                        alignment: Alignment.center,
-                                      )),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                      snapshot[index]
+                                          .user_items.name,
+                                      style: const TextStyle(
+                                          fontSize: 12,
+                                          color:
+                                          Colors.blueAccent)),
                                 ],
-                              ),
-                            ),
+                              )
+                            ],
                           ),
-                        ));
-                  },
-                  separatorBuilder: (context, index) => Divider(),
-                );
-              }
-          }
-        });
+                        ),
+                      ),
+                      Expanded(
+                          flex: 1,
+                          child: Image.network(
+                            API.URL_IMG_KADAMAT +
+                                snapshot[index].img,
+                            fit: BoxFit.cover,
+                            height: double.infinity,
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+            ));
+      },
+      separatorBuilder: (context, index) => Divider(),
+    );
   }
 }

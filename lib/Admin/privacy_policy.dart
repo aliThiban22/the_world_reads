@@ -14,7 +14,7 @@ class _Privacy_PolicyState extends State<Privacy_Policy> {
     return Container(
         child: WebViewX(
           initialContent:
-          'https://sites.google.com/view/world-reads-privacy-policy/privacy-policy',
+          'https://sites.google.com/view/world-reads/privacy-policy',
           initialSourceType: SourceType.url,
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,

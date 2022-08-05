@@ -109,42 +109,6 @@ class _Book_ReadState extends State<Book_Read> {
                         initialContent:
                         "http://www.storys.esy.es/book/reading/reader.php?id=${widget._book_item.book_url.toString()}",
                         initialSourceType: SourceType.url,
-                        height: MediaQuery.of(context).size.height,
-                        width: MediaQuery.of(context).size.width,
-                        onWebViewCreated: (controller) =>
-                        webviewController = controller,
-                        onPageStarted: (src) =>
-                            debugPrint('A new page has started loading: $src\n'),
-                        onPageFinished: (src) =>
-                            debugPrint('The page has finished loading: $src\n'),
-                        jsContent: const {
-
-                          EmbeddedJsContent(
-                            js: "function testPlatformIndependentMethod() { console.log('Hi from JS') }",
-                          ),
-                          EmbeddedJsContent(
-                            webJs: "function testPlatformSpecificMethod(msg) { TestDartCallback('Web callback says: ' + msg) }",
-                            mobileJs:
-                            "function testPlatformSpecificMethod(msg) { TestDartCallback.postMessage('Mobile callback says: ' + msg) }",
-                          ),
-                        },
-                        dartCallBacks: {
-                          DartCallback(
-                            name: 'TestDartCallback',
-                            callBack: (msg) =>
-                                showSnackBar(msg.toString(), context),
-                          )
-                        },
-                        webSpecificParams: const WebSpecificParams(
-                          printDebugInfo: true,
-                        ),
-                        mobileSpecificParams: const MobileSpecificParams(
-                          androidEnableHybridComposition: true,
-                        ),
-                         navigationDelegate: (navigation) {
-                           debugPrint(navigation.content.sourceType.toString());
-                           return NavigationDecision.navigate;
-                         },
                       )),
 
                   Expanded(

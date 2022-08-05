@@ -1,7 +1,0 @@
-import 'dart:async';import 'package:flutter/material.dart';import 'package:flutter/foundation.dart';import 'package:flutter/services.dart';
-
-    /// Toast Length/// Only for Android Platformenum Toast {/// Show Short toast for 1 secLENGTH_SHORT,
-
-    /// Show Long toast for 5 secLENGTH_LONG}
-
-    /// ToastGravity/// Used to define the position of the Toast on the screenenum ToastGravity {TOP,BOTTOM,CENTER,TOP_LEFT,

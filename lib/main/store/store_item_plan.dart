@@ -4,6 +4,7 @@ class Store_Item_Plan {
   int number_search;
   int number_books;
   int number_articles;
+  int number_hours;
   String store_date;
   String store_date_b;
   int key_user;
@@ -14,6 +15,7 @@ class Store_Item_Plan {
       this.number_search,
       this.number_books,
       this.number_articles,
+      this.number_hours,
       this.store_date,
       this.store_date_b,
       this.key_user});
@@ -25,6 +27,7 @@ class Store_Item_Plan {
         number_search: json['number_search'],
         number_books: json['number_books'],
         number_articles: json['number_articles'],
+        number_hours: json['number_hours'],
         store_date: json['store_date'],
         store_date_b: json['store_date_b'],
         key_user: json['key_user']);

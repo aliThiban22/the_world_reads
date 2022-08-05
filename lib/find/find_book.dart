@@ -50,7 +50,7 @@ class _Find_BookState extends State<Find_Book> {
                         ),
                       ),
                     ),
-                    Expanded(
+                    const Expanded(
                       flex: 8,
                       child: Text("البحث"),
                     ),
@@ -96,7 +96,7 @@ class _Find_BookState extends State<Find_Book> {
                       ),
                     ),
 
-                    Container(
+                    SizedBox(
                         height: 1000,
                         child: book()),
 
@@ -111,26 +111,6 @@ class _Find_BookState extends State<Find_Book> {
   }
 
 
-
-  // Widget hidingIcon() {
-  //   if (inputText.length > 0) {
-  //     return IconButton(
-  //         icon: Icon(
-  //           Icons.clear,
-  //           color: Colors.red,
-  //         ),
-  //         splashColor: Colors.redAccent,
-  //         onPressed: () {
-  //           setState(() {
-  //             _controller.clear();
-  //             inputText = "";
-  //           });
-  //         });
-  //   } else {
-  //     return null;
-  //   }
-  // }
-
   Widget book() {
     return FutureBuilder(
       future: API.Book_Find(inputText), // async work
@@ -138,7 +118,7 @@ class _Find_BookState extends State<Find_Book> {
           (BuildContext contextBook, AsyncSnapshot<List<Book_Item>> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           default:
             if (snapshot.hasError) {
               print(snapshot.error);
@@ -150,10 +130,11 @@ class _Find_BookState extends State<Find_Book> {
                   itemCount: snapshot.data.length,
                   itemBuilder: (context, index) =>
                       Book_Item.bookItemWidget(snapshot.data[index], context),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 5,
                     mainAxisSpacing: 5,
+                    mainAxisExtent: 300
                   ),
                 ),
               );

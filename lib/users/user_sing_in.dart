@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:the_world_reads/Admin/privacy_policy.dart';
+import 'package:the_world_reads/Admin/send_me.dart';
 import 'package:the_world_reads/users/user_data.dart';
 import 'package:the_world_reads/users/user_sign_up.dart';
 import 'package:the_world_reads/users/user_updata.dart';
@@ -139,13 +140,19 @@ class _UserSingInState extends State<UserSingIn> {
                     // تعيين الأيقونة
                     title: Text("راسلنا",
                         style: TextStyle(color: Colors.teal, fontSize: 20)),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Sind_Me()));
+
+                    },
                   ),
                   Divider(),
                   ListTile(
                     leading: Icon(Icons.shield, color: Colors.teal),
                     // تعيين الأيقونة
-                    title: Text("سياسة الاستخدام",
+                    title: Text("اتفاقية الاستخدام",
                         style: TextStyle(color: Colors.teal, fontSize: 20)),
                     onTap: () {
                       Navigator.push(

@@ -1,6 +1,6 @@
 class Stars_item {
   int id;
-  double star;
+  int star;
   int key_user;
   int key_book;
 

@@ -50,7 +50,7 @@ class PayMyPay {
                       ],
                     );
                   } else if (snapshot.hasError) {
-                    return Text('${snapshot.error}');
+                    return const Text('لا يوجد اتصال بالشبكة !');
                   }
                   return const Center(
                     child: CircularProgressIndicator(),

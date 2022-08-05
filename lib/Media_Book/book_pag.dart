@@ -69,24 +69,24 @@ class _Book_PagState extends State<Book_Pag> {
                           ),
                         ),
                         Expanded(
-                          flex: 9,
+                          flex: 7,
                           child: Text(
                             widget._book_item.title,
                             maxLines: 1,
                           ),
                         ),
-                        Expanded(
-                          flex: 1,
-                          child: InkWell(
-                              onTap: () {
-                                /////////------
-                              },
-                              child: const Icon(
-                                Icons.favorite_border,
-                                size: 30,
-                                color: Colors.white,
-                              )),
-                        ),
+//                        Expanded(
+//                          flex: 1,
+//                          child: InkWell(
+//                              onTap: () {
+//                                /////////------
+//                              },
+//                              child: const Icon(
+//                                Icons.favorite_border,
+//                                size: 30,
+//                                color: Colors.white,
+//                              )),
+//                        ),
                       ],
                     ))),
 
@@ -557,7 +557,7 @@ class _Book_PagState extends State<Book_Pag> {
           default:
             if (snapshot.hasError) {
                print(snapshot.error);
-              return SizedBox();
+              return const SizedBox();
 //              return Text('Error: ${snapshot.error}');
             } else {
               if (snapshot.data == null) {
@@ -598,7 +598,7 @@ class _Book_PagState extends State<Book_Pag> {
                                         initialRating: 3,
                                         minRating: 1,
                                         direction: Axis.horizontal,
-                                        allowHalfRating: true,
+                                        allowHalfRating: false,
                                         itemCount: 5,
                                         itemPadding: EdgeInsets.symmetric(
                                             horizontal: 4.0),

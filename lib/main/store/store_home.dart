@@ -25,37 +25,27 @@ class _Store_HomeState extends State<Store_Home> {
 
   // كل البيانات
   int max_num_pag = 0, max_num_book = 0, max_num_minute = 0;
-  int max_num_pages_plan = 0,
-      max_num_articles_plan = 0,
-      max_num_search_plan = 0,
-      max_num_books_plan = 0;
+  int max_num_pages_plan = 0, max_num_articles_plan = 0,
+      max_num_search_plan = 0, max_num_books_plan = 0 ,
+      max_num_cook_plan = 0;
 
   // بيانات اليوم
-  int max_num_read_day_pag = 0,
-      max_num_read_day_book = 0,
-      max_num_read_day_minute = 0,
-      max_num_plan_day_pages = 0,
-      max_num_plan_day_articles = 0,
-      max_num_plan_day_search = 0,
-      max_num_plan_day_books = 0;
+  int max_num_read_day_pag = 0, max_num_read_day_book = 0,
+      max_num_read_day_minute = 0, max_num_plan_day_pages = 0,
+      max_num_plan_day_articles = 0, max_num_plan_day_search = 0,
+      max_num_plan_day_books = 0, max_num_plan_day_cook = 0;
 
   // بيانات الشهر
-  int max_num_read_month_pag = 0,
-      max_num_read_month_book = 0,
-      max_num_read_month_minute = 0,
-      max_num_plan_month_pages = 0,
-      max_num_plan_month_articles = 0,
-      max_num_plan_month_search = 0,
-      max_num_plan_month_books = 0;
+  int max_num_read_month_pag = 0, max_num_read_month_book = 0,
+      max_num_read_month_minute = 0, max_num_plan_month_pages = 0,
+      max_num_plan_month_articles = 0, max_num_plan_month_search = 0,
+      max_num_plan_month_books = 0, max_num_plan_month_cook = 0;
 
   // بيانات السنة
-  int max_num_read_year_pag = 0,
-      max_num_read_year_book = 0,
-      max_num_read_year_minute = 0,
-      max_num_plan_year_pages = 0,
-      max_num_plan_year_articles = 0,
-      max_num_plan_year_search = 0,
-      max_num_plan_year_books = 0;
+  int max_num_read_year_pag = 0, max_num_read_year_book = 0,
+      max_num_read_year_minute = 0, max_num_plan_year_pages = 0,
+      max_num_plan_year_articles = 0, max_num_plan_year_search = 0,
+      max_num_plan_year_books = 0, max_num_plan_year_cook = 0;
 
   var currDt = DateTime.now();
   var dd = DateTime.now();
@@ -79,74 +69,59 @@ class _Store_HomeState extends State<Store_Home> {
       max_num_minute = max_num_minute + list_books[i].number_minutes;
       dd = DateTime.parse(list_books[i].store_date);
       // بيانات اليوم
-      if (currDt.day == dd.day) {
-        max_num_read_day_pag =
-            max_num_read_day_pag + list_books[i].number_pages;
-        max_num_read_day_book =
-            max_num_read_day_book + list_books[i].number_book;
-        max_num_read_day_minute =
-            max_num_read_day_minute + list_books[i].number_minutes;
+      if (currDt.day == dd.day && currDt.month == dd.month) {
+        max_num_read_day_pag = max_num_read_day_pag + list_books[i].number_pages;
+        max_num_read_day_book = max_num_read_day_book + list_books[i].number_book;
+        max_num_read_day_minute = max_num_read_day_minute + list_books[i].number_minutes;
       }
       // بيانات الشهر
       if (currDt.month == dd.month) {
-        max_num_read_month_pag =
-            max_num_read_month_pag + list_books[i].number_pages;
-        max_num_read_month_book =
-            max_num_read_month_book + list_books[i].number_book;
-        max_num_read_month_minute =
-            max_num_read_month_minute + list_books[i].number_minutes;
+        max_num_read_month_pag = max_num_read_month_pag + list_books[i].number_pages;
+        max_num_read_month_book = max_num_read_month_book + list_books[i].number_book;
+        max_num_read_month_minute = max_num_read_month_minute + list_books[i].number_minutes;
       }
       // بيانات السنة
       if (currDt.year == dd.year) {
-        max_num_read_year_pag =
-            max_num_read_year_pag + list_books[i].number_pages;
-        max_num_read_year_book =
-            max_num_read_year_book + list_books[i].number_book;
-        max_num_read_year_minute =
-            max_num_read_year_minute + list_books[i].number_minutes;
+        max_num_read_year_pag = max_num_read_year_pag + list_books[i].number_pages;
+        max_num_read_year_book = max_num_read_year_book + list_books[i].number_book;
+        max_num_read_year_minute = max_num_read_year_minute + list_books[i].number_minutes;
       }
     }
 
     // الخطة البحثية
     for (int i = 0; i < list_plan.length; i++) {
       max_num_pages_plan = max_num_pages_plan + list_plan[i].number_pages;
-      max_num_articles_plan =
-          max_num_articles_plan + list_plan[i].number_articles;
+      max_num_articles_plan = max_num_articles_plan + list_plan[i].number_articles;
       max_num_search_plan = max_num_search_plan + list_plan[i].number_search;
       max_num_books_plan = max_num_books_plan + list_plan[i].number_books;
+      max_num_cook_plan = max_num_cook_plan + list_plan[i].number_hours;
       dd = DateTime.parse(list_plan[i].store_date);
+
       // بيانات اليوم
-      if (currDt.day == dd.day) {
-        max_num_plan_day_pages =
-            max_num_plan_day_pages + list_plan[i].number_pages;
-        max_num_plan_day_articles =
-            max_num_plan_day_articles + list_plan[i].number_articles;
-        max_num_plan_day_search =
-            max_num_plan_day_search + list_plan[i].number_search;
-        max_num_plan_day_books =
-            max_num_plan_day_books + list_plan[i].number_books;
+      if (currDt.day == dd.day && currDt.month == dd.month) {
+        max_num_plan_day_pages = max_num_plan_day_pages + list_plan[i].number_pages;
+        max_num_plan_day_articles = max_num_plan_day_articles + list_plan[i].number_articles;
+        max_num_plan_day_search = max_num_plan_day_search + list_plan[i].number_search;
+        max_num_plan_day_books = max_num_plan_day_books + list_plan[i].number_books;
+        max_num_plan_day_cook = max_num_plan_day_cook + list_plan[i].number_hours;
       }
+
       // بيانات الشهر
       if (currDt.month == dd.month) {
-        max_num_plan_month_pages =
-            max_num_plan_month_pages + list_plan[i].number_pages;
-        max_num_plan_month_articles =
-            max_num_plan_month_articles + list_plan[i].number_articles;
-        max_num_plan_month_search =
-            max_num_plan_month_search + list_plan[i].number_search;
-        max_num_plan_month_books =
-            max_num_plan_month_books + list_plan[i].number_books;
+        max_num_plan_month_pages = max_num_plan_month_pages + list_plan[i].number_pages;
+        max_num_plan_month_articles = max_num_plan_month_articles + list_plan[i].number_articles;
+        max_num_plan_month_search = max_num_plan_month_search + list_plan[i].number_search;
+        max_num_plan_month_books = max_num_plan_month_books + list_plan[i].number_books;
+        max_num_plan_month_cook = max_num_plan_month_cook + list_plan[i].number_hours;
       }
+
       // بيانات السنة
       if (currDt.year == dd.year) {
-        max_num_plan_year_pages =
-            max_num_plan_year_pages + list_plan[i].number_pages;
-        max_num_plan_year_articles =
-            max_num_plan_year_articles + list_plan[i].number_articles;
-        max_num_plan_year_search =
-            max_num_plan_year_search + list_plan[i].number_search;
-        max_num_plan_year_books =
-            max_num_plan_year_books + list_plan[i].number_books;
+        max_num_plan_year_pages = max_num_plan_year_pages + list_plan[i].number_pages;
+        max_num_plan_year_articles = max_num_plan_year_articles + list_plan[i].number_articles;
+        max_num_plan_year_search = max_num_plan_year_search + list_plan[i].number_search;
+        max_num_plan_year_books = max_num_plan_year_books + list_plan[i].number_books;
+        max_num_plan_year_cook = max_num_plan_year_cook + list_plan[i].number_hours;
       }
     }
 
@@ -167,6 +142,7 @@ class _Store_HomeState extends State<Store_Home> {
 //    }
 
     setState(() {});
+
   }
 
   @override
@@ -286,7 +262,7 @@ class _Store_HomeState extends State<Store_Home> {
                   ))
             ],
           ),
-          Divider(),
+          const Divider(),
 
           // الاستماع
           const Padding(
@@ -344,7 +320,7 @@ class _Store_HomeState extends State<Store_Home> {
                                 color: Colors.teal[100],
                                 width: 100,
                                 child: Text(
-                                  '${(max_num_minute / 60).roundToDouble()}',
+                                  '${(max_num_minute / 60).round()}',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(color: Colors.red[300]),
                                 ),
@@ -361,7 +337,7 @@ class _Store_HomeState extends State<Store_Home> {
                   ))
             ],
           ),
-          Divider(),
+          const Divider(),
 
           // البحث والتاليف
           const Padding(
@@ -472,7 +448,29 @@ class _Store_HomeState extends State<Store_Home> {
                               child: Text('كتاب'),
                             ),
                           ],
+                        ),
+                        Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Container(
+                                padding: const EdgeInsets.all(5.0),
+                                color: Colors.teal[100],
+                                width: 100,
+                                child: Text(
+                                  '$max_num_cook_plan',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.red[300]),
+                                ),
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Text('اختصار كتاب'),
+                            ),
+                          ],
                         )
+
                       ],
                     ),
                   ))
@@ -615,7 +613,7 @@ class _Store_HomeState extends State<Store_Home> {
                           child: Text('كتاب'),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               )),
@@ -775,7 +773,7 @@ class _Store_HomeState extends State<Store_Home> {
               width: 50,
               height: 50,
             ),
-            Text(
+            const Text(
               '    رصيد الاستماع  ',
               style: TextStyle(fontSize: 20),
             )
@@ -818,8 +816,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('دقيقة'),
                         ),
                       ],
@@ -865,8 +863,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('دقيقة'),
                         ),
                       ],
@@ -880,14 +878,14 @@ class _Store_HomeState extends State<Store_Home> {
                             color: Colors.teal[100],
                             width: 100,
                             child: Text(
-                              '${(max_num_read_month_minute / 60).roundToDouble()}',
+                              '${(max_num_read_month_minute / 60).round()}',
                               textAlign: TextAlign.center,
                               style: TextStyle(color: Colors.red[300]),
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('ساعة'),
                         ),
                       ],
@@ -933,8 +931,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('دقيقة'),
                         ),
                       ],
@@ -948,14 +946,14 @@ class _Store_HomeState extends State<Store_Home> {
                             color: Colors.teal[100],
                             width: 100,
                             child: Text(
-                              '${(max_num_read_year_minute / 60).roundToDouble()}',
+                              '${(max_num_read_year_minute / 60).round()}',
                               textAlign: TextAlign.center,
                               style: TextStyle(color: Colors.red[300]),
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('ساعة'),
                         ),
                       ],
@@ -966,7 +964,7 @@ class _Store_HomeState extends State<Store_Home> {
         ],
       ),
 
-      Divider(
+      const Divider(
         height: 40,
       ),
 
@@ -980,7 +978,7 @@ class _Store_HomeState extends State<Store_Home> {
               child: Container(
                   width: 40,
                   height: 40,
-                  child: Center(child: Text("منذ بداية التسجيل")))),
+                  child: const Center(child: Text("منذ بداية التسجيل")))),
           Expanded(
               flex: 2,
               child: Center(
@@ -1001,8 +999,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('دقيقة'),
                         ),
                       ],
@@ -1016,14 +1014,14 @@ class _Store_HomeState extends State<Store_Home> {
                             color: Colors.teal[100],
                             width: 100,
                             child: Text(
-                              '${(max_num_minute / 60).roundToDouble()}',
+                              '${(max_num_minute / 60).round()}',
                               textAlign: TextAlign.center,
                               style: TextStyle(color: Colors.red[300]),
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('ساعة'),
                         ),
                       ],
@@ -1051,7 +1049,7 @@ class _Store_HomeState extends State<Store_Home> {
               width: 50,
               height: 50,
             ),
-            Text(
+            const Text(
               '    رصيد التاليف    ',
               style: TextStyle(fontSize: 20),
             )
@@ -1059,7 +1057,7 @@ class _Store_HomeState extends State<Store_Home> {
         ),
       ),
 
-      SizedBox(
+      const SizedBox(
         height: 40,
       ),
 
@@ -1094,8 +1092,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('صفحة'),
                         ),
                       ],
@@ -1115,8 +1113,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('مقال'),
                         ),
                       ],
@@ -1127,7 +1125,7 @@ class _Store_HomeState extends State<Store_Home> {
         ],
       ),
 
-      Divider(
+      const Divider(
         height: 40,
       ),
 
@@ -1162,8 +1160,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('صفحة'),
                         ),
                       ],
@@ -1183,8 +1181,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('مقال'),
                         ),
                       ],
@@ -1204,8 +1202,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('بحث'),
                         ),
                       ],
@@ -1225,19 +1223,41 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('كتاب'),
                         ),
                       ],
+                    ),
+                    Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Container(
+                            padding: const EdgeInsets.all(5.0),
+                            color: Colors.teal[100],
+                            width: 100,
+                            child: Text(
+                              '${max_num_plan_month_cook}',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.red[300]),
+                            ),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text('اختصار كتاب'),
+                        ),
+                      ],
                     )
+
                   ],
                 ),
               )),
         ],
       ),
 
-      Divider(
+      const Divider(
         height: 40,
       ),
 
@@ -1272,8 +1292,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('صفحة'),
                         ),
                       ],
@@ -1293,8 +1313,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('مقال'),
                         ),
                       ],
@@ -1314,8 +1334,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('بحث'),
                         ),
                       ],
@@ -1335,19 +1355,41 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('كتاب'),
                         ),
                       ],
+                    ),
+                    Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Container(
+                            padding: const EdgeInsets.all(5.0),
+                            color: Colors.teal[100],
+                            width: 100,
+                            child: Text(
+                              '${max_num_plan_year_cook}',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.red[300]),
+                            ),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text('اختصار كتاب'),
+                        ),
+                      ],
                     )
+
                   ],
                 ),
               )),
         ],
       ),
 
-      Divider(
+      const Divider(
         height: 40,
       ),
 
@@ -1382,8 +1424,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('صفحة'),
                         ),
                       ],
@@ -1403,8 +1445,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('مقال'),
                         ),
                       ],
@@ -1424,8 +1466,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('بحث'),
                         ),
                       ],
@@ -1445,9 +1487,30 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('كتاب'),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Container(
+                            padding: const EdgeInsets.all(5.0),
+                            color: Colors.teal[100],
+                            width: 100,
+                            child: Text(
+                              '$max_num_cook_plan',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.red[300]),
+                            ),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text('اختصار كتاب'),
                         ),
                       ],
                     )

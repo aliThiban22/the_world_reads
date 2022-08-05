@@ -1,8 +1,0 @@
-#import "FluttertoastPlugin.h"#import
-<Toast/UIView+Toast.h>
-
-    static NSString *const CHANNEL_NAME = @"PonnamKarthik/fluttertoast";
-
-    @interface FluttertoastPlugin ()@property(nonatomic, retain) FlutterMethodChannel *channel;@property(nonatomic, assign) BOOL isKeyboardVisible;@end
-
-    @implementation FluttertoastPlugin {FlutterResul

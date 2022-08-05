@@ -64,7 +64,7 @@ class _HomeState extends State<Home> {
               child: Container(
             child: Column(children: [
               banner(),
-              Divider(),
+              const Divider(),
 
 //              Padding(
 //                padding: const EdgeInsets.all(10.0),
@@ -78,18 +78,49 @@ class _HomeState extends State<Home> {
 //                ),
 //              ),
 
-              SizedBox(),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'الخدمات',
-                  style: TextStyle(fontSize: 20, color: Colors.teal),
+              const SizedBox(),
+              Directionality(
+                textDirection: TextDirection.rtl,
+                child: Padding(
+                  padding: EdgeInsets.all(12.0),
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Kadamat_List("جميع الخدمات", 0)));
+
+                    },
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Image.asset(
+                              'images/img_home_pag_f_a_ab.png',
+                              width: 40.0,
+                              height: 40.0,
+                            ),
+                          ),
+                          const Expanded(
+                            flex: 1,
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text('الخدمات'),
+                            ),
+                          ),
+                          const Expanded(
+                              flex: 3,
+                              child: Text("المزيد",style: TextStyle(color: Colors.blue),
+                                textDirection: TextDirection.ltr,),)
+                        ],
+                      ),
+                )
                 ),
               ),
               Directionality(
                 textDirection: TextDirection.rtl,
                 child: Container(
-                  margin: const EdgeInsets.all(20.0),
+                  margin: const EdgeInsets.all(10.0),
                   height: 130,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
@@ -119,7 +150,7 @@ class _HomeState extends State<Home> {
           (BuildContext contextBook, AsyncSnapshot<List<Book_Item>> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
 //                            return Center(child: CircularProgressIndicator());
           default:
             if (snapshot.hasError) {
@@ -153,22 +184,17 @@ class _HomeState extends State<Home> {
 
               for (int i = 0; i < snapshot.data.length; i++) {
                 if (snapshot.data[i].name_list_main
-                        .compareTo("المنتخب من كتب الادب") ==
-                    0) {
+                        .compareTo("المنتخب من شعر العرب") == 0) {
                   listC.add(snapshot.data[i]);
                 }
               }
               for (int i = 0; i < snapshot.data.length; i++) {
-                if (snapshot.data[i].name_list_main
-                        .compareTo("المستعذب من كتب") ==
-                    0) {
+                if (snapshot.data[i].name_list_main.compareTo("المستعذب من كتب الادب") == 0) {
                   listD.add(snapshot.data[i]);
                 }
               }
               for (int i = 0; i < snapshot.data.length; i++) {
-                if (snapshot.data[i].name_list_main
-                        .compareTo("المستعذب من كتب") ==
-                    0) {
+                if (snapshot.data[i].name_list_main.compareTo("الخلاصة الثقافية") == 0) {
                   listE.add(snapshot.data[i]);
                 }
               }
@@ -182,29 +208,46 @@ class _HomeState extends State<Home> {
                   textDirection: TextDirection.rtl,
                   child: Column(
                     children: [
-                      InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        Book_Lists('خلاصة العلم')));
-                          },
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                'images/back_item_home_pag_a.png',
-                                width: 50.0,
-                                height: 50.0,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text('خلاصة العلم'),
-                              ),
-                            ],
-                          )),
+
+                      Padding(
+                          padding: EdgeInsets.all(1.0),
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          Book_Lists('خلاصة العلم')));
+                            },
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    flex: 1,
+                                    child:Image.asset(
+                                      'images/back_item_home_pag_a.png',
+                                      width: 40.0,
+                                      height: 40.0,
+                                    )
+                                ),
+                                const Expanded(
+                                  flex: 3,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('خلاصة العلم',textDirection: TextDirection.rtl),
+                                  ),
+                                ),
+                                const Expanded(
+                                  flex: 2,
+                                  child: Text("المزيد",style: TextStyle(color: Colors.blue),
+                                    textDirection: TextDirection.ltr,),)
+                              ],
+                            ),
+                          )
+                      ),
+
+
                       Container(
-                        margin: const EdgeInsets.all(20.0),
+                        margin: const EdgeInsets.all(2.0),
                         height: 250,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
@@ -219,109 +262,151 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                       Divider(),
-                      InkWell(
-                        onTap: (){
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      Book_Lists('الموجز في العلوم')));
 
-                        },
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'images/img_esdarat_b.png',
-                              width: 50.0,
-                              height: 50.0,
+                      Padding(
+                          padding: const EdgeInsets.all(1.0),
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          Book_Lists('الموجز في العلوم')));
+                            },
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    flex: 1,
+                                    child:Image.asset(
+                                      'images/img_esdarat_b.png',
+                                      width: 40.0,
+                                      height: 40.0,
+                                    )
+                                ),
+                                const Expanded(
+                                  flex: 3,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('الموجز في العلوم'),
+                                  ),
+                                ),
+                                const Expanded(
+                                  flex: 2,
+                                  child: Text("المزيد",style: TextStyle(color: Colors.blue),
+                                    textDirection: TextDirection.ltr,),)
+                              ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text('الموجز في العلوم'),
-                            ),
-                          ],
-                        ),
+                          )
                       ),
+
+
                       Container(
-                        margin: const EdgeInsets.all(50.0),
+                        margin: const EdgeInsets.all(2.0),
                         height: 250,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           itemCount: listB.length,
 //                      shrinkWrap: true,
 //                      physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
+                          itemBuilder: (conx, index) {
                             return Book_Item.bookItemWidget(
                                 listB[index], context);
                           },
-                          separatorBuilder: (context, index) => Divider(),
+                          separatorBuilder: (context, index) => const Divider(),
                         ),
                       ),
-                      Divider(),
-                      InkWell(
-                        onTap: (){
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      Book_Lists('المنتخب من كتب الادب')));
+                      const Divider(),
 
-                        },
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'images/img_esdarat_d.png',
-                              width: 50.0,
-                              height: 50.0,
+                      Padding(
+                          padding: const EdgeInsets.all(1.0),
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          Book_Lists('المنتخب من شعر العرب')));
+                            },
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    flex: 1,
+                                    child:Image.asset(
+                                      'images/img_esdarat_d.png',
+                                      width: 40.0,
+                                      height: 40.0,
+                                    )
+                                ),
+                                const Expanded(
+                                  flex: 3,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('المنتخب من شعر العرب'),
+                                  ),
+                                ),
+                                const Expanded(
+                                  flex: 2,
+                                  child: Text("المزيد",style: TextStyle(color: Colors.blue),
+                                    textDirection: TextDirection.ltr,),)
+                              ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text('المنتخب من كتب الادب'),
-                            ),
-                          ],
-                        ),
+                          )
                       ),
+
                       Container(
-                        margin: const EdgeInsets.all(50.0),
+                        margin: const EdgeInsets.all(2.0),
                         height: 250,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           itemCount: listC.length,
 //                      shrinkWrap: true,
 //                      physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
+                          itemBuilder: (conx, index) {
                             return Book_Item.bookItemWidget(
                                 listC[index], context);
                           },
-                          separatorBuilder: (context, index) => Divider(),
+                          separatorBuilder: (context, index) => const Divider(),
                         ),
                       ),
-                      Divider(),
-                      InkWell(
-                        onTap: (){
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      Book_Lists('المستعذب من كتب الادب')));
+                      const Divider(),
+                      Padding(
+                          padding: EdgeInsets.all(1.0),
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          Book_Lists('المستعذب من كتب الادب')));
+                            },
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child:Image.asset(
+                                    'images/img_esdarat_a.png',
+                                    width: 40.0,
+                                    height: 40.0,
+                                  )
+                                ),
+                                const Expanded(
+                                  flex: 3,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('المستعذب من كتب الادب'),
+                                  ),
+                                ),
+                                const Expanded(
+                                  flex: 2,
+                                  child: Text("المزيد",style: TextStyle(color: Colors.blue),
+                                    textDirection: TextDirection.ltr,),)
+                              ],
+                            ),
+                          )
+                      ),
 
-                        },
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'images/img_esdarat_a.png',
-                              width: 50.0,
-                              height: 50.0,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text('المستعذب من كتب الادب'),
-                            ),
-                          ],
-                        ),
-                      ),
                       Container(
-                        margin: const EdgeInsets.all(50.0),
+                        margin: const EdgeInsets.all(2.0),
                         height: 250,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
@@ -332,46 +417,58 @@ class _HomeState extends State<Home> {
                             return Book_Item.bookItemWidget(
                                 listD[index], context);
                           },
-                          separatorBuilder: (context, index) => Divider(),
+                          separatorBuilder: (conx, index) => const Divider(),
                         ),
                       ),
-                      Divider(),
-                      InkWell(
-                        onTap: (){
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      Book_Lists('الخلاصة الثقافية')));
-
-                        },
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'images/back_item_home_pag_ff.png',
-                              width: 50.0,
-                              height: 50.0,
+                      const Divider(),
+                      Padding(
+                          padding: EdgeInsets.all(1.0),
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          Book_Lists('الخلاصة الثقافية')));
+                            },
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child:Image.asset(
+                                    'images/back_item_home_pag_ff.png',
+                                    width: 40.0,
+                                    height: 40.0,
+                                  ),
+                                ),
+                                const Expanded(
+                                  flex: 3,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('الخلاصة الثقافية'),
+                                  ),
+                                  ),
+                                const Expanded(
+                                  flex: 2,
+                                  child: Text("المزيد",style: TextStyle(color: Colors.blue),
+                                    textDirection: TextDirection.ltr,),)
+                              ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text('الخلاصة الثقافية'),
-                            ),
-                          ],
-                        ),
+                          )
                       ),
                       Container(
-                        margin: const EdgeInsets.all(50.0),
+                        margin: const EdgeInsets.all(2.0),
                         height: 250,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           itemCount: listE.length,
 //                      shrinkWrap: true,
 //                      physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
+                          itemBuilder: (conx, index) {
                             return Book_Item.bookItemWidget(
                                 listE[index], context);
                           },
-                          separatorBuilder: (context, index) => Divider(),
+                          separatorBuilder: (context, index) => const Divider(),
                         ),
                       ),
                     ],
@@ -396,8 +493,8 @@ class _HomeState extends State<Home> {
         enableInfiniteScroll: true,
         reverse: false,
         autoPlay: true,
-        autoPlayInterval: Duration(seconds: 3),
-        autoPlayAnimationDuration: Duration(milliseconds: 800),
+        autoPlayInterval: const Duration(seconds: 3),
+        autoPlayAnimationDuration: const Duration(milliseconds: 800),
         autoPlayCurve: Curves.fastOutSlowIn,
         enlargeCenterPage: true,
 //                                  onPageChanged: callbackFunction,
@@ -419,6 +516,7 @@ class _HomeState extends State<Home> {
   // الخدمات
   Widget getKadamats(int index) {
     List<String> img = [
+      "images/k_search.png",
       "images/img_home_ff_a.png",
       "images/img_home_ff_b.png",
       "images/img_home_ff_c.png",
@@ -434,6 +532,7 @@ class _HomeState extends State<Home> {
     ];
 
     List<String> title = [
+      "جميع الخدمات",
       "خدمات القراءة والاستماع",
       "خدمات البحث العلمي",
       "خدمات الكتابة والتحرير والترجمة",
@@ -453,7 +552,7 @@ class _HomeState extends State<Home> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => Kadamat_List(title[index], index + 1)));
+                builder: (context) => Kadamat_List(title[index], index)));
       },
       child: Container(
           margin: const EdgeInsets.all(5.0),
@@ -475,7 +574,7 @@ class _HomeState extends State<Home> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(10),
                           topRight: Radius.circular(10),
                           bottomLeft: Radius.circular(0),

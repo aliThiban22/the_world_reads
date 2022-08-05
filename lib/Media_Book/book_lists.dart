@@ -34,12 +34,12 @@ class _Book_ListsState extends State<Book_Lists> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
-                        flex: 1,
+                        flex: 2,
                         child: InkWell(
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: Icon(
+                          child: const Icon(
                             Icons.arrow_back,
                             size: 40,
                             color: Colors.white,
@@ -47,10 +47,11 @@ class _Book_ListsState extends State<Book_Lists> {
                         ),
                       ),
                       Expanded(
+                        flex: 9,
                         child: Text(
                           widget.title,
+                          maxLines: 1,
                         ),
-                        flex: 9,
                       ),
                       Expanded(
                         flex: 1,
@@ -59,11 +60,11 @@ class _Book_ListsState extends State<Book_Lists> {
                             itemBuilder: (BuildContext con) {
                               return [
                                 PopupMenuItem(
-                                    child: Text('تصفية الكتب حسب الاحدث'),
+                                    child: const Text('تصفية الكتب حسب الاحدث'),
                                     onTap: () {}),
                                 PopupMenuItem(
                                     child:
-                                        Text('تصفية الكتب حسب الاكثر مشاهدة'),
+                                        const Text('تصفية الكتب حسب الاكثر مشاهدة'),
                                     onTap: () {})
                               ];
                             }),
@@ -101,7 +102,8 @@ class _Book_ListsState extends State<Book_Lists> {
           default:
             if (snapshot.hasError) {
               print(snapshot.error);
-              return Text('Error: ${snapshot.error}');
+              return book();
+//              return Text('Error: ${snapshot.error}');
             } else {
               return Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -113,6 +115,7 @@ class _Book_ListsState extends State<Book_Lists> {
                     crossAxisCount: getTheMat(),
                     crossAxisSpacing: 5,
                     mainAxisSpacing: 5,
+                    mainAxisExtent: 300
                   ),
                 ),
               );
@@ -122,7 +125,7 @@ class _Book_ListsState extends State<Book_Lists> {
     );
   }
 
-  //// لمعرفة اذا كان التبيق ايفون او اندرويد
+  // لمعرفة اذا كان التبيق ايفون او اندرويد
   int getTheMat() {
     var platformName = '';
     var platformNumber = 0;

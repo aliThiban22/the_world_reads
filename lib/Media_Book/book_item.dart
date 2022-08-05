@@ -82,67 +82,68 @@ class Book_Item {
       },
       child: Container(
           margin: const EdgeInsets.all(5.0),
-//          padding: const EdgeInsets.all(5.0),
-          width: 150,
+          width: 170,
           child: Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
             elevation: 10,
-            child: Column(
-//            mainAxisAlignment:MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                        bottomLeft: Radius.circular(0),
-                        bottomRight: Radius.circular(0)),
-                    child: Image.network(
-                      API.URL_IMG_BOOK + bookItem.img,
-                      fit: BoxFit.fill,
-                      height: double.infinity,
-                      width: double.infinity,
+            child: SizedBox(
+              height: 250,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    flex: 5,
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(0),
+                          bottomRight: Radius.circular(0)),
+                      child: Image.network(
+                        API.URL_IMG_BOOK + bookItem.img,
+                        fit: BoxFit.fill,
+                        height: double.infinity,
+                        width: double.infinity,
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                    flex: 1,
-                    child: Center(
-                        child: Text(
-                      bookItem.title,
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      style: TextStyle(fontSize: 13),
-                    ))),
-                Expanded(
-                    flex: 1,
-                    child: DecoratedBox(
-                      decoration: const BoxDecoration(
-                          color: Colors.teal,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(0),
-                            topRight: Radius.circular(0),
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10),
-                          )),
+                  Expanded(
+                      flex: 1,
                       child: Center(
-                        child: Text(
-                          '${bookItem.author}',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
+                          child: Text(
+                        bookItem.title,
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        style: TextStyle(fontSize: 13),
+                      ))),
+                  Expanded(
+                      flex: 1,
+                      child: DecoratedBox(
+                        decoration: const BoxDecoration(
+                            color: Colors.teal,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(0),
+                              topRight: Radius.circular(0),
+                              bottomLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            )),
+                        child: Center(
+                          child: Text(
+                            '${bookItem.author}',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
                           ),
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
                         ),
-                      ),
-                    ))
-              ],
+                      ))
+                ],
+              ),
             ),
           )),
     );

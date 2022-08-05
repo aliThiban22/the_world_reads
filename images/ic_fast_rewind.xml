@@ -1,9 +1,0 @@
-import 'package:flutter/material.dart';import 'package:fluttertoast/fluttertoast.dart';
-
-    class ToastNoContext extends StatefulWidget {@override_ToastNoContextState createState() => _ToastNoContextState();}
-
-    class _ToastNoContextState extends State
-<ToastNoContext>{
-    void showLongToast() {
-    Fluttertoast.showToast(
-    msg: "Th

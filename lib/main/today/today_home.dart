@@ -125,7 +125,7 @@ class _Today_HomeState extends State<Today_Home> {
       return 2;
     } else if (type.compareTo("مقال") == 0) {
       return 3;
-    } else if (type.compareTo("أخرئ") == 0) {
+    } else if (type.compareTo("اختصار كتاب") == 0) {
       return 4;
     }
   }
@@ -213,12 +213,12 @@ class _Today_HomeState extends State<Today_Home> {
   // القراءة والاستماع
   Widget getReads() {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
-      floatingActionButton: Container(
-        height: 40,
-        width: (MediaQuery.of(context).size.width),
-        color: Colors.teal,
-        child: Row(
+
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          height: 40,
+          color: Colors.teal,
+          child: Row(
           children: [
             Expanded(
                 flex: 1,
@@ -252,7 +252,49 @@ class _Today_HomeState extends State<Today_Home> {
                 )),
           ],
         ),
+        ),
       ),
+
+//      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+//      floatingActionButton: Container(
+//        height: 40,
+//        width: (MediaQuery.of(context).size.width),
+//        color: Colors.teal,
+//        child: Row(
+//          children: [
+//            Expanded(
+//                flex: 1,
+//                child: InkWell(
+//                  onTap: () {
+//                    payStart(context, 2);
+//                  },
+//                  child: const Center(
+//                    child: Text(
+//                      "تسجيل بيانات كتاب",
+//                      style: TextStyle(color: Colors.white),
+//                    ),
+//                  ),
+//                )),
+//            const SizedBox(
+//              height: 30,
+//              child: VerticalDivider(color: Colors.white),
+//            ),
+//            Expanded(
+//                flex: 1,
+//                child: InkWell(
+//                  onTap: () {
+//                    payStart(context, 3);
+//                  },
+//                  child: const Center(
+//                    child: Text(
+//                      "تسجيل بيانات برنامج",
+//                      style: TextStyle(color: Colors.white),
+//                    ),
+//                  ),
+//                )),
+//          ],
+//        ),
+//      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -350,16 +392,11 @@ class _Today_HomeState extends State<Today_Home> {
                         const Divider(color: Colors.white),
                         ElevatedButton(
                             style: ButtonStyle(
-                              shadowColor:
-                                  MaterialStateProperty.all(Colors.teal),
+                              shadowColor: MaterialStateProperty.all(Colors.teal),
                               // الظل
-                              padding: MaterialStateProperty.all(
-                                  const EdgeInsets.all(5)),
+                              padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
                               // الهامش
-                              minimumSize: MaterialStateProperty.all(
-                                  const Size(250, 40)),
-                              //ألطول والعرض
-
+                              minimumSize: MaterialStateProperty.all(const Size(250, 40)),
                               // حواف مائلة
                               shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
@@ -399,8 +436,7 @@ class _Today_HomeState extends State<Today_Home> {
                               return FutureBuilder(
                                 future: API.Listen_Get(), // async work
                                 builder: (BuildContext contextBook,
-                                    AsyncSnapshot<List<Listen_Item>>
-                                        snapshot_listns) {
+                                    AsyncSnapshot<List<Listen_Item>>snapshot_listns) {
                                   switch (snapshot_listns.connectionState) {
                                     case ConnectionState.waiting:
                                       return const Center(
@@ -415,47 +451,29 @@ class _Today_HomeState extends State<Today_Home> {
                                       } else {
 //                                        print(snapshot_listns.data[0].title);
 
-                                        List<Read_And_Listen_item> list_all =
-                                            new List.from([]);
+                                        List<Read_And_Listen_item> list_all = new List.from([]);
 
                                         // دوارة الكتب
-                                        for (int i = 0;
-                                            i < snapshot_reads.data.length;
-                                            i++) {
-                                          Read_And_Listen_item item_all =
-                                              new Read_And_Listen_item();
-                                          item_all.id =
-                                              snapshot_reads.data[i].id;
-                                          item_all.title =
-                                              snapshot_reads.data[i].title;
-                                          item_all.day =
-                                              snapshot_reads.data[i].start_date;
-                                          item_all.number_pages = snapshot_reads
-                                              .data[i].number_pages;
-                                          item_all.number_stop = snapshot_reads
-                                              .data[i].number_pages_end;
-                                          item_all.number_end = snapshot_reads
-                                                  .data[i].number_pages -
-                                              snapshot_reads
-                                                  .data[i].number_pages_end;
-                                          item_all.number_days = DateTime.now()
-                                              .difference(DateTime.parse(
-                                                  snapshot_reads
-                                                      .data[i].start_date))
-                                              .inDays;
-                                          item_all.is_done =
-                                              snapshot_reads.data[i].done;
+                                        for (int i = 0; i < snapshot_reads.data.length; i++) {
+                                          Read_And_Listen_item item_all = new Read_And_Listen_item();
+                                          item_all.id = snapshot_reads.data[i].id;
+                                          item_all.title = snapshot_reads.data[i].title;
+                                          item_all.day = snapshot_reads.data[i].start_date;
+                                          item_all.number_pages = snapshot_reads.data[i].number_pages;
+                                          item_all.number_stop = snapshot_reads.data[i].number_pages_end;
+                                          item_all.number_end = snapshot_reads.data[i].number_pages -
+                                              snapshot_reads.data[i].number_pages_end;
+                                          item_all.number_days = DateTime.now().difference(DateTime.parse(
+                                                  snapshot_reads.data[i].start_date)).inDays;
+                                          item_all.is_done = snapshot_reads.data[i].done;
                                           item_all.type = 1;
 
                                           list_all.add(item_all);
                                         }
 
                                         // دوارة الصوتيات
-                                        for (int i = 0;
-                                            i < snapshot_listns.data.length;
-                                            i++) {
-                                          Read_And_Listen_item item_all =
-                                              new Read_And_Listen_item();
+                                        for (int i = 0; i < snapshot_listns.data.length; i++) {
+                                          Read_And_Listen_item item_all = new Read_And_Listen_item();
                                           item_all.id = snapshot_listns.data[i].id;
                                           item_all.title = snapshot_listns.data[i].title;
                                           item_all.day = snapshot_listns.data[i].start_date;
@@ -478,60 +496,45 @@ class _Today_HomeState extends State<Today_Home> {
                                             itemCount: list_all.length,
                                             itemBuilder: (conx, index) {
                                               return Container(
-                                                  margin:
-                                                      const EdgeInsets.all(5.0),
+                                                  margin: const EdgeInsets.all(5.0),
                                                   height: 250,
                                                   child: Card(
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.0),
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(10.0),
                                                     ),
                                                     elevation: 10,
                                                     child: Column(
                                                       children: [
                                                         Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          mainAxisSize: MainAxisSize.max,
                                                           children: [
                                                             Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child:
-                                                                  Image.asset(
+                                                              padding: const EdgeInsets.all(8.0),
+                                                              child: Image.asset(
                                                                 '${getStrings_img(list_all[index].type)}',
                                                                 width: 40,
                                                                 height: 40,
                                                               ),
                                                             ),
                                                             Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
+                                                              padding: const EdgeInsets.all(8.0),
                                                               child: Text(
                                                                 '${list_all[index].title}',
+                                                                maxLines: 1,
                                                                 style: const TextStyle(
-                                                                    color: Colors
-                                                                        .teal,
-                                                                    fontSize:
-                                                                        18),
+                                                                    color: Colors.teal,
+                                                                    fontSize: 18),
                                                               ),
                                                             ),
                                                             Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(5.0),
+                                                              padding: const EdgeInsets.all(5.0),
                                                               child: PopupMenuButton(
                                                                 iconSize: 25,
                                                                 itemBuilder: (BuildContext con) {
                                                                   return [
                                                                     PopupMenuItem(
-                                                                        child: Text('تعديل'),
+                                                                        child: const Text('تعديل'),
                                                                         onTap: () {
                                                                           if(list_all[index].type == 1){
                                                                             // قراءة
@@ -546,7 +549,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                           }
                                                                         }),
                                                                     PopupMenuItem(
-                                                                        child: Text('حذف'),
+                                                                        child: const Text('حذف'),
                                                                         onTap: () {
                                                                           if(list_all[index].type == 1){
                                                                             // قراءة
@@ -562,26 +565,21 @@ class _Today_HomeState extends State<Today_Home> {
                                                                         })
                                                                   ];
                                                                 }),
-
-                                              ),
+                                                            ),
                                                           ],
                                                         ),
                                                         const Divider(),
                                                         Padding(
                                                           padding: const EdgeInsets.all(8.0),
                                                           child: Container(
-                                                            height: 50,
+                                                            height: 80,
                                                             child: Column(
                                                               children: [
                                                                 Expanded(
                                                                   flex: 1,
                                                                   child: Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .spaceBetween,
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
+                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                    mainAxisSize: MainAxisSize.max,
                                                                     children: [
                                                                       Expanded(
                                                                           flex: 2,
@@ -594,23 +592,21 @@ class _Today_HomeState extends State<Today_Home> {
                                                                                   bottomLeft: Radius.circular(0),
                                                                                   bottomRight: Radius.circular(5),
                                                                                 )),
-                                                                            child:
-                                                                                Center(
+
+                                                                            child: Center(
                                                                               child: Text(
                                                                                 '${getStrings_num_pags(list_all[index].type)}',
                                                                                 style: const TextStyle(
                                                                                   color: Colors.black,
-                                                                                  fontSize: 16,
+                                                                                  fontSize: 13,
                                                                                 ),
                                                                                 textAlign: TextAlign.center,
                                                                               ),
                                                                             ),
                                                                           )),
                                                                       Expanded(
-                                                                          flex:
-                                                                              1,
-                                                                          child:
-                                                                              DecoratedBox(
+                                                                          flex: 1,
+                                                                          child: DecoratedBox(
                                                                             decoration: const BoxDecoration(
                                                                                 color: Colors.teal,
                                                                                 borderRadius: BorderRadius.only(
@@ -619,28 +615,24 @@ class _Today_HomeState extends State<Today_Home> {
                                                                                   bottomLeft: Radius.circular(5),
                                                                                   bottomRight: Radius.circular(0),
                                                                                 )),
-                                                                            child:
-                                                                                Center(
+
+                                                                            child: Center(
                                                                               child: Text(
                                                                                 //مدة البرنامج او عد دالصفحات
                                                                                 '${getNumber_pags_or_listn(list_all[index].type, list_all[index].number_pages)}',
                                                                                 style: const TextStyle(
                                                                                   color: Colors.white,
-                                                                                  fontSize: 16,
+                                                                                  fontSize: 13,
                                                                                 ),
                                                                                 textAlign: TextAlign.center,
                                                                               ),
                                                                             ),
                                                                           )),
-                                                                      const SizedBox(
-                                                                        width:
-                                                                            5,
-                                                                      ),
+                                                                      const SizedBox(width: 5,),
+
                                                                       Expanded(
-                                                                          flex:
-                                                                              2,
-                                                                          child:
-                                                                              DecoratedBox(
+                                                                          flex: 2,
+                                                                          child: DecoratedBox(
                                                                             decoration: const BoxDecoration(
                                                                                 color: Color(0xFFF9FBE7),
                                                                                 borderRadius: BorderRadius.only(
@@ -649,23 +641,21 @@ class _Today_HomeState extends State<Today_Home> {
                                                                                   bottomLeft: Radius.circular(0),
                                                                                   bottomRight: Radius.circular(5),
                                                                                 )),
-                                                                            child:
-                                                                                Center(
+
+                                                                            child: Center(
                                                                               child: Text(
                                                                                 '${getStrings_num_stop(list_all[index].type)}',
                                                                                 style: const TextStyle(
                                                                                   color: Colors.black,
-                                                                                  fontSize: 16,
+                                                                                  fontSize: 13,
                                                                                 ),
                                                                                 textAlign: TextAlign.center,
                                                                               ),
                                                                             ),
                                                                           )),
                                                                       Expanded(
-                                                                          flex:
-                                                                              1,
-                                                                          child:
-                                                                              DecoratedBox(
+                                                                          flex: 1,
+                                                                          child: DecoratedBox(
                                                                             decoration: const BoxDecoration(
                                                                                 color: Colors.teal,
                                                                                 borderRadius: BorderRadius.only(
@@ -674,13 +664,12 @@ class _Today_HomeState extends State<Today_Home> {
                                                                                   bottomLeft: Radius.circular(5),
                                                                                   bottomRight: Radius.circular(0),
                                                                                 )),
-                                                                            child:
-                                                                                Center(
+                                                                            child: Center(
                                                                               child: Text(
                                                                                 '${getNumber_pags_or_listn(list_all[index].type, list_all[index].number_stop)}',
                                                                                 style: const TextStyle(
                                                                                   color: Colors.white,
-                                                                                  fontSize: 16,
+                                                                                  fontSize: 13,
                                                                                 ),
                                                                                 textAlign: TextAlign.center,
                                                                               ),
@@ -689,24 +678,16 @@ class _Today_HomeState extends State<Today_Home> {
                                                                     ],
                                                                   ),
                                                                 ),
-                                                                const SizedBox(
-                                                                  height: 5,
-                                                                ),
+                                                                const SizedBox(height: 5,),
                                                                 Expanded(
                                                                   flex: 1,
                                                                   child: Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .spaceBetween,
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
+                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                    mainAxisSize: MainAxisSize.max,
                                                                     children: [
                                                                       const Expanded(
-                                                                          flex:
-                                                                              2,
-                                                                          child:
-                                                                              DecoratedBox(
+                                                                          flex: 2,
+                                                                          child: DecoratedBox(
                                                                             decoration: BoxDecoration(
                                                                                 color: Color(0xFFF9FBE7),
                                                                                 borderRadius: BorderRadius.only(
@@ -715,23 +696,20 @@ class _Today_HomeState extends State<Today_Home> {
                                                                                   bottomLeft: Radius.circular(0),
                                                                                   bottomRight: Radius.circular(5),
                                                                                 )),
-                                                                            child:
-                                                                                Center(
+                                                                            child: Center(
                                                                               child: Text(
-                                                                                'عدد ايام الانجاز :',
+                                                                                'عدد ايام الانجاز',
                                                                                 style: TextStyle(
                                                                                   color: Colors.black,
-                                                                                  fontSize: 16,
+                                                                                  fontSize: 13,
                                                                                 ),
                                                                                 textAlign: TextAlign.center,
                                                                               ),
                                                                             ),
                                                                           )),
                                                                       Expanded(
-                                                                          flex:
-                                                                              1,
-                                                                          child:
-                                                                              DecoratedBox(
+                                                                          flex: 1,
+                                                                          child: DecoratedBox(
                                                                             decoration: const BoxDecoration(
                                                                                 color: Colors.teal,
                                                                                 borderRadius: BorderRadius.only(
@@ -740,27 +718,21 @@ class _Today_HomeState extends State<Today_Home> {
                                                                                   bottomLeft: Radius.circular(5),
                                                                                   bottomRight: Radius.circular(0),
                                                                                 )),
-                                                                            child:
-                                                                                Center(
+                                                                            child: Center(
                                                                               child: Text(
                                                                                 '${list_all[index].number_days}',
                                                                                 style: const TextStyle(
                                                                                   color: Colors.white,
-                                                                                  fontSize: 16,
+                                                                                  fontSize: 13,
                                                                                 ),
                                                                                 textAlign: TextAlign.center,
                                                                               ),
                                                                             ),
                                                                           )),
-                                                                      const SizedBox(
-                                                                        width:
-                                                                            5,
-                                                                      ),
+                                                                      const SizedBox(width: 5,),
                                                                       Expanded(
-                                                                          flex:
-                                                                              2,
-                                                                          child:
-                                                                              DecoratedBox(
+                                                                          flex: 2,
+                                                                          child: DecoratedBox(
                                                                             decoration: const BoxDecoration(
                                                                                 color: Color(0xFFF9FBE7),
                                                                                 borderRadius: BorderRadius.only(
@@ -769,23 +741,20 @@ class _Today_HomeState extends State<Today_Home> {
                                                                                   bottomLeft: Radius.circular(0),
                                                                                   bottomRight: Radius.circular(5),
                                                                                 )),
-                                                                            child:
-                                                                                Center(
+                                                                            child: Center(
                                                                               child: Text(
                                                                                 '${getStrings_num_pag_end(list_all[index].type)}',
                                                                                 style: const TextStyle(
                                                                                   color: Colors.black,
-                                                                                  fontSize: 16,
+                                                                                  fontSize: 13,
                                                                                 ),
                                                                                 textAlign: TextAlign.center,
                                                                               ),
                                                                             ),
                                                                           )),
                                                                       Expanded(
-                                                                          flex:
-                                                                              1,
-                                                                          child:
-                                                                              DecoratedBox(
+                                                                          flex: 1,
+                                                                          child: DecoratedBox(
                                                                             decoration: const BoxDecoration(
                                                                                 color: Colors.teal,
                                                                                 borderRadius: BorderRadius.only(
@@ -794,13 +763,13 @@ class _Today_HomeState extends State<Today_Home> {
                                                                                   bottomLeft: Radius.circular(5),
                                                                                   bottomRight: Radius.circular(0),
                                                                                 )),
-                                                                            child:
-                                                                                Center(
+
+                                                                            child: Center(
                                                                               child: Text(
                                                                                 '${getNumber_pags_or_listn(list_all[index].type, list_all[index].number_end)}',
                                                                                 style: const TextStyle(
                                                                                   color: Colors.white,
-                                                                                  fontSize: 16,
+                                                                                  fontSize: 13,
                                                                                 ),
                                                                                 textAlign: TextAlign.center,
                                                                               ),
@@ -818,9 +787,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                             child: Center(
                                                                 child: Text(
                                                               'تاريخ البدء : ${list_all[index].day} ',
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
+                                                              textAlign: TextAlign.center,
                                                               maxLines: 1,
                                                               style: const TextStyle(
                                                                   fontSize: 13),
@@ -829,40 +796,26 @@ class _Today_HomeState extends State<Today_Home> {
                                                             flex: 1,
                                                             child: InkWell(
                                                               onTap: () {
-                                                                upData_done_Read_Listn(
-                                                                    list_all[
-                                                                        index]);
+                                                                upData_done_Read_Listn(list_all[index]);
                                                               },
-                                                              child:
-                                                                  const DecoratedBox(
+                                                              child: const DecoratedBox(
                                                                 decoration:
                                                                     BoxDecoration(
-                                                                        color: Colors
-                                                                            .teal,
-                                                                        borderRadius:
-                                                                            BorderRadius.only(
-                                                                          topLeft:
-                                                                              Radius.circular(0),
-                                                                          topRight:
-                                                                              Radius.circular(0),
-                                                                          bottomLeft:
-                                                                              Radius.circular(10),
-                                                                          bottomRight:
-                                                                              Radius.circular(10),
+                                                                        color: Colors.teal,
+                                                                        borderRadius: BorderRadius.only(
+                                                                          topLeft: Radius.circular(0),
+                                                                          topRight: Radius.circular(0),
+                                                                          bottomLeft: Radius.circular(10),
+                                                                          bottomRight: Radius.circular(10),
                                                                         )),
-                                                                child: const Center(
+                                                                child: Center(
                                                                   child: Text(
                                                                     'تسجيل انجاز',
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          16,
+                                                                    style: TextStyle(
+                                                                      color: Colors.white,
+                                                                      fontSize: 13,
                                                                     ),
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .center,
+                                                                    textAlign: TextAlign.center,
                                                                   ),
                                                                 ),
                                                               ),
@@ -871,8 +824,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                     ),
                                                   ));
                                             },
-                                            separatorBuilder:
-                                                (context, index) => const Divider(),
+                                            separatorBuilder: (context, index) => const Divider(),
                                           ),
                                         );
                                       }
@@ -884,9 +836,7 @@ class _Today_HomeState extends State<Today_Home> {
                       },
                     ),
                   ),
-                  const SizedBox(
-                    height: 100,
-                  )
+                  const SizedBox(height: 100,)
                 ],
               ),
             )
@@ -966,16 +916,16 @@ class _Today_HomeState extends State<Today_Home> {
                                     },
                                     style: const TextStyle(
                                       color: Colors.white,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
                               ),
                             )),
-                        Expanded(
+                        const Expanded(
                             flex: 2,
-                            child: const DecoratedBox(
+                            child: DecoratedBox(
                               decoration: BoxDecoration(
                                   color: Color(0xFFF9FBE7),
                                   borderRadius: BorderRadius.only(
@@ -991,7 +941,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     'عدد الكتب ',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -1049,7 +999,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     },
                                     style: const TextStyle(
                                       color: Colors.white,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -1074,7 +1024,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     'عدد البرامج ',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -1350,7 +1300,7 @@ class _Today_HomeState extends State<Today_Home> {
                                       ' حدد تاريخ البدء \n $ed_read_start_date',
                                       style: const TextStyle(
                                         color: Colors.black,
-                                        fontSize: 16,
+                                        fontSize: 13,
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -1606,7 +1556,7 @@ class _Today_HomeState extends State<Today_Home> {
                                       ' عدل تاريخ البدء \n $ed_read_start_date',
                                       style: const TextStyle(
                                         color: Colors.black,
-                                        fontSize: 16,
+                                        fontSize: 13,
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -1858,7 +1808,7 @@ class _Today_HomeState extends State<Today_Home> {
                                 "حدد شكل البرنامج",
                                 style: TextStyle(
                                     color: Colors.teal,
-                                    fontSize: 16,
+                                    fontSize: 13,
                                     fontWeight: FontWeight.w600),
                               ),
                               onChanged: (String value) {
@@ -1892,7 +1842,7 @@ class _Today_HomeState extends State<Today_Home> {
                                 'ورشة عمل',
                                 'فلم وثائقي',
                                 'محاضرات ودروس',
-                                'أخرئ',
+                                'اختصار كتاب',
                               ].map<DropdownMenuItem<String>>((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
@@ -1903,7 +1853,7 @@ class _Today_HomeState extends State<Today_Home> {
                                 "حدد نوع البرنامج",
                                 style: TextStyle(
                                     color: Colors.teal,
-                                    fontSize: 16,
+                                    fontSize: 13,
                                     fontWeight: FontWeight.w600),
                               ),
                               onChanged: (String value) {
@@ -2020,7 +1970,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     ' حدد تاريخ البدء \n $ed_read_start_date',
                                     style: const TextStyle(
                                       color: Colors.black,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -2240,7 +2190,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     "حدد شكل البرنامج",
                                     style: TextStyle(
                                         color: Colors.teal,
-                                        fontSize: 16,
+                                        fontSize: 13,
                                         fontWeight: FontWeight.w600),
                                   ),
                                   onChanged: (String value) {
@@ -2274,7 +2224,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     'ورشة عمل',
                                     'فلم وثائقي',
                                     'محاضرات ودروس',
-                                    'أخرئ',
+                                    'اختصار كتاب',
                                   ].map<DropdownMenuItem<String>>((String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
@@ -2285,7 +2235,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     "حدد نوع البرنامج",
                                     style: TextStyle(
                                         color: Colors.teal,
-                                        fontSize: 16,
+                                        fontSize: 13,
                                         fontWeight: FontWeight.w600),
                                   ),
                                   onChanged: (String value) {
@@ -2407,7 +2357,7 @@ class _Today_HomeState extends State<Today_Home> {
                                         ' حدد تاريخ البدء \n $ed_read_start_date',
                                         style: const TextStyle(
                                           color: Colors.black,
-                                          fontSize: 16,
+                                          fontSize: 13,
                                         ),
                                         textAlign: TextAlign.center,
                                       ),
@@ -2562,23 +2512,41 @@ class _Today_HomeState extends State<Today_Home> {
   // البحث والتاليف
   Widget getPlan() {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
-      floatingActionButton: Container(
-        height: 40,
-        width: (MediaQuery.of(context).size.width),
-        color: Colors.teal,
-        child: InkWell(
-          onTap: () {
-            payStart(context, 5);
-          },
-          child: const Center(
-            child: Text(
-              "تسجيل بيانات جديدة",
-              style: TextStyle(color: Colors.white),
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          height: 40,
+          color: Colors.teal,
+          child: InkWell(
+            onTap: () {
+              payStart(context, 5);
+            },
+            child: const Center(
+              child: Text(
+                "تسجيل بيانات جديدة",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
         ),
       ),
+
+//      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+//      floatingActionButton: Container(
+//        height: 40,
+//        width: (MediaQuery.of(context).size.width),
+//        color: Colors.teal,
+//        child: InkWell(
+//          onTap: () {
+//            payStart(context, 5);
+//          },
+//          child: const Center(
+//            child: Text(
+//              "تسجيل بيانات جديدة",
+//              style: TextStyle(color: Colors.white),
+//            ),
+//          ),
+//        ),
+//      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -2687,7 +2655,7 @@ class _Today_HomeState extends State<Today_Home> {
                   ),
                 ),
                 SizedBox(
-                  height: 800,
+                  height: 2000,
                   child: FutureBuilder(
                     future: API.Plan_Data_Get(), // async work
                     builder: (BuildContext contextBook,
@@ -2698,7 +2666,8 @@ class _Today_HomeState extends State<Today_Home> {
                         default:
                           if (snapshot.hasError) {
                             print(snapshot.error);
-                            return Text('Error: ${snapshot.error}');
+                            return getPlan();
+//                            return Text('Error: ${snapshot.error}');
                           } else {
                             return ListView.separated(
                               shrinkWrap: true,
@@ -2708,45 +2677,53 @@ class _Today_HomeState extends State<Today_Home> {
                               itemBuilder: (conx, index) {
                                 return Container(
                                     margin: const EdgeInsets.all(5.0),
-                                    height: 230,
+                                    height: 270,
                                     child: Card(
                                       shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
+                                        borderRadius: BorderRadius.circular(10.0),
                                       ),
                                       elevation: 10,
                                       child: Column(
                                         children: [
                                           Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .spaceBetween,
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(
-                                                        15.0),
-                                                child: Text(
-                                                  '${snapshot.data[index].title}',
-                                                  style: const TextStyle(
-                                                      color: Colors.teal,
-                                                      fontSize: 18),
+                                              Expanded(
+                                                flex: 8,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(15.0),
+                                                  child: Text(
+                                                    '${snapshot.data[index].title}',
+                                                    maxLines: 1,
+                                                    style: const TextStyle(
+                                                        color: Colors.teal,
+                                                        fontSize: 18),
+                                                  ),
                                                 ),
                                               ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(
-                                                        8.0),
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    //more --------
-                                                  },
-                                                  child: const Icon(
-                                                    Icons.more_vert,
-                                                    color: Colors.green,
-                                                    size: 30.0,
-                                                  ),
+                                              Expanded(
+                                                flex: 1,
+                                                child:Padding(
+                                                  padding: const EdgeInsets.all(5.0),
+                                                  child: PopupMenuButton(
+                                                      iconSize: 25,
+                                                      itemBuilder: (BuildContext con) {
+                                                        return [
+                                                          PopupMenuItem(
+                                                              child: const Text('تعديل'),
+                                                              onTap: () {
+                                                                updataNew_Data_Plan(snapshot.data[index]);
+                                                                }
+                                                              ),
+                                                          PopupMenuItem(
+                                                              child: const Text('حذف'),
+                                                              onTap: () {
+                                                                delete_plan(snapshot.data[index].id);
+                                                                }
+                                                              )
+                                                        ];
+                                                      }),
                                                 ),
                                               )
                                             ],
@@ -2755,124 +2732,81 @@ class _Today_HomeState extends State<Today_Home> {
                                           Padding(
                                             padding:
                                                 const EdgeInsets.all(8.0),
-                                            child: Container(
-                                              height: 50,
+                                            child: SizedBox(
+                                              height: 80,
                                               child: Column(
                                                 children: [
                                                   Expanded(
                                                     flex: 1,
                                                     child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      mainAxisSize: MainAxisSize.max,
                                                       children: [
-                                                        Expanded(
+                                                        const Expanded(
                                                             flex: 2,
-                                                            child:
-                                                                const DecoratedBox(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                      color: Color(
-                                                                          0xFFF9FBE7),
-                                                                      borderRadius:
-                                                                          BorderRadius.only(
-                                                                        topLeft:
-                                                                            Radius.circular(0),
-                                                                        topRight:
-                                                                            Radius.circular(5),
-                                                                        bottomLeft:
-                                                                            Radius.circular(0),
-                                                                        bottomRight:
-                                                                            Radius.circular(5),
+                                                            child: DecoratedBox(
+                                                              decoration: BoxDecoration(
+                                                                      color: Color(0xFFF9FBE7),
+                                                                      borderRadius: BorderRadius.only(
+                                                                        topLeft: Radius.circular(0),
+                                                                        topRight: Radius.circular(5),
+                                                                        bottomLeft: Radius.circular(0),
+                                                                        bottomRight: Radius.circular(5),
                                                                       )),
-                                                              child: const Center(
-                                                                child: Text(
-                                                                  'نوع المحتوئ :',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        16,
+                                                              child: Center(
+                                                                child: Text('نوع المحتوئ :',
+                                                                  style: TextStyle(
+                                                                    color: Colors.black,
+                                                                    fontSize: 13,
                                                                   ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
+                                                                  textAlign: TextAlign.center,
                                                                 ),
                                                               ),
                                                             )),
                                                         Expanded(
                                                             flex: 1,
-                                                            child:
-                                                                DecoratedBox(
-                                                              decoration:
-                                                                  const BoxDecoration(
-                                                                      color: Colors
-                                                                          .teal,
-                                                                      borderRadius:
-                                                                          BorderRadius.only(
-                                                                        topLeft:
-                                                                            Radius.circular(5),
-                                                                        topRight:
-                                                                            Radius.circular(0),
-                                                                        bottomLeft:
-                                                                            Radius.circular(5),
-                                                                        bottomRight:
-                                                                            Radius.circular(0),
+                                                            child: DecoratedBox(
+                                                              decoration: const BoxDecoration(
+                                                                      color: Colors.teal,
+                                                                      borderRadius: BorderRadius.only(
+                                                                        topLeft: Radius.circular(5),
+                                                                        topRight: Radius.circular(0),
+                                                                        bottomLeft: Radius.circular(5),
+                                                                        bottomRight: Radius.circular(0),
                                                                       )),
                                                               child: Center(
                                                                 child: Text(
                                                                   '${Plan_Data.plan_type_data(snapshot.data[index].type)}',
-                                                                  style:
-                                                                      const TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        16,
-                                                                  ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
+                                                                  style: const TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontSize: 13,),
+                                                                  textAlign: TextAlign.center,
                                                                 ),
                                                               ),
                                                             )),
                                                         const SizedBox(
                                                           width: 5,
                                                         ),
-                                                        Expanded(
+                                                        const Expanded(
                                                             flex: 2,
                                                             child:
-                                                                const DecoratedBox(
+                                                                DecoratedBox(
                                                               decoration:
                                                                   BoxDecoration(
-                                                                      color: Color(
-                                                                          0xFFF9FBE7),
-                                                                      borderRadius:
-                                                                          BorderRadius.only(
-                                                                        topLeft:
-                                                                            Radius.circular(0),
-                                                                        topRight:
-                                                                            Radius.circular(5),
-                                                                        bottomLeft:
-                                                                            Radius.circular(0),
-                                                                        bottomRight:
-                                                                            Radius.circular(5),
+                                                                      color: Color(0xFFF9FBE7),
+                                                                      borderRadius: BorderRadius.only(
+                                                                        topLeft: Radius.circular(0),
+                                                                        topRight: Radius.circular(5),
+                                                                        bottomLeft: Radius.circular(0),
+                                                                        bottomRight: Radius.circular(5),
                                                                       )),
-                                                              child: const Center(
-                                                                child: const Text(
-                                                                  'الحالة :',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        16,
+                                                              child: Center(
+                                                                child: Text('الحالة :',
+                                                                  style: TextStyle(
+                                                                    color: Colors.black,
+                                                                    fontSize: 13,
                                                                   ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
+                                                                  textAlign: TextAlign.center,
                                                                 ),
                                                               ),
                                                             )),
@@ -2898,16 +2832,11 @@ class _Today_HomeState extends State<Today_Home> {
                                                               child: Center(
                                                                 child: Text(
                                                                   '${Plan_Data.plan_done_data(snapshot.data[index].done)}',
-                                                                  style:
-                                                                      const TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        16,
+                                                                  style: const TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontSize: 13,
                                                                   ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
+                                                                  textAlign: TextAlign.center,
                                                                 ),
                                                               ),
                                                             )),
@@ -2926,10 +2855,10 @@ class _Today_HomeState extends State<Today_Home> {
                                                       mainAxisSize:
                                                           MainAxisSize.max,
                                                       children: [
-                                                        Expanded(
+                                                        const Expanded(
                                                             flex: 2,
                                                             child:
-                                                                const DecoratedBox(
+                                                                DecoratedBox(
                                                               decoration:
                                                                   BoxDecoration(
                                                                       color: Color(
@@ -2953,7 +2882,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                     color: Colors
                                                                         .black,
                                                                     fontSize:
-                                                                        16,
+                                                                    13,
                                                                   ),
                                                                   textAlign:
                                                                       TextAlign
@@ -2988,7 +2917,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                     color: Colors
                                                                         .white,
                                                                     fontSize:
-                                                                        16,
+                                                                    13,
                                                                   ),
                                                                   textAlign:
                                                                       TextAlign
@@ -3026,7 +2955,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                                     color: Colors
                                                                         .black,
                                                                     fontSize:
-                                                                        16,
+                                                                    13,
                                                                   ),
                                                                   textAlign:
                                                                       TextAlign
@@ -3042,30 +2971,20 @@ class _Today_HomeState extends State<Today_Home> {
                                                                   const BoxDecoration(
                                                                       color: Colors
                                                                           .teal,
-                                                                      borderRadius:
-                                                                          BorderRadius.only(
-                                                                        topLeft:
-                                                                            Radius.circular(5),
-                                                                        topRight:
-                                                                            Radius.circular(0),
-                                                                        bottomLeft:
-                                                                            Radius.circular(5),
-                                                                        bottomRight:
-                                                                            Radius.circular(0),
+                                                                      borderRadius: BorderRadius.only(
+                                                                        topLeft: Radius.circular(5),
+                                                                        topRight: Radius.circular(0),
+                                                                        bottomLeft: Radius.circular(5),
+                                                                        bottomRight: Radius.circular(0),
                                                                       )),
                                                               child: Center(
                                                                 child: Text(
                                                                   '${snapshot.data[index].number_page_end}',
-                                                                  style:
-                                                                      const TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        16,
+                                                                  style: const TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontSize: 13,
                                                                   ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
+                                                                  textAlign: TextAlign.center,
                                                                 ),
                                                               ),
                                                             )),
@@ -3093,31 +3012,21 @@ class _Today_HomeState extends State<Today_Home> {
                                                 updata_done_plan(
                                                     snapshot.data[index]);
                                               },
-                                              child: const Expanded(
-                                                  child: DecoratedBox(
-                                                decoration:
-                                                    BoxDecoration(
-                                                        color: Colors.teal,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .only(
-                                                          topLeft: Radius
-                                                              .circular(0),
-                                                          topRight: Radius
-                                                              .circular(0),
-                                                          bottomLeft: Radius
-                                                              .circular(10),
-                                                          bottomRight:
-                                                              Radius
-                                                                  .circular(
-                                                                      10),
-                                                        )),
-                                                child: const Center(
+                                              child: const DecoratedBox(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.teal,
+                                                    borderRadius: BorderRadius.only(
+                                                      topLeft: Radius.circular(0),
+                                                      topRight: Radius.circular(0),
+                                                      bottomLeft: Radius.circular(10),
+                                                      bottomRight: Radius.circular(10),
+                                                    )),
+                                                child: Center(
                                                   child: Text(
                                                     'تسجيل انجاز',
                                                     style: TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: 16,
+                                                      fontSize: 13,
                                                     ),
                                                     textAlign:
                                                         TextAlign.center,
@@ -3125,7 +3034,6 @@ class _Today_HomeState extends State<Today_Home> {
                                                 ),
                                               )),
                                             ),
-                                          )
                                         ],
                                       ),
                                     ));
@@ -3216,7 +3124,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     },
                                     style: const TextStyle(
                                       color: Colors.white,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -3238,10 +3146,10 @@ class _Today_HomeState extends State<Today_Home> {
                                 height: 50,
                                 child: Center(
                                   child: Text(
-                                    'عدد الساعات البحثية ',
+                                    'عدد اختصارات الكتب ',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -3300,7 +3208,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     },
                                     style: const TextStyle(
                                       color: Colors.white,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -3325,7 +3233,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     'عدد المقالات ',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -3384,7 +3292,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     },
                                     style: const TextStyle(
                                       color: Colors.white,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -3409,7 +3317,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     'عدد البحوث ',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -3467,7 +3375,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     },
                                     style: const TextStyle(
                                       color: Colors.white,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -3492,7 +3400,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     'عدد الكتب ',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -3646,7 +3554,7 @@ class _Today_HomeState extends State<Today_Home> {
                                   'كتاب',
                                   'بحث',
                                   'مقال',
-                                  'أخرئ',
+                                  'اختصار كتاب',
                                 ].map<DropdownMenuItem<String>>((String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
@@ -3657,7 +3565,7 @@ class _Today_HomeState extends State<Today_Home> {
                                   "حدد نوع الحتوئ",
                                   style: TextStyle(
                                       color: Colors.teal,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                       fontWeight: FontWeight.w600),
                                 ),
                                 onChanged: (String value) {
@@ -3758,7 +3666,7 @@ class _Today_HomeState extends State<Today_Home> {
                                       ' حدد تاريخ البدء \n $ed_read_start_date',
                                       style: const TextStyle(
                                         color: Colors.black,
-                                        fontSize: 16,
+                                        fontSize: 13,
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -3837,6 +3745,306 @@ class _Today_HomeState extends State<Today_Home> {
         });
   }
 
+  // تعديل بيانات الخطة البحثية
+  updataNew_Data_Plan(Plan_item_data item) {
+    showDialog(
+        context: context,
+        builder: (BuildContext conte) {
+
+          String ed_read_start_date = item.start_date, title_book = item.title,
+              v_type = Plan_Data.plan_type_data(item.type);
+          int number_pages = item.number_page, type_plan = item.type;
+
+          return StatefulBuilder(builder: (context, setState) {
+            return AlertDialog(
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(32.0))),
+              contentPadding: const EdgeInsets.only(top: 10.0),
+              content: Container(
+                width: 400.0,
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: key_form_read_book,
+                    child: Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          const SizedBox(
+                            height: 50,
+                          ),
+                          const Center(
+                            child: Text(
+                              "تسجيل البيانات ",
+                              style: TextStyle(fontSize: 20, color: Colors.teal),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              padding:const EdgeInsets.only(left: 10.0, right: 10.0),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(color: const Color(0xFF33b17c))),
+                              child: DropdownButton<String>(
+                                value: v_type,
+//                                  elevation: 100,
+                                style: const TextStyle(color: Colors.teal),
+                                items: <String>[
+                                  'كتاب',
+                                  'بحث',
+                                  'مقال',
+                                  'اختصار كتاب',
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                hint: const Text(
+                                  "حدد نوع الحتوئ",
+                                  style: TextStyle(
+                                      color: Colors.teal,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                onChanged: (String value) {
+                                  setState(() {
+                                    type_plan = getType_plan(value);
+                                    v_type = value;
+//                                      print(type_plan);
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              initialValue: "$title_book",
+                              decoration: const InputDecoration(
+                                labelText: 'العنوان :',
+                                labelStyle: TextStyle(color: Color(0xFF33b17c)),
+                                border: OutlineInputBorder(),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                    BorderSide(color: Color(0xFF33b17c))),
+                              ),
+                              validator: (value) {
+                                if (value.length < 2) {
+                                  return 'يجب تحديد عنوان صحيح ';
+                                } else {
+                                  title_book = value;
+                                  return null;
+                                }
+                              },
+                              maxLength: 30,
+                              onSaved: (value) =>
+                                  setState(() => title_book = value),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                                initialValue: "$number_pages",
+                                inputFormatters: [
+                                  //هذا عشان ما يكتب الا رقم بس
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]')),
+                                ],
+                                decoration: const InputDecoration(
+                                  labelText: 'عدد الصفحات :',
+                                  labelStyle: TextStyle(color: Color(0xFF33b17c)),
+                                  border: OutlineInputBorder(),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                      BorderSide(color: Color(0xFF33b17c))),
+                                ),
+                                validator: (value) {
+                                  if (value.length < 1) {
+                                    return 'يجب ادخال عدد الصفحات !';
+                                  } else {
+                                    number_pages = int.parse(value);
+                                    return null;
+                                  }
+                                },
+                                maxLength: 7,
+                                onSaved: (value) => setState(
+                                        () => number_pages = int.parse(value))),
+                          ),
+                          const Divider(),
+                          InkWell(
+                              onTap: () async {
+                                DateTime pickedDate = await showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(2000),
+                                    lastDate: DateTime(2101));
+                                ed_read_start_date =
+                                "${pickedDate.year}-${App_Data.getDate_month(pickedDate.month)}-${App_Data.getDate_Day(pickedDate.day)}";
+
+                                if (pickedDate != null) {
+                                  setState(() {
+                                    ed_read_start_date;
+                                  });
+                                } else {
+                                  print("Date is not selected");
+                                }
+                              },
+                              child: DecoratedBox(
+                                decoration: const BoxDecoration(
+                                    color: Color(0xFFF9FBE7),
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(0),
+                                      topRight: Radius.circular(10),
+                                      bottomLeft: Radius.circular(0),
+                                      bottomRight: Radius.circular(10),
+                                    )),
+                                child: SizedBox(
+                                  height: 50,
+                                  child: Center(
+                                    child: Text(
+                                      ' حدد تاريخ البدء \n $ed_read_start_date',
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 13,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              )),
+
+                          const SizedBox(height: 50,),
+
+                          InkWell(
+                            onTap: () {
+                              if (key_form_read_book.currentState.validate()) {
+                                // الاتصال وحفظ البيانات للسنة
+                                if (ed_read_start_date == null ||
+                                    ed_read_start_date.compareTo("0000-00-00") == 0) {
+                                  // الاضافة الجديدة
+
+                                  Fluttertoast.showToast(
+                                      msg: 'يجب اضافة الناريخ',
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.red,
+                                      textColor: Colors.yellow);
+                                } else {
+                                  API.Plan_Data_Updata(item.id, type_plan, title_book,
+                                      number_pages, item.number_page_end, item.done,
+                                      ed_read_start_date)
+                                      .then((user) {
+                                    if (user.id != 0) {
+                                      key_scaffold.currentState
+                                          .showSnackBar(const SnackBar(
+                                        content: Text(" تم التعديل "),
+                                      ));
+                                      Navigator.pop(conte);
+//                                        setState(() {});
+                                      get_data_numbers();
+
+                                    } else {
+                                      Fluttertoast.showToast(
+                                          msg: 'فشلت العملية',
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.BOTTOM,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor: Colors.red,
+                                          textColor: Colors.yellow);
+                                    }
+                                  });
+                                }
+                              } else {
+                                print("no");
+                              }
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                              decoration: const BoxDecoration(
+                                color: Color(0xFF33b17c),
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(32.0),
+                                    bottomRight: Radius.circular(32.0)),
+                              ),
+                              child: const Text(
+                                "حــفـظ",
+                                style: TextStyle(color: Colors.white),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          });
+        });
+  }
+
+  // حذف بيانات الخطة
+  delete_plan(int id){
+    showCupertinoDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return CupertinoAlertDialog(
+            title: const Text('حذف بيانات الخطة', style: TextStyle(color: Colors.red),),
+            content: const Text('هل انت متاكد من حذف الخطة !'),
+            actions: [
+
+              CupertinoDialogAction(
+                onPressed: () {
+                  setState(() {
+                    API.Plan_Data_Delete(id).then((user) {
+
+                      if (user.id != 0) {
+                        key_scaffold.currentState
+                            .showSnackBar(const SnackBar(
+                          content: Text(" تم الحذف "),
+                        ));
+                        Navigator.of(ctx).pop();
+                        setState(() {
+
+                        });
+                      } else {
+                        Fluttertoast.showToast(
+                            msg: 'فشلت العملية',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.yellow);
+                      }
+                    });
+
+                  });
+                },
+                child: const Text('حذف',style: TextStyle(color: Colors.red)),
+
+              ),
+
+              CupertinoDialogAction(
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+                child: const Text('الغاء'),
+
+              )
+            ],
+          );
+        });
+  }
+
   // تعديل انجاز على القراءة
   upData_done_Read_Listn(Read_And_Listen_item item_all) {
     int ed_num = 0;
@@ -3909,7 +4117,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     },
                                     style: const TextStyle(
                                       color: Colors.white,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -3934,7 +4142,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     ' $name_ed ',
                                     style: const TextStyle(
                                       color: Colors.black,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -4276,7 +4484,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     },
                                     style: const TextStyle(
                                       color: Colors.white,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -4301,7 +4509,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     'عدد الصفحات المنجزة ',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -4318,14 +4526,11 @@ class _Today_HomeState extends State<Today_Home> {
                     ),
                     InkWell(
                       onTap: () {
-                        int number_hour_done = 0,
-                            number_article_done = 0,
-                            number_search_done = 0,
-                            number_book_done = 0;
-                        int number_articles = 0,
-                            number_search = 0,
-                            number_books = 0,
-                            number_hours = 0;
+                        int number_hour_done = 0, number_article_done = 0,
+                            number_search_done = 0, number_book_done = 0;
+
+                        int number_articles = 0, number_search = 0,
+                            number_books = 0, number_hours = 0;
 
 //                        print (item.number_page_end + ed_num) ;
 
@@ -4376,37 +4581,39 @@ class _Today_HomeState extends State<Today_Home> {
 
 
                             }
-//
+
                             // التعديل على الرصيد المعرفي
                             if (item.type == 1) {
                               number_articles = 0;
                               number_search = 0;
                               number_books = 1;
-//                                        store_item_plan.number_hours = 0;
+                              number_hours = 0;
 
                             } else if (item.type == 2) {
                               number_articles = 0;
                               number_search = 1;
                               number_books = 0;
-//                                        store_item_plan.number_hours = 0;
+                              number_hours = 0;
 
                             } else if (item.type == 3) {
                               number_articles = 1;
                               number_search = 0;
                               number_books = 0;
-//                                        store_item_plan.number_hours = 0;
+                              number_hours = 0;
 
                             } else if (item.type == 4) {
                               number_articles = 0;
                               number_search = 0;
                               number_books = 0;
-//                                        store_item_plan.number_hours = 1;
+                              number_hours = 1;
+
                             }
                             // الاتصال وحفظ للرصيد المعرفي
                             API.StorePlan_Add(
                                     number_articles,
                                     number_search,
                                     number_books,
+                                    number_hours,
                                     ed_num,
                                     "${currDt.year}-${App_Data.getDate_month(currDt.month)}-${App_Data.getDate_Day(currDt.day)}")
                                 .then((user) {
@@ -4455,11 +4662,8 @@ class _Today_HomeState extends State<Today_Home> {
                           } else {
 
                             // الاتصال وحفظ للرصيد المعرفي
-                            API.StorePlan_Add(
-                                    number_articles,
-                                    number_search,
-                                    number_books,
-                                    ed_num,
+                            API.StorePlan_Add(number_articles, number_search,
+                                number_books, number_hours, ed_num,
                                     "${currDt.year}-${App_Data.getDate_month(currDt.month)}-${App_Data.getDate_Day(currDt.day)}")
                                 .then((user) {
                               if (user.id != 0) {
@@ -4798,10 +5002,9 @@ class _Today_HomeState extends State<Today_Home> {
                   itemBuilder: (conx, index) {
                     return Container(
                         margin: const EdgeInsets.all(5.0),
-                        height: 200,
+                        height: 220,
                         child: Card(
-                          shape:
-                          RoundedRectangleBorder(
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           elevation: 10,
@@ -4825,6 +5028,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     const EdgeInsets.all(8.0),
                                     child: Text(
                                       '${snapshot_reads.data[index].title}',
+                                      maxLines: 1,
                                       style: const TextStyle(
                                           color: Colors.teal,
                                           fontSize: 18),
@@ -4840,13 +5044,13 @@ class _Today_HomeState extends State<Today_Home> {
                                         itemBuilder: (BuildContext con) {
                                           return [
                                             PopupMenuItem(
-                                                child: Text('تعديل'),
+                                                child: const Text('تعديل'),
                                                 onTap: () {
                                                   // قراءة
                                                   updata_reads(snapshot_reads.data[index]);
                                                 }),
                                             PopupMenuItem(
-                                                child: Text('حذف'),
+                                                child: const Text('حذف'),
                                                 onTap: () {
                                                   delete_reads(snapshot_reads.data[index].id);
                                                 }
@@ -4863,7 +5067,7 @@ class _Today_HomeState extends State<Today_Home> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  height: 50,
+                                  height: 80,
                                   child: Column(
                                     children: [
                                       Expanded(
@@ -4888,7 +5092,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                       'عدد صفحات الكتاب',
                                                       style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 16,
+                                                        fontSize: 13,
                                                       ),
                                                       textAlign: TextAlign.center,
                                                     ),
@@ -4911,7 +5115,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                       '${snapshot_reads.data[index].number_pages}',
                                                       style: const TextStyle(
                                                         color: Colors.white,
-                                                        fontSize: 16,
+                                                        fontSize: 13,
                                                       ),
                                                       textAlign: TextAlign.center,
                                                     ),
@@ -4937,7 +5141,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                       'صفحة الوقوف',
                                                       style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 16,
+                                                        fontSize: 13,
                                                       ),
                                                       textAlign: TextAlign.center,
                                                     ),
@@ -4960,7 +5164,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                       '${snapshot_reads.data[index].number_pages}',
                                                       style: const TextStyle(
                                                         color: Colors.white,
-                                                        fontSize: 16,
+                                                        fontSize: 13,
                                                       ),
                                                       textAlign: TextAlign.center,
                                                     ),
@@ -4995,7 +5199,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                       'تم الانجاز :',
                                                       style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 16,
+                                                        fontSize: 13,
                                                       ),
                                                       textAlign: TextAlign.center,
                                                     ),
@@ -5044,7 +5248,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                       'الصفحات المتبقية',
                                                       style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 16,
+                                                        fontSize: 13,
                                                       ),
                                                       textAlign: TextAlign.center,
                                                     ),
@@ -5066,7 +5270,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                     child: Text('0',
                                                       style: TextStyle(
                                                         color: Colors.white,
-                                                        fontSize: 16,
+                                                        fontSize: 13,
                                                       ),
                                                       textAlign: TextAlign.center,
                                                     ),
@@ -5124,7 +5328,7 @@ class _Today_HomeState extends State<Today_Home> {
                   itemBuilder: (conx, index) {
                     return Container(
                         margin: const EdgeInsets.all(5.0),
-                        height: 200,
+                        height: 220,
                         child: Card(
                           shape:
                           RoundedRectangleBorder(
@@ -5151,6 +5355,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     const EdgeInsets.all(8.0),
                                     child: Text(
                                       '${snapshot_reads.data[index].title}',
+                                      maxLines: 1,
                                       style: const TextStyle(
                                           color: Colors.teal,
                                           fontSize: 18),
@@ -5158,20 +5363,18 @@ class _Today_HomeState extends State<Today_Home> {
                                   ),
 
                                   Padding(
-                                    padding:
-                                    const EdgeInsets
-                                        .all(5.0),
+                                    padding: const EdgeInsets.all(5.0),
                                     child: PopupMenuButton(
                                         iconSize: 25,
                                         itemBuilder: (BuildContext con) {
                                           return [
                                             PopupMenuItem(
-                                                child: Text('تعديل'),
+                                                child: const Text('تعديل'),
                                                 onTap: () {
                                                   updata_listn(snapshot_reads.data[index]);
                                                 }),
                                             PopupMenuItem(
-                                                child: Text('حذف'),
+                                                child: const Text('حذف'),
                                                 onTap: () {
                                                   delete_listn(snapshot_reads.data[index].id);
                                                 }
@@ -5188,7 +5391,7 @@ class _Today_HomeState extends State<Today_Home> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: SizedBox(
-                                  height: 50,
+                                  height: 80,
                                   child: Column(
                                     children: [
                                       Expanded(
@@ -5213,7 +5416,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                       'مدة البرنامج',
                                                       style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 16,
+                                                        fontSize: 13,
                                                       ),
                                                       textAlign: TextAlign.center,
                                                     ),
@@ -5233,10 +5436,11 @@ class _Today_HomeState extends State<Today_Home> {
                                                   child: Center(
                                                     child: Text(
                                                       //مدة البرنامج او عد دالصفحات
-                                                      '${getNumber_pags_or_listn(2, snapshot_reads.data[index].time_video)}',
+                                                      '${getNumber_pags_or_listn(
+                                                          2, snapshot_reads.data[index].time_video)}',
                                                       style: const TextStyle(
                                                         color: Colors.white,
-                                                        fontSize: 16,
+                                                        fontSize: 13,
                                                       ),
                                                       textAlign: TextAlign.center,
                                                     ),
@@ -5262,7 +5466,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                       'دقيقة الوقوف',
                                                       style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 16,
+                                                        fontSize: 13,
                                                       ),
                                                       textAlign: TextAlign.center,
                                                     ),
@@ -5285,7 +5489,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                       '${getNumber_pags_or_listn(2, snapshot_reads.data[index].time_video)}',
                                                       style: const TextStyle(
                                                         color: Colors.white,
-                                                        fontSize: 16,
+                                                        fontSize: 13,
                                                       ),
                                                       textAlign: TextAlign.center,
                                                     ),
@@ -5320,7 +5524,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                       'تم الانجاز :',
                                                       style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 16,
+                                                        fontSize: 13,
                                                       ),
                                                       textAlign: TextAlign.center,
                                                     ),
@@ -5369,7 +5573,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                       'المدة المتبقية',
                                                       style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 16,
+                                                        fontSize: 13,
                                                       ),
                                                       textAlign: TextAlign.center,
                                                     ),
@@ -5391,7 +5595,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                     child: Text('0',
                                                       style: TextStyle(
                                                         color: Colors.white,
-                                                        fontSize: 16,
+                                                        fontSize: 13,
                                                       ),
                                                       textAlign: TextAlign.center,
                                                     ),
@@ -5426,9 +5630,6 @@ class _Today_HomeState extends State<Today_Home> {
       );
 
 
-
-
-
     }else if(indx == 2 ){
       return FutureBuilder(
         future: API.Plan_Data_Get_Done(), // async work
@@ -5440,7 +5641,8 @@ class _Today_HomeState extends State<Today_Home> {
             default:
               if (snapshot.hasError) {
                 print(snapshot.error);
-                return Text('Error: ${snapshot.error}');
+//                return Text('Error: ${snapshot.error}');
+                return getMy_mktbah_done(indx);
               } else {
                 print(snapshot.data.length);
 
@@ -5467,32 +5669,46 @@ class _Today_HomeState extends State<Today_Home> {
                                     .spaceBetween,
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Padding(
-                                    padding:
-                                    const EdgeInsets.all(
-                                        15.0),
-                                    child: Text(
-                                      '${snapshot.data[index].title}',
-                                      style: const TextStyle(
-                                          color: Colors.teal,
-                                          fontSize: 18),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                    const EdgeInsets.all(
-                                        8.0),
-                                    child: InkWell(
-                                      onTap: () {
-                                        //more --------
-                                      },
-                                      child: const Icon(
-                                        Icons.more_vert,
-                                        color: Colors.green,
-                                        size: 30.0,
+                                  Expanded(
+                                    flex: 5,
+                                    child: Padding(
+                                      padding:
+                                      const EdgeInsets.all(
+                                          15.0),
+                                      child: Text(
+                                        '${snapshot.data[index].title}',
+                                        maxLines: 1,
+                                        style: const TextStyle(
+                                            color: Colors.teal,
+                                            fontSize: 18),
                                       ),
                                     ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child:Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: PopupMenuButton(
+                                          iconSize: 25,
+                                          itemBuilder: (BuildContext con) {
+                                            return [
+                                              PopupMenuItem(
+                                                  child: const Text('تعديل'),
+                                                  onTap: () {
+                                                    updataNew_Data_Plan(snapshot.data[index]);
+                                                  }
+                                              ),
+                                              PopupMenuItem(
+                                                  child: const Text('حذف'),
+                                                  onTap: () {
+                                                    delete_plan(snapshot.data[index].id);
+                                                  }
+                                              )
+                                            ];
+                                          }),
+                                    ),
                                   )
+
                                 ],
                               ),
                               const Divider(),
@@ -5500,123 +5716,83 @@ class _Today_HomeState extends State<Today_Home> {
                                 padding:
                                 const EdgeInsets.all(8.0),
                                 child: Container(
-                                  height: 50,
+                                  height: 80,
                                   child: Column(
                                     children: [
                                       Expanded(
                                         flex: 1,
                                         child: Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment
-                                              .spaceBetween,
-                                          mainAxisSize:
-                                          MainAxisSize.max,
+                                          MainAxisAlignment.spaceBetween,
+                                          mainAxisSize: MainAxisSize.max,
                                           children: [
                                             const Expanded(
                                                 flex: 2,
-                                                child:
-                                                DecoratedBox(
-                                                  decoration:
-                                                  BoxDecoration(
-                                                      color: Color(
-                                                          0xFFF9FBE7),
-                                                      borderRadius:
-                                                      BorderRadius.only(
-                                                        topLeft:
-                                                        Radius.circular(0),
-                                                        topRight:
-                                                        Radius.circular(5),
-                                                        bottomLeft:
-                                                        Radius.circular(0),
-                                                        bottomRight:
-                                                        Radius.circular(5),
+                                                child: DecoratedBox(
+                                                  decoration: BoxDecoration(
+                                                      color: Color(0xFFF9FBE7),
+                                                      borderRadius: BorderRadius.only(
+                                                        topLeft: Radius.circular(0),
+                                                        topRight: Radius.circular(5),
+                                                        bottomLeft: Radius.circular(0),
+                                                        bottomRight: Radius.circular(5),
                                                       )),
                                                   child: Center(
                                                     child: Text(
                                                       'نوع المحتوئ :',
-                                                      style:
-                                                      TextStyle(
-                                                        color: Colors
-                                                            .black,
-                                                        fontSize:
-                                                        16,
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 13,
                                                       ),
-                                                      textAlign:
-                                                      TextAlign
-                                                          .center,
+                                                      textAlign: TextAlign.center,
                                                     ),
                                                   ),
                                                 )),
                                             Expanded(
                                                 flex: 1,
-                                                child:
-                                                DecoratedBox(
-                                                  decoration:
-                                                  const BoxDecoration(
-                                                      color: Colors
-                                                          .teal,
-                                                      borderRadius:
-                                                      BorderRadius.only(
-                                                        topLeft:
-                                                        Radius.circular(5),
-                                                        topRight:
-                                                        Radius.circular(0),
-                                                        bottomLeft:
-                                                        Radius.circular(5),
-                                                        bottomRight:
-                                                        Radius.circular(0),
+                                                child: DecoratedBox(
+                                                  decoration: const BoxDecoration(
+                                                      color: Colors.teal,
+                                                      borderRadius: BorderRadius.only(
+                                                        topLeft: Radius.circular(5),
+                                                        topRight: Radius.circular(0),
+                                                        bottomLeft: Radius.circular(5),
+                                                        bottomRight: Radius.circular(0),
                                                       )),
                                                   child: Center(
                                                     child: Text(
                                                       '${Plan_Data.plan_type_data(snapshot.data[index].type)}',
                                                       style:
                                                       const TextStyle(
-                                                        color: Colors
-                                                            .white,
-                                                        fontSize:
-                                                        16,
+                                                        color: Colors.white,
+                                                        fontSize: 13,
                                                       ),
-                                                      textAlign:
-                                                      TextAlign
-                                                          .center,
+                                                      textAlign: TextAlign.center,
                                                     ),
                                                   ),
                                                 )),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
+                                            const SizedBox(width: 5,),
                                             const Expanded(
                                                 flex: 2,
-                                                child:
-                                                DecoratedBox(
+                                                child: DecoratedBox(
                                                   decoration:
                                                   BoxDecoration(
-                                                      color: Color(
-                                                          0xFFF9FBE7),
+                                                      color: Color(0xFFF9FBE7),
                                                       borderRadius:
                                                       BorderRadius.only(
-                                                        topLeft:
-                                                        Radius.circular(0),
-                                                        topRight:
-                                                        Radius.circular(5),
-                                                        bottomLeft:
-                                                        Radius.circular(0),
-                                                        bottomRight:
-                                                        Radius.circular(5),
+                                                        topLeft: Radius.circular(0),
+                                                        topRight: Radius.circular(5),
+                                                        bottomLeft: Radius.circular(0),
+                                                        bottomRight: Radius.circular(5),
                                                       )),
                                                   child: Center(
                                                     child: Text(
                                                       'الحالة :',
-                                                      style:
-                                                      TextStyle(
-                                                        color: Colors
-                                                            .black,
-                                                        fontSize:
-                                                        16,
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 13,
                                                       ),
-                                                      textAlign:
-                                                      TextAlign
-                                                          .center,
+                                                      textAlign: TextAlign.center,
                                                     ),
                                                   ),
                                                 )),
@@ -5626,32 +5802,22 @@ class _Today_HomeState extends State<Today_Home> {
                                                 DecoratedBox(
                                                   decoration:
                                                   const BoxDecoration(
-                                                      color: Colors
-                                                          .teal,
+                                                      color: Colors.teal,
                                                       borderRadius:
                                                       BorderRadius.only(
-                                                        topLeft:
-                                                        Radius.circular(5),
-                                                        topRight:
-                                                        Radius.circular(0),
-                                                        bottomLeft:
-                                                        Radius.circular(5),
-                                                        bottomRight:
-                                                        Radius.circular(0),
+                                                        topLeft: Radius.circular(5),
+                                                        topRight: Radius.circular(0),
+                                                        bottomLeft: Radius.circular(5),
+                                                        bottomRight: Radius.circular(0),
                                                       )),
                                                   child: Center(
                                                     child: Text(
                                                       '${Plan_Data.plan_done_data(snapshot.data[index].done)}',
-                                                      style:
-                                                      const TextStyle(
-                                                        color: Colors
-                                                            .white,
-                                                        fontSize:
-                                                        16,
+                                                      style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 13,
                                                       ),
-                                                      textAlign:
-                                                      TextAlign
-                                                          .center,
+                                                      textAlign: TextAlign.center,
                                                     ),
                                                   ),
                                                 )),
@@ -5664,117 +5830,78 @@ class _Today_HomeState extends State<Today_Home> {
                                       Expanded(
                                         flex: 1,
                                         child: Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment
-                                              .spaceBetween,
-                                          mainAxisSize:
-                                          MainAxisSize.max,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisSize: MainAxisSize.max,
                                           children: [
                                             const Expanded(
                                                 flex: 2,
-                                                child:
-                                                DecoratedBox(
+                                                child: DecoratedBox(
                                                   decoration:
                                                   BoxDecoration(
-                                                      color: Color(
-                                                          0xFFF9FBE7),
+                                                      color: Color(0xFFF9FBE7),
                                                       borderRadius:
                                                       BorderRadius.only(
-                                                        topLeft:
-                                                        Radius.circular(0),
-                                                        topRight:
-                                                        Radius.circular(5),
-                                                        bottomLeft:
-                                                        Radius.circular(0),
-                                                        bottomRight:
-                                                        Radius.circular(5),
+                                                        topLeft: Radius.circular(0),
+                                                        topRight: Radius.circular(5),
+                                                        bottomLeft: Radius.circular(0),
+                                                        bottomRight: Radius.circular(5),
                                                       )),
                                                   child: Center(
                                                     child: Text(
                                                       'عدد الصفحات :',
-                                                      style:
-                                                      TextStyle(
-                                                        color: Colors
-                                                            .black,
-                                                        fontSize:
-                                                        16,
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 13,
                                                       ),
-                                                      textAlign:
-                                                      TextAlign
-                                                          .center,
+                                                      textAlign: TextAlign.center,
                                                     ),
                                                   ),
                                                 )),
                                             Expanded(
                                                 flex: 1,
-                                                child:
-                                                DecoratedBox(
-                                                  decoration:
-                                                  const BoxDecoration(
-                                                      color: Colors
-                                                          .teal,
+                                                child: DecoratedBox(
+                                                  decoration: const BoxDecoration(
+                                                      color: Colors.teal,
                                                       borderRadius:
                                                       BorderRadius.only(
-                                                        topLeft:
-                                                        Radius.circular(5),
-                                                        topRight:
-                                                        Radius.circular(0),
-                                                        bottomLeft:
-                                                        Radius.circular(5),
-                                                        bottomRight:
-                                                        Radius.circular(0),
+                                                        topLeft: Radius.circular(5),
+                                                        topRight: Radius.circular(0),
+                                                        bottomLeft: Radius.circular(5),
+                                                        bottomRight: Radius.circular(0),
                                                       )),
                                                   child: Center(
                                                     child: Text(
                                                       '${snapshot.data[index].number_page}',
-                                                      style:
-                                                      const TextStyle(
-                                                        color: Colors
-                                                            .white,
-                                                        fontSize:
-                                                        16,
+                                                      style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 13,
                                                       ),
-                                                      textAlign:
-                                                      TextAlign
-                                                          .center,
+                                                      textAlign: TextAlign.center,
                                                     ),
                                                   ),
                                                 )),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
+                                            const SizedBox(width: 5,),
                                             const Expanded(
                                                 flex: 2,
-                                                child:
-                                                DecoratedBox(
+                                                child: DecoratedBox(
                                                   decoration:
                                                   BoxDecoration(
-                                                      color: Color(
-                                                          0xFFF9FBE7),
+                                                      color: Color(0xFFF9FBE7),
                                                       borderRadius:
                                                       BorderRadius.only(
-                                                        topLeft:
-                                                        Radius.circular(0),
-                                                        topRight:
-                                                        Radius.circular(5),
-                                                        bottomLeft:
-                                                        Radius.circular(0),
-                                                        bottomRight:
-                                                        Radius.circular(5),
+                                                        topLeft: Radius.circular(0),
+                                                        topRight: Radius.circular(5),
+                                                        bottomLeft: Radius.circular(0),
+                                                        bottomRight: Radius.circular(5),
                                                       )),
                                                   child: Center(
                                                     child: Text(
                                                       'المنجزة :',
-                                                      style:
-                                                      TextStyle(
-                                                        color: Colors
-                                                            .black,
-                                                        fontSize:
-                                                        16,
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 13,
                                                       ),
-                                                      textAlign:
-                                                      TextAlign
-                                                          .center,
+                                                      textAlign: TextAlign.center,
                                                     ),
                                                   ),
                                                 )),
@@ -5784,32 +5911,23 @@ class _Today_HomeState extends State<Today_Home> {
                                                 DecoratedBox(
                                                   decoration:
                                                   const BoxDecoration(
-                                                      color: Colors
-                                                          .teal,
+                                                      color: Colors.teal,
                                                       borderRadius:
                                                       BorderRadius.only(
-                                                        topLeft:
-                                                        Radius.circular(5),
-                                                        topRight:
-                                                        Radius.circular(0),
-                                                        bottomLeft:
-                                                        Radius.circular(5),
-                                                        bottomRight:
-                                                        Radius.circular(0),
+                                                        topLeft: Radius.circular(5),
+                                                        topRight: Radius.circular(0),
+                                                        bottomLeft: Radius.circular(5),
+                                                        bottomRight: Radius.circular(0),
                                                       )),
                                                   child: Center(
                                                     child: Text(
                                                       '${snapshot.data[index].number_page_end}',
                                                       style:
                                                       const TextStyle(
-                                                        color: Colors
-                                                            .white,
-                                                        fontSize:
-                                                        16,
+                                                        color: Colors.white,
+                                                        fontSize: 13,
                                                       ),
-                                                      textAlign:
-                                                      TextAlign
-                                                          .center,
+                                                      textAlign: TextAlign.center,
                                                     ),
                                                   ),
                                                 )),
@@ -5827,8 +5945,7 @@ class _Today_HomeState extends State<Today_Home> {
                                         'تاريخ البدء : ${snapshot.data[index].start_date} ',
                                         textAlign: TextAlign.center,
                                         maxLines: 1,
-                                        style:
-                                        const TextStyle(fontSize: 13),
+                                        style: const TextStyle(fontSize: 13),
                                       ))),
                             ],
                           ),
@@ -5841,10 +5958,6 @@ class _Today_HomeState extends State<Today_Home> {
           }
         },
       );
-
-
-
-
 
 
     }else if(indx == 3 ){

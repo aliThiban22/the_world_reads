@@ -174,8 +174,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   label: ('الإنجاز اليومي'),
                   backgroundColor: Colors.teal),
-              const BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
+              BottomNavigationBarItem(
+                  icon: Image.asset(
+                    'images/img_main_home.png',
+                    width: 30,
+                    height: 30),
                   label: ('الرئيسية'),
                   backgroundColor: Colors.teal),
             ],

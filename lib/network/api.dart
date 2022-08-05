@@ -919,6 +919,34 @@ class API {
     }
   }
 
+  static Future<List<Kadamat_Item>> Kadamat_Get_All(int type) async {
+    final Response response = await post(Uri.parse('$MAIN_URL/Kadamat_Get_All.php'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{"type": type}));
+
+    if (response.statusCode == 200) {
+//      print(response.body);
+//    return FoodItemApi.fromJson(json.decode(response.body));
+      final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+      return parsed
+          .map<Kadamat_Item>((item) => Kadamat_Item.fromJson(item))
+          .toList();
+
+//      final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+//      return parsed.map<Comment_item>((item) => Comment_item.fromJson(item))
+//          .toList();
+    } else {
+      Fluttertoast.showToast(
+          msg: _erorr,
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+    }
+  }
+
   static Future<Kadamat_Item> Kadamat_Add(String title, String body,
       String img, int price, int type, int number_day, String time_post, BuildContext cxn) async {
     final Response response = await post(Uri.parse('$MAIN_URL/Kadamat_Add.php'),
@@ -1188,8 +1216,43 @@ class API {
     }
   }
 
+  // حذف الخطة
+  static Future<Plan_item_data> Plan_Data_Delete(int id) async {
+
+    final Response response = await post(
+        Uri.parse('$MAIN_URL/Plan_Data_Delete.php'),
+        headers: <String, String>{
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          "id": id
+        }));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      if (Plan_item_data.fromJson(json.decode(response.body)).id != null) {
+        return Plan_item_data.fromJson(json.decode(response.body));
+      } else {
+        Fluttertoast.showToast(
+            msg: 'لا توجد بيانات ',
+            toastLength: Toast.LENGTH_SHORT,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.red,
+            textColor: Colors.yellow);
+      }
+    } else {
+      Fluttertoast.showToast(
+          msg: _erorr,
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.yellow);
+//      throw Exception('فشل الاتصال بالانترنت !');
+    }
+  }
+
   // اضافة بيانات خطة بحثية
-  static Future<Read_item> Plan_Data_Add(
+  static Future<Plan_item_data> Plan_Data_Add(
       int type, String title, int number_page, String start_date) async {
     final Response response = await post(
         Uri.parse('$MAIN_URL/Plan_Data_Add.php'),
@@ -1206,8 +1269,8 @@ class API {
 
     if (response.statusCode == 200) {
       print(response.body);
-      if (Read_item.fromJson(json.decode(response.body)).id != null) {
-        return Read_item.fromJson(json.decode(response.body));
+      if (Plan_item_data.fromJson(json.decode(response.body)).id != null) {
+        return Plan_item_data.fromJson(json.decode(response.body));
       } else {
         Fluttertoast.showToast(
             msg: 'لا توجد بيانات اشتراك للمستخدم',
@@ -1228,7 +1291,7 @@ class API {
   }
 
   // تعديل بيانات خطة بحثية
-  static Future<Read_item> Plan_Data_Updata(int id, int type, String title,
+  static Future<Plan_item_data> Plan_Data_Updata(int id, int type, String title,
       int number_page, int number_page_end, int done, String start_date) async {
     final Response response = await post(
         Uri.parse('$MAIN_URL/Plan_Data_Updata.php'),
@@ -1248,8 +1311,8 @@ class API {
 
     if (response.statusCode == 200) {
       print(response.body);
-      if (Read_item.fromJson(json.decode(response.body)).id != null) {
-        return Read_item.fromJson(json.decode(response.body));
+      if (Plan_item_data.fromJson(json.decode(response.body)).id != null) {
+        return Plan_item_data.fromJson(json.decode(response.body));
       } else {
         Fluttertoast.showToast(
             msg: 'لا توجد بيانات اشتراك للمستخدم',
@@ -1362,12 +1425,10 @@ class API {
   }
 
   // اضافة بيانات رصيد الخطة بحثية
-  static Future<Store_Item_Plan> StorePlan_Add(
-      int number_articles,
-      int number_search,
-      int number_books,
-      int number_pages,
+  static Future<Store_Item_Plan> StorePlan_Add(int number_articles,
+      int number_search, int number_books, int number_pages, int number_hours,
       String store_date) async {
+
     final Response response = await post(
         Uri.parse('$MAIN_URL/StorePlan_Add.php'),
         headers: <String, String>{
@@ -1378,7 +1439,7 @@ class API {
           "number_search": number_search,
           "number_books": number_books,
           "number_pages": number_pages,
-          "number_hours": 0,
+          "number_hours": number_hours,
           "store_date": store_date,
           "key_user": await User_Data.getUserDataId()
         }));
@@ -1762,7 +1823,7 @@ class API {
         body: jsonEncode(<String, dynamic>{"key_book": keyBook}));
 
     if (response.statusCode == 200) {
-//      print(response.body);
+      print(response.body);
 //    return FoodItemApi.fromJson(json.decode(response.body));
       if (Stars_item.fromJson(json.decode(response.body)).star != null) {
         return Stars_item.fromJson(json.decode(response.body));
