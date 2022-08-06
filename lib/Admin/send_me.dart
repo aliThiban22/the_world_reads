@@ -155,7 +155,7 @@ class _Sind_MeState extends State<Sind_Me> {
                                     child: const Text("ارسال",
                                         style: TextStyle(color: Colors.white, fontSize: 20))),
 
-                                SizedBox(height: 30,)
+                                const SizedBox(height: 30,)
                               ],
                             )
                         )
