@@ -22,7 +22,7 @@ class _Kadamat_addState extends State<Kadamat_add> {
 
   final key_form_stat = GlobalKey<FormState>();
   List<String> list_title = [
-    "خدمات القراءة والاستماع",
+    "خدمات تطوير القراءة والاستماع",
     "خدمات البحث العلمي",
     "خدمات الكتابة والتحرير والترجمة",
     "خدمات التصميم والمنتاج",
@@ -206,7 +206,7 @@ class _Kadamat_addState extends State<Kadamat_add> {
 //                                  elevation: 100,
                     style: TextStyle(color: Colors.teal),
                     items: <String>[
-                      'خدمات القراءة والاستماع',
+                      'خدمات تطوير القراءة والاستماع',
                       'خدمات البحث العلمي',
                       'خدمات الكتابة والتحرير والترجمة',
                       'خدمات التصميم والمنتاج',
@@ -361,7 +361,7 @@ class _Kadamat_addState extends State<Kadamat_add> {
   }
 
   int getType(String tt) {
-    if (tt.compareTo("خدمات القراءة والاستماع") == 0) {
+    if (tt.compareTo("خدمات تطوير القراءة والاستماع") == 0) {
       return 1;
     } else if (tt.compareTo("خدمات البحث العلمي") == 0) {
       return 2;

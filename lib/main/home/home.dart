@@ -102,16 +102,16 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                           const Expanded(
-                            flex: 1,
+                            flex: 4,
                             child: Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text('الخدمات'),
                             ),
                           ),
-                          const Expanded(
-                              flex: 3,
-                              child: Text("المزيد",style: TextStyle(color: Colors.blue),
-                                textDirection: TextDirection.ltr,),)
+//                          const Expanded(
+//                              flex: 3,
+//                              child: Text("المزيد",style: TextStyle(color: Colors.blue),
+//                                textDirection: TextDirection.ltr,),)
                         ],
                       ),
                 )
@@ -533,7 +533,7 @@ class _HomeState extends State<Home> {
 
     List<String> title = [
       "جميع الخدمات",
-      "خدمات القراءة والاستماع",
+      "خدمات تطوير القراءة والاستماع",
       "خدمات البحث العلمي",
       "خدمات الكتابة والتحرير والترجمة",
       "خدمات التصميم والمنتاج",
