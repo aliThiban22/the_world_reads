@@ -298,551 +298,552 @@ class _Today_HomeState extends State<Today_Home> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              child: Column(
-                children: [
-                  Container(
-                    color: Colors.teal,
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Center(
-                                child: Text(
-                                  ' هدف سنة ${currDt.year}',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
+            Column(
+              children: [
+                Container(
+                  color: Colors.teal,
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Center(
+                              child: Text(
+                                ' هدف سنة ${currDt.year}',
+                                style: const TextStyle(color: Colors.white),
                               ),
                             ),
-                            const SizedBox(
-                              height: 30,
-                              child: VerticalDivider(color: Colors.white),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Center(
-                                child: Text(
-                                  ' كتاب ${number_book_year}',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
+                          ),
+                          const SizedBox(
+                            height: 30,
+                            child: VerticalDivider(color: Colors.white),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Center(
+                              child: Text(
+                                ' كتاب ${number_book_year}',
+                                style: const TextStyle(color: Colors.white),
                               ),
                             ),
-                            const SizedBox(
-                              height: 30,
-                              child: VerticalDivider(color: Colors.white),
+                          ),
+                          const SizedBox(
+                            height: 30,
+                            child: VerticalDivider(color: Colors.white),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Center(
+                              child: Text(' برنامج $number_song_year',
+                                  style: const TextStyle(color: Colors.white)),
                             ),
-                            Expanded(
-                              flex: 1,
-                              child: Center(
-                                child: Text(' برنامج $number_song_year',
-                                    style: const TextStyle(color: Colors.white)),
-                              ),
-                            )
-                          ],
-                        ),
-                        const Divider(color: Colors.white),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Center(
-                                child: Text(
-                                  ' هدف شهر ${currDt.month}',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 30,
-                              child: VerticalDivider(color: Colors.white),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Center(
-                                child: Text(
-                                  ' كتاب ${number_book_month}',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
+                          )
+                        ],
+                      ),
+                      const Divider(color: Colors.white),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Center(
+                              child: Text(
+                                ' هدف شهر ${currDt.month}',
+                                style: const TextStyle(color: Colors.white),
                               ),
                             ),
-                            const SizedBox(
-                              height: 30,
-                              child: const VerticalDivider(color: Colors.white),
+                          ),
+                          const SizedBox(
+                            height: 30,
+                            child: VerticalDivider(color: Colors.white),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Center(
+                              child: Text(
+                                ' كتاب ${number_book_month}',
+                                style: const TextStyle(color: Colors.white),
+                              ),
                             ),
-                            Expanded(
-                              flex: 1,
-                              child: Center(
-                                child: Text(' برنامج $number_song_month',
-                                    style: const TextStyle(color: Colors.white)),
+                          ),
+                          const SizedBox(
+                            height: 30,
+                            child: const VerticalDivider(color: Colors.white),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Center(
+                              child: Text(' برنامج $number_song_month',
+                                  style: const TextStyle(color: Colors.white)),
+                            ),
+                          )
+                        ],
+                      ),
+                      const Divider(color: Colors.white),
+                      ElevatedButton(
+                          style: ButtonStyle(
+                            shadowColor: MaterialStateProperty.all(Colors.teal),
+                            // الظل
+                            padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
+                            // الهامش
+                            minimumSize: MaterialStateProperty.all(const Size(250, 40)),
+                            // حواف مائلة
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                            )
-                          ],
-                        ),
-                        const Divider(color: Colors.white),
-                        ElevatedButton(
-                            style: ButtonStyle(
-                              shadowColor: MaterialStateProperty.all(Colors.teal),
-                              // الظل
-                              padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
-                              // الهامش
-                              minimumSize: MaterialStateProperty.all(const Size(250, 40)),
-                              // حواف مائلة
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
+                            ),
 
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.white),
-                            ),
-                            onPressed: () {
-                              payStart(context, 1);
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Colors.white),
+                          ),
+                          onPressed: () {
+                            payStart(context, 1);
 
-                            },
-                            child: const Text("تسجيل اهداف سنة جديدة",
-                                style: TextStyle(
-                                    color: Colors.teal, fontSize: 18))),
-                        const SizedBox(height: 10,),
-                      ],
-                    ),
+                          },
+                          child: const Text("تسجيل اهداف سنة جديدة",
+                              style: TextStyle(
+                                  color: Colors.teal, fontSize: 18))),
+                      const SizedBox(height: 10,),
+                    ],
                   ),
-                  SizedBox(
-                    // height: 1000,
-                    child: FutureBuilder(
-                      future: API.Reads_Get(), // async work
-                      builder: (BuildContext contextBook,
-                          AsyncSnapshot<List<Read_item>> snapshot_reads) {
-                        switch (snapshot_reads.connectionState) {
-                          case ConnectionState.waiting:
-                            return const Center(child: CircularProgressIndicator());
-                          default:
-                            if (snapshot_reads.hasError) {
-//                              print(snapshot_reads.error);
-                              return  getReads();
-//                              return Text('Error: ${snapshot_reads.error}');
-                            } else {
-                              return FutureBuilder(
-                                future: API.Listen_Get(), // async work
-                                builder: (BuildContext contextBook,
-                                    AsyncSnapshot<List<Listen_Item>>snapshot_listns) {
-                                  switch (snapshot_listns.connectionState) {
-                                    case ConnectionState.waiting:
-                                      return const Center(
-                                          child: CircularProgressIndicator());
-                                    default:
-                                      if (snapshot_listns.hasError) {
-                                        print(snapshot_listns.error);
-                                        return  getReads();
-
-//                                        return Text(
-//                                            'Error: ${snapshot_listns.error}');
-                                      } else {
-//                                        print(snapshot_listns.data[0].title);
-
-                                        List<Read_And_Listen_item> list_all = new List.from([]);
-
-                                        // دوارة الكتب
-                                        for (int i = 0; i < snapshot_reads.data.length; i++) {
-                                          Read_And_Listen_item item_all = new Read_And_Listen_item();
-                                          item_all.id = snapshot_reads.data[i].id;
-                                          item_all.title = snapshot_reads.data[i].title;
-                                          item_all.day = snapshot_reads.data[i].start_date;
-                                          item_all.number_pages = snapshot_reads.data[i].number_pages;
-                                          item_all.number_stop = snapshot_reads.data[i].number_pages_end;
-                                          item_all.number_end = snapshot_reads.data[i].number_pages -
-                                              snapshot_reads.data[i].number_pages_end;
-                                          item_all.number_days = DateTime.now().difference(DateTime.parse(
-                                                  snapshot_reads.data[i].start_date)).inDays;
-                                          item_all.is_done = snapshot_reads.data[i].done;
-                                          item_all.type = 1;
-
-                                          list_all.add(item_all);
-                                        }
-
-                                        // دوارة الصوتيات
-                                        for (int i = 0; i < snapshot_listns.data.length; i++) {
-                                          Read_And_Listen_item item_all = new Read_And_Listen_item();
-                                          item_all.id = snapshot_listns.data[i].id;
-                                          item_all.title = snapshot_listns.data[i].title;
-                                          item_all.day = snapshot_listns.data[i].start_date;
-                                          item_all.number_pages = snapshot_listns.data[i].time_video;
-                                          item_all.number_stop = snapshot_listns.data[i].time_end;
-                                          item_all.number_end = snapshot_listns.data[i].time_video -
-                                              snapshot_listns.data[i].time_end;
-                                          item_all.number_days = DateTime.now().difference(DateTime.parse(
-                                                  snapshot_listns.data[i].start_date)).inDays;
-                                          item_all.is_done = snapshot_listns.data[i].done;
-                                          item_all.type = 2;
-
-                                          list_all.add(item_all);
-                                        }
-
-                                        return Container(
-                                          child: ListView.separated(
-                                            shrinkWrap: true,
-                                            physics: const NeverScrollableScrollPhysics(),
-                                            itemCount: list_all.length,
-                                            itemBuilder: (conx, index) {
-                                              return Container(
-                                                  margin: const EdgeInsets.all(5.0),
-                                                  height: 250,
-                                                  child: Card(
-                                                    shape: RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius.circular(10.0),
-                                                    ),
-                                                    elevation: 10,
-                                                    child: Column(
-                                                      children: [
-                                                        Row(
-                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                          mainAxisSize: MainAxisSize.max,
-                                                          children: [
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(8.0),
-                                                              child: Image.asset(
-                                                                '${getStrings_img(list_all[index].type)}',
-                                                                width: 40,
-                                                                height: 40,
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(8.0),
-                                                              child: Text(
-                                                                '${list_all[index].title}',
-                                                                maxLines: 1,
-                                                                style: const TextStyle(
-                                                                    color: Colors.teal,
-                                                                    fontSize: 18),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(5.0),
-                                                              child: PopupMenuButton(
-                                                                iconSize: 25,
-                                                                itemBuilder: (BuildContext con) {
-                                                                  return [
-                                                                    PopupMenuItem(
-                                                                        child: const Text('تعديل'),
-                                                                        onTap: () {
-                                                                          if(list_all[index].type == 1){
-                                                                            // قراءة
-                                                                            updata_reads(snapshot_reads.data[index]);
-
-                                                                          }else{
-                                                                            // استماع
-                                                                            updata_listn(snapshot_listns.data[
-                                                                              index - snapshot_reads.data.length]);
-
-
-                                                                          }
-                                                                        }),
-                                                                    PopupMenuItem(
-                                                                        child: const Text('حذف'),
-                                                                        onTap: () {
-                                                                          if(list_all[index].type == 1){
-                                                                            // قراءة
-                                                                            delete_reads(list_all[index].id);
-
-                                                                          }else{
-                                                                            // استماع
-                                                                            delete_listn(list_all[index].id);
-
-
-                                                                          }
-
-                                                                        })
-                                                                  ];
-                                                                }),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        const Divider(),
-                                                        Padding(
-                                                          padding: const EdgeInsets.all(8.0),
-                                                          child: Container(
-                                                            height: 80,
-                                                            child: Column(
-                                                              children: [
-                                                                Expanded(
-                                                                  flex: 1,
-                                                                  child: Row(
-                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                    mainAxisSize: MainAxisSize.max,
-                                                                    children: [
-                                                                      Expanded(
-                                                                          flex: 2,
-                                                                          child: DecoratedBox(
-                                                                            decoration: const BoxDecoration(
-                                                                                color: Color(0xFFF9FBE7),
-                                                                                borderRadius: BorderRadius.only(
-                                                                                  topLeft: Radius.circular(0),
-                                                                                  topRight: Radius.circular(5),
-                                                                                  bottomLeft: Radius.circular(0),
-                                                                                  bottomRight: Radius.circular(5),
-                                                                                )),
-
-                                                                            child: Center(
-                                                                              child: Text(
-                                                                                '${getStrings_num_pags(list_all[index].type)}',
-                                                                                style: const TextStyle(
-                                                                                  color: Colors.black,
-                                                                                  fontSize: 13,
-                                                                                ),
-                                                                                textAlign: TextAlign.center,
-                                                                              ),
-                                                                            ),
-                                                                          )),
-                                                                      Expanded(
-                                                                          flex: 1,
-                                                                          child: DecoratedBox(
-                                                                            decoration: const BoxDecoration(
-                                                                                color: Colors.teal,
-                                                                                borderRadius: BorderRadius.only(
-                                                                                  topLeft: Radius.circular(5),
-                                                                                  topRight: Radius.circular(0),
-                                                                                  bottomLeft: Radius.circular(5),
-                                                                                  bottomRight: Radius.circular(0),
-                                                                                )),
-
-                                                                            child: Center(
-                                                                              child: Text(
-                                                                                //مدة البرنامج او عد دالصفحات
-                                                                                '${getNumber_pags_or_listn(list_all[index].type, list_all[index].number_pages)}',
-                                                                                style: const TextStyle(
-                                                                                  color: Colors.white,
-                                                                                  fontSize: 13,
-                                                                                ),
-                                                                                textAlign: TextAlign.center,
-                                                                              ),
-                                                                            ),
-                                                                          )),
-                                                                      const SizedBox(width: 5,),
-
-                                                                      Expanded(
-                                                                          flex: 2,
-                                                                          child: DecoratedBox(
-                                                                            decoration: const BoxDecoration(
-                                                                                color: Color(0xFFF9FBE7),
-                                                                                borderRadius: BorderRadius.only(
-                                                                                  topLeft: Radius.circular(0),
-                                                                                  topRight: Radius.circular(5),
-                                                                                  bottomLeft: Radius.circular(0),
-                                                                                  bottomRight: Radius.circular(5),
-                                                                                )),
-
-                                                                            child: Center(
-                                                                              child: Text(
-                                                                                '${getStrings_num_stop(list_all[index].type)}',
-                                                                                style: const TextStyle(
-                                                                                  color: Colors.black,
-                                                                                  fontSize: 13,
-                                                                                ),
-                                                                                textAlign: TextAlign.center,
-                                                                              ),
-                                                                            ),
-                                                                          )),
-                                                                      Expanded(
-                                                                          flex: 1,
-                                                                          child: DecoratedBox(
-                                                                            decoration: const BoxDecoration(
-                                                                                color: Colors.teal,
-                                                                                borderRadius: BorderRadius.only(
-                                                                                  topLeft: Radius.circular(5),
-                                                                                  topRight: Radius.circular(0),
-                                                                                  bottomLeft: Radius.circular(5),
-                                                                                  bottomRight: Radius.circular(0),
-                                                                                )),
-                                                                            child: Center(
-                                                                              child: Text(
-                                                                                '${getNumber_pags_or_listn(list_all[index].type, list_all[index].number_stop)}',
-                                                                                style: const TextStyle(
-                                                                                  color: Colors.white,
-                                                                                  fontSize: 13,
-                                                                                ),
-                                                                                textAlign: TextAlign.center,
-                                                                              ),
-                                                                            ),
-                                                                          )),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(height: 5,),
-                                                                Expanded(
-                                                                  flex: 1,
-                                                                  child: Row(
-                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                    mainAxisSize: MainAxisSize.max,
-                                                                    children: [
-                                                                      const Expanded(
-                                                                          flex: 2,
-                                                                          child: DecoratedBox(
-                                                                            decoration: BoxDecoration(
-                                                                                color: Color(0xFFF9FBE7),
-                                                                                borderRadius: BorderRadius.only(
-                                                                                  topLeft: Radius.circular(0),
-                                                                                  topRight: Radius.circular(5),
-                                                                                  bottomLeft: Radius.circular(0),
-                                                                                  bottomRight: Radius.circular(5),
-                                                                                )),
-                                                                            child: Center(
-                                                                              child: Text(
-                                                                                'عدد ايام الانجاز',
-                                                                                style: TextStyle(
-                                                                                  color: Colors.black,
-                                                                                  fontSize: 13,
-                                                                                ),
-                                                                                textAlign: TextAlign.center,
-                                                                              ),
-                                                                            ),
-                                                                          )),
-                                                                      Expanded(
-                                                                          flex: 1,
-                                                                          child: DecoratedBox(
-                                                                            decoration: const BoxDecoration(
-                                                                                color: Colors.teal,
-                                                                                borderRadius: BorderRadius.only(
-                                                                                  topLeft: Radius.circular(5),
-                                                                                  topRight: Radius.circular(0),
-                                                                                  bottomLeft: Radius.circular(5),
-                                                                                  bottomRight: Radius.circular(0),
-                                                                                )),
-                                                                            child: Center(
-                                                                              child: Text(
-                                                                                '${list_all[index].number_days}',
-                                                                                style: const TextStyle(
-                                                                                  color: Colors.white,
-                                                                                  fontSize: 13,
-                                                                                ),
-                                                                                textAlign: TextAlign.center,
-                                                                              ),
-                                                                            ),
-                                                                          )),
-                                                                      const SizedBox(width: 5,),
-                                                                      Expanded(
-                                                                          flex: 2,
-                                                                          child: DecoratedBox(
-                                                                            decoration: const BoxDecoration(
-                                                                                color: Color(0xFFF9FBE7),
-                                                                                borderRadius: BorderRadius.only(
-                                                                                  topLeft: Radius.circular(0),
-                                                                                  topRight: Radius.circular(5),
-                                                                                  bottomLeft: Radius.circular(0),
-                                                                                  bottomRight: Radius.circular(5),
-                                                                                )),
-                                                                            child: Center(
-                                                                              child: Text(
-                                                                                '${getStrings_num_pag_end(list_all[index].type)}',
-                                                                                style: const TextStyle(
-                                                                                  color: Colors.black,
-                                                                                  fontSize: 13,
-                                                                                ),
-                                                                                textAlign: TextAlign.center,
-                                                                              ),
-                                                                            ),
-                                                                          )),
-                                                                      Expanded(
-                                                                          flex: 1,
-                                                                          child: DecoratedBox(
-                                                                            decoration: const BoxDecoration(
-                                                                                color: Colors.teal,
-                                                                                borderRadius: BorderRadius.only(
-                                                                                  topLeft: Radius.circular(5),
-                                                                                  topRight: Radius.circular(0),
-                                                                                  bottomLeft: Radius.circular(5),
-                                                                                  bottomRight: Radius.circular(0),
-                                                                                )),
-
-                                                                            child: Center(
-                                                                              child: Text(
-                                                                                '${getNumber_pags_or_listn(list_all[index].type, list_all[index].number_end)}',
-                                                                                style: const TextStyle(
-                                                                                  color: Colors.white,
-                                                                                  fontSize: 13,
-                                                                                ),
-                                                                                textAlign: TextAlign.center,
-                                                                              ),
-                                                                            ),
-                                                                          )),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Expanded(
-                                                            flex: 1,
-                                                            child: Center(
-                                                                child: Text(
-                                                              'تاريخ البدء : ${list_all[index].day} ',
-                                                              textAlign: TextAlign.center,
-                                                              maxLines: 1,
-                                                              style: const TextStyle(
-                                                                  fontSize: 13),
-                                                            ))),
-                                                        Expanded(
-                                                            flex: 1,
-                                                            child: InkWell(
-                                                              onTap: () {
-                                                                upData_done_Read_Listn(list_all[index]);
-                                                              },
-                                                              child: const DecoratedBox(
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                        color: Colors.teal,
-                                                                        borderRadius: BorderRadius.only(
-                                                                          topLeft: Radius.circular(0),
-                                                                          topRight: Radius.circular(0),
-                                                                          bottomLeft: Radius.circular(10),
-                                                                          bottomRight: Radius.circular(10),
-                                                                        )),
-                                                                child: Center(
-                                                                  child: Text(
-                                                                    'تسجيل انجاز',
-                                                                    style: TextStyle(
-                                                                      color: Colors.white,
-                                                                      fontSize: 13,
-                                                                    ),
-                                                                    textAlign: TextAlign.center,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            )),
-                                                      ],
-                                                    ),
-                                                  ));
-                                            },
-                                            separatorBuilder: (context, index) => const Divider(),
-                                          ),
-                                        );
-                                      }
-                                  }
-                                },
-                              );
-                            }
-                        }
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 100,)
-                ],
-              ),
+                ),
+                SizedBox(
+                  // height: 1000,
+                  child: conn_reads(),
+                ),
+                const SizedBox(height: 100,)
+              ],
             )
           ],
         ),
       ),
+    );
+  }
+
+  Widget conn_reads(){
+    return FutureBuilder(
+      future: API.Reads_Get(), // async work
+      builder: (BuildContext contextBook,
+          AsyncSnapshot<List<Read_item>> snapshot_reads) {
+        switch (snapshot_reads.connectionState) {
+          case ConnectionState.waiting:
+            return const Center(child: CircularProgressIndicator());
+          default: if (snapshot_reads.hasError) {
+//                              print(snapshot_reads.error);
+            return  conn_reads();
+//                              return Text('Error: ${snapshot_reads.error}');
+          } else {
+            return FutureBuilder(
+              future: API.Listen_Get(), // async work
+              builder: (BuildContext contextBook,
+                  AsyncSnapshot<List<Listen_Item>>snapshot_listns) {
+                switch (snapshot_listns.connectionState) {
+                  case ConnectionState.waiting:
+                    return const Center(
+                        child: CircularProgressIndicator());
+                  default:
+                    if (snapshot_listns.hasError) {
+                      print(snapshot_listns.error);
+                      return  conn_reads();
+
+//                                        return Text(
+//                                            'Error: ${snapshot_listns.error}');
+                    } else {
+//                                        print(snapshot_listns.data[0].title);
+
+                      List<Read_And_Listen_item> list_all = new List.from([]);
+
+                      // دوارة الكتب
+                      for (int i = 0; i < snapshot_reads.data.length; i++) {
+                        Read_And_Listen_item item_all = new Read_And_Listen_item();
+                        item_all.id = snapshot_reads.data[i].id;
+                        item_all.title = snapshot_reads.data[i].title;
+                        item_all.day = snapshot_reads.data[i].start_date;
+                        item_all.number_pages = snapshot_reads.data[i].number_pages;
+                        item_all.number_stop = snapshot_reads.data[i].number_pages_end;
+                        item_all.number_end = snapshot_reads.data[i].number_pages -
+                            snapshot_reads.data[i].number_pages_end;
+                        item_all.number_days = DateTime.now().difference(DateTime.parse(
+                            snapshot_reads.data[i].start_date)).inDays;
+                        item_all.is_done = snapshot_reads.data[i].done;
+                        item_all.type = 1;
+
+                        list_all.add(item_all);
+                      }
+
+                      // دوارة الصوتيات
+                      for (int i = 0; i < snapshot_listns.data.length; i++) {
+                        Read_And_Listen_item item_all = new Read_And_Listen_item();
+                        item_all.id = snapshot_listns.data[i].id;
+                        item_all.title = snapshot_listns.data[i].title;
+                        item_all.day = snapshot_listns.data[i].start_date;
+                        item_all.number_pages = snapshot_listns.data[i].time_video;
+                        item_all.number_stop = snapshot_listns.data[i].time_end;
+                        item_all.number_end = snapshot_listns.data[i].time_video -
+                            snapshot_listns.data[i].time_end;
+                        item_all.number_days = DateTime.now().difference(DateTime.parse(
+                            snapshot_listns.data[i].start_date)).inDays;
+                        item_all.is_done = snapshot_listns.data[i].done;
+                        item_all.type = 2;
+
+                        list_all.add(item_all);
+                      }
+
+                      return Container(
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: list_all.length,
+                          itemBuilder: (conx, index) {
+                            return Container(
+                                margin: const EdgeInsets.all(5.0),
+                                height: 250,
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  elevation: 10,
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Image.asset(
+                                              '${getStrings_img(list_all[index].type)}',
+                                              width: 40,
+                                              height: 40,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(
+                                              '${list_all[index].title}',
+                                              maxLines: 1,
+                                              style: const TextStyle(
+                                                  color: Colors.teal,
+                                                  fontSize: 18),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: PopupMenuButton(
+                                                iconSize: 25,
+                                                itemBuilder: (BuildContext con) {
+                                                  return [
+                                                    PopupMenuItem(
+                                                        child: const Text('تعديل'),
+                                                        onTap: () {
+                                                          if(list_all[index].type == 1){
+                                                            // قراءة
+                                                            updata_reads(snapshot_reads.data[index]);
+
+                                                          }else{
+                                                            // استماع
+                                                            updata_listn(snapshot_listns.data[
+                                                            index - snapshot_reads.data.length]);
+
+
+                                                          }
+                                                        }),
+                                                    PopupMenuItem(
+                                                        child: const Text('حذف'),
+                                                        onTap: () {
+                                                          if(list_all[index].type == 1){
+                                                            // قراءة
+                                                            delete_reads(list_all[index].id);
+
+                                                          }else{
+                                                            // استماع
+                                                            delete_listn(list_all[index].id);
+
+
+                                                          }
+
+                                                        })
+                                                  ];
+                                                }),
+                                          ),
+                                        ],
+                                      ),
+                                      const Divider(),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                          height: 80,
+                                          child: Column(
+                                            children: [
+                                              Expanded(
+                                                flex: 1,
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  children: [
+                                                    Expanded(
+                                                        flex: 2,
+                                                        child: DecoratedBox(
+                                                          decoration: const BoxDecoration(
+                                                              color: Color(0xFFF9FBE7),
+                                                              borderRadius: BorderRadius.only(
+                                                                topLeft: Radius.circular(0),
+                                                                topRight: Radius.circular(5),
+                                                                bottomLeft: Radius.circular(0),
+                                                                bottomRight: Radius.circular(5),
+                                                              )),
+
+                                                          child: Center(
+                                                            child: Text(
+                                                              '${getStrings_num_pags(list_all[index].type)}',
+                                                              style: const TextStyle(
+                                                                color: Colors.black,
+                                                                fontSize: 13,
+                                                              ),
+                                                              textAlign: TextAlign.center,
+                                                            ),
+                                                          ),
+                                                        )),
+                                                    Expanded(
+                                                        flex: 1,
+                                                        child: DecoratedBox(
+                                                          decoration: const BoxDecoration(
+                                                              color: Colors.teal,
+                                                              borderRadius: BorderRadius.only(
+                                                                topLeft: Radius.circular(5),
+                                                                topRight: Radius.circular(0),
+                                                                bottomLeft: Radius.circular(5),
+                                                                bottomRight: Radius.circular(0),
+                                                              )),
+
+                                                          child: Center(
+                                                            child: Text(
+                                                              //مدة البرنامج او عد دالصفحات
+                                                              '${getNumber_pags_or_listn(list_all[index].type, list_all[index].number_pages)}',
+                                                              style: const TextStyle(
+                                                                color: Colors.white,
+                                                                fontSize: 13,
+                                                              ),
+                                                              textAlign: TextAlign.center,
+                                                            ),
+                                                          ),
+                                                        )),
+                                                    const SizedBox(width: 5,),
+
+                                                    Expanded(
+                                                        flex: 2,
+                                                        child: DecoratedBox(
+                                                          decoration: const BoxDecoration(
+                                                              color: Color(0xFFF9FBE7),
+                                                              borderRadius: BorderRadius.only(
+                                                                topLeft: Radius.circular(0),
+                                                                topRight: Radius.circular(5),
+                                                                bottomLeft: Radius.circular(0),
+                                                                bottomRight: Radius.circular(5),
+                                                              )),
+
+                                                          child: Center(
+                                                            child: Text(
+                                                              '${getStrings_num_stop(list_all[index].type)}',
+                                                              style: const TextStyle(
+                                                                color: Colors.black,
+                                                                fontSize: 13,
+                                                              ),
+                                                              textAlign: TextAlign.center,
+                                                            ),
+                                                          ),
+                                                        )),
+                                                    Expanded(
+                                                        flex: 1,
+                                                        child: DecoratedBox(
+                                                          decoration: const BoxDecoration(
+                                                              color: Colors.teal,
+                                                              borderRadius: BorderRadius.only(
+                                                                topLeft: Radius.circular(5),
+                                                                topRight: Radius.circular(0),
+                                                                bottomLeft: Radius.circular(5),
+                                                                bottomRight: Radius.circular(0),
+                                                              )),
+                                                          child: Center(
+                                                            child: Text(
+                                                              '${getNumber_pags_or_listn(list_all[index].type, list_all[index].number_stop)}',
+                                                              style: const TextStyle(
+                                                                color: Colors.white,
+                                                                fontSize: 13,
+                                                              ),
+                                                              textAlign: TextAlign.center,
+                                                            ),
+                                                          ),
+                                                        )),
+                                                  ],
+                                                ),
+                                              ),
+                                              const SizedBox(height: 5,),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  children: [
+                                                    const Expanded(
+                                                        flex: 2,
+                                                        child: DecoratedBox(
+                                                          decoration: BoxDecoration(
+                                                              color: Color(0xFFF9FBE7),
+                                                              borderRadius: BorderRadius.only(
+                                                                topLeft: Radius.circular(0),
+                                                                topRight: Radius.circular(5),
+                                                                bottomLeft: Radius.circular(0),
+                                                                bottomRight: Radius.circular(5),
+                                                              )),
+                                                          child: Center(
+                                                            child: Text(
+                                                              'عدد ايام الانجاز',
+                                                              style: TextStyle(
+                                                                color: Colors.black,
+                                                                fontSize: 13,
+                                                              ),
+                                                              textAlign: TextAlign.center,
+                                                            ),
+                                                          ),
+                                                        )),
+                                                    Expanded(
+                                                        flex: 1,
+                                                        child: DecoratedBox(
+                                                          decoration: const BoxDecoration(
+                                                              color: Colors.teal,
+                                                              borderRadius: BorderRadius.only(
+                                                                topLeft: Radius.circular(5),
+                                                                topRight: Radius.circular(0),
+                                                                bottomLeft: Radius.circular(5),
+                                                                bottomRight: Radius.circular(0),
+                                                              )),
+                                                          child: Center(
+                                                            child: Text(
+                                                              '${list_all[index].number_days}',
+                                                              style: const TextStyle(
+                                                                color: Colors.white,
+                                                                fontSize: 13,
+                                                              ),
+                                                              textAlign: TextAlign.center,
+                                                            ),
+                                                          ),
+                                                        )),
+                                                    const SizedBox(width: 5,),
+                                                    Expanded(
+                                                        flex: 2,
+                                                        child: DecoratedBox(
+                                                          decoration: const BoxDecoration(
+                                                              color: Color(0xFFF9FBE7),
+                                                              borderRadius: BorderRadius.only(
+                                                                topLeft: Radius.circular(0),
+                                                                topRight: Radius.circular(5),
+                                                                bottomLeft: Radius.circular(0),
+                                                                bottomRight: Radius.circular(5),
+                                                              )),
+                                                          child: Center(
+                                                            child: Text(
+                                                              '${getStrings_num_pag_end(list_all[index].type)}',
+                                                              style: const TextStyle(
+                                                                color: Colors.black,
+                                                                fontSize: 13,
+                                                              ),
+                                                              textAlign: TextAlign.center,
+                                                            ),
+                                                          ),
+                                                        )),
+                                                    Expanded(
+                                                        flex: 1,
+                                                        child: DecoratedBox(
+                                                          decoration: const BoxDecoration(
+                                                              color: Colors.teal,
+                                                              borderRadius: BorderRadius.only(
+                                                                topLeft: Radius.circular(5),
+                                                                topRight: Radius.circular(0),
+                                                                bottomLeft: Radius.circular(5),
+                                                                bottomRight: Radius.circular(0),
+                                                              )),
+
+                                                          child: Center(
+                                                            child: Text(
+                                                              '${getNumber_pags_or_listn(list_all[index].type, list_all[index].number_end)}',
+                                                              style: const TextStyle(
+                                                                color: Colors.white,
+                                                                fontSize: 13,
+                                                              ),
+                                                              textAlign: TextAlign.center,
+                                                            ),
+                                                          ),
+                                                        )),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                          flex: 1,
+                                          child: Center(
+                                              child: Text(
+                                                'تاريخ البدء : ${list_all[index].day} ',
+                                                textAlign: TextAlign.center,
+                                                maxLines: 1,
+                                                style: const TextStyle(
+                                                    fontSize: 13),
+                                              ))),
+                                      Expanded(
+                                          flex: 1,
+                                          child: InkWell(
+                                            onTap: () {
+                                              upData_done_Read_Listn(list_all[index]);
+                                            },
+                                            child: const DecoratedBox(
+                                              decoration:
+                                              BoxDecoration(
+                                                  color: Colors.teal,
+                                                  borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(0),
+                                                    topRight: Radius.circular(0),
+                                                    bottomLeft: Radius.circular(10),
+                                                    bottomRight: Radius.circular(10),
+                                                  )),
+                                              child: Center(
+                                                child: Text(
+                                                  'تسجيل انجاز',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 13,
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                            ),
+                                          )),
+                                    ],
+                                  ),
+                                ));
+                          },
+                          separatorBuilder: (context, index) => const Divider(),
+                        ),
+                      );
+                    }
+                }
+              },
+            );
+          }
+        }
+      },
     );
   }
 
@@ -1329,7 +1330,7 @@ class _Today_HomeState extends State<Today_Home> {
                                     ));
                                     Navigator.pop(conte);
 
-                                    getReads();
+                                    get_select_tap(0);
                                     get_data_numbers();
 
                                   } else {
@@ -1586,7 +1587,7 @@ class _Today_HomeState extends State<Today_Home> {
                                       content: Text(" تم تعديل الكتاب "),
                                     ));
                                     Navigator.pop(conte);
-                                    getReads();
+                                    get_select_tap(0);
 //                                  setState(() {});
                                   } else {
                                     Fluttertoast.showToast(
@@ -2656,395 +2657,7 @@ class _Today_HomeState extends State<Today_Home> {
                 ),
                 SizedBox(
                   height: 2000,
-                  child: FutureBuilder(
-                    future: API.Plan_Data_Get(), // async work
-                    builder: (BuildContext contextBook,
-                        AsyncSnapshot<List<Plan_item_data>> snapshot) {
-                      switch (snapshot.connectionState) {
-                        case ConnectionState.waiting:
-                          return const Center(child: CircularProgressIndicator());
-                        default:
-                          if (snapshot.hasError) {
-                            print(snapshot.error);
-                            return getPlan();
-//                            return Text('Error: ${snapshot.error}');
-                          } else {
-                            return ListView.separated(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (conx, index) {
-                                return Container(
-                                    margin: const EdgeInsets.all(5.0),
-                                    height: 270,
-                                    child: Card(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10.0),
-                                      ),
-                                      elevation: 10,
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Expanded(
-                                                flex: 8,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(15.0),
-                                                  child: Text(
-                                                    '${snapshot.data[index].title}',
-                                                    maxLines: 1,
-                                                    style: const TextStyle(
-                                                        color: Colors.teal,
-                                                        fontSize: 18),
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                flex: 1,
-                                                child:Padding(
-                                                  padding: const EdgeInsets.all(5.0),
-                                                  child: PopupMenuButton(
-                                                      iconSize: 25,
-                                                      itemBuilder: (BuildContext con) {
-                                                        return [
-                                                          PopupMenuItem(
-                                                              child: const Text('تعديل'),
-                                                              onTap: () {
-                                                                updataNew_Data_Plan(snapshot.data[index]);
-                                                                }
-                                                              ),
-                                                          PopupMenuItem(
-                                                              child: const Text('حذف'),
-                                                              onTap: () {
-                                                                delete_plan(snapshot.data[index].id);
-                                                                }
-                                                              )
-                                                        ];
-                                                      }),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          const Divider(),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.all(8.0),
-                                            child: SizedBox(
-                                              height: 80,
-                                              child: Column(
-                                                children: [
-                                                  Expanded(
-                                                    flex: 1,
-                                                    child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      mainAxisSize: MainAxisSize.max,
-                                                      children: [
-                                                        const Expanded(
-                                                            flex: 2,
-                                                            child: DecoratedBox(
-                                                              decoration: BoxDecoration(
-                                                                      color: Color(0xFFF9FBE7),
-                                                                      borderRadius: BorderRadius.only(
-                                                                        topLeft: Radius.circular(0),
-                                                                        topRight: Radius.circular(5),
-                                                                        bottomLeft: Radius.circular(0),
-                                                                        bottomRight: Radius.circular(5),
-                                                                      )),
-                                                              child: Center(
-                                                                child: Text('نوع المحتوئ :',
-                                                                  style: TextStyle(
-                                                                    color: Colors.black,
-                                                                    fontSize: 13,
-                                                                  ),
-                                                                  textAlign: TextAlign.center,
-                                                                ),
-                                                              ),
-                                                            )),
-                                                        Expanded(
-                                                            flex: 1,
-                                                            child: DecoratedBox(
-                                                              decoration: const BoxDecoration(
-                                                                      color: Colors.teal,
-                                                                      borderRadius: BorderRadius.only(
-                                                                        topLeft: Radius.circular(5),
-                                                                        topRight: Radius.circular(0),
-                                                                        bottomLeft: Radius.circular(5),
-                                                                        bottomRight: Radius.circular(0),
-                                                                      )),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '${Plan_Data.plan_type_data(snapshot.data[index].type)}',
-                                                                  style: const TextStyle(
-                                                                    color: Colors.white,
-                                                                    fontSize: 13,),
-                                                                  textAlign: TextAlign.center,
-                                                                ),
-                                                              ),
-                                                            )),
-                                                        const SizedBox(
-                                                          width: 5,
-                                                        ),
-                                                        const Expanded(
-                                                            flex: 2,
-                                                            child:
-                                                                DecoratedBox(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                      color: Color(0xFFF9FBE7),
-                                                                      borderRadius: BorderRadius.only(
-                                                                        topLeft: Radius.circular(0),
-                                                                        topRight: Radius.circular(5),
-                                                                        bottomLeft: Radius.circular(0),
-                                                                        bottomRight: Radius.circular(5),
-                                                                      )),
-                                                              child: Center(
-                                                                child: Text('الحالة :',
-                                                                  style: TextStyle(
-                                                                    color: Colors.black,
-                                                                    fontSize: 13,
-                                                                  ),
-                                                                  textAlign: TextAlign.center,
-                                                                ),
-                                                              ),
-                                                            )),
-                                                        Expanded(
-                                                            flex: 1,
-                                                            child:
-                                                                DecoratedBox(
-                                                              decoration:
-                                                                  const BoxDecoration(
-                                                                      color: Colors
-                                                                          .teal,
-                                                                      borderRadius:
-                                                                          BorderRadius.only(
-                                                                        topLeft:
-                                                                            Radius.circular(5),
-                                                                        topRight:
-                                                                            Radius.circular(0),
-                                                                        bottomLeft:
-                                                                            Radius.circular(5),
-                                                                        bottomRight:
-                                                                            Radius.circular(0),
-                                                                      )),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '${Plan_Data.plan_done_data(snapshot.data[index].done)}',
-                                                                  style: const TextStyle(
-                                                                    color: Colors.white,
-                                                                    fontSize: 13,
-                                                                  ),
-                                                                  textAlign: TextAlign.center,
-                                                                ),
-                                                              ),
-                                                            )),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                  Expanded(
-                                                    flex: 1,
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        const Expanded(
-                                                            flex: 2,
-                                                            child:
-                                                                DecoratedBox(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                      color: Color(
-                                                                          0xFFF9FBE7),
-                                                                      borderRadius:
-                                                                          BorderRadius.only(
-                                                                        topLeft:
-                                                                            Radius.circular(0),
-                                                                        topRight:
-                                                                            Radius.circular(5),
-                                                                        bottomLeft:
-                                                                            Radius.circular(0),
-                                                                        bottomRight:
-                                                                            Radius.circular(5),
-                                                                      )),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  'عدد الصفحات :',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                    13,
-                                                                  ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                ),
-                                                              ),
-                                                            )),
-                                                        Expanded(
-                                                            flex: 1,
-                                                            child:
-                                                                DecoratedBox(
-                                                              decoration:
-                                                                  const BoxDecoration(
-                                                                      color: Colors
-                                                                          .teal,
-                                                                      borderRadius:
-                                                                          BorderRadius.only(
-                                                                        topLeft:
-                                                                            Radius.circular(5),
-                                                                        topRight:
-                                                                            Radius.circular(0),
-                                                                        bottomLeft:
-                                                                            Radius.circular(5),
-                                                                        bottomRight:
-                                                                            Radius.circular(0),
-                                                                      )),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '${snapshot.data[index].number_page}',
-                                                                  style:
-                                                                      const TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                    13,
-                                                                  ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                ),
-                                                              ),
-                                                            )),
-                                                        const SizedBox(
-                                                          width: 5,
-                                                        ),
-                                                        const Expanded(
-                                                            flex: 2,
-                                                            child:
-                                                                DecoratedBox(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                      color: Color(
-                                                                          0xFFF9FBE7),
-                                                                      borderRadius:
-                                                                          BorderRadius.only(
-                                                                        topLeft:
-                                                                            Radius.circular(0),
-                                                                        topRight:
-                                                                            Radius.circular(5),
-                                                                        bottomLeft:
-                                                                            Radius.circular(0),
-                                                                        bottomRight:
-                                                                            Radius.circular(5),
-                                                                      )),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  'المنجزة :',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                    13,
-                                                                  ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                ),
-                                                              ),
-                                                            )),
-                                                        Expanded(
-                                                            flex: 1,
-                                                            child:
-                                                                DecoratedBox(
-                                                              decoration:
-                                                                  const BoxDecoration(
-                                                                      color: Colors
-                                                                          .teal,
-                                                                      borderRadius: BorderRadius.only(
-                                                                        topLeft: Radius.circular(5),
-                                                                        topRight: Radius.circular(0),
-                                                                        bottomLeft: Radius.circular(5),
-                                                                        bottomRight: Radius.circular(0),
-                                                                      )),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '${snapshot.data[index].number_page_end}',
-                                                                  style: const TextStyle(
-                                                                    color: Colors.white,
-                                                                    fontSize: 13,
-                                                                  ),
-                                                                  textAlign: TextAlign.center,
-                                                                ),
-                                                              ),
-                                                            )),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                              flex: 1,
-                                              child: Center(
-                                                  child: Text(
-                                                'تاريخ البدء : ${snapshot.data[index].start_date} ',
-                                                textAlign: TextAlign.center,
-                                                maxLines: 1,
-                                                style:
-                                                    const TextStyle(fontSize: 13),
-                                              ))),
-                                          Expanded(
-                                            flex: 1,
-                                            child: InkWell(
-                                              onTap: () {
-                                                updata_done_plan(
-                                                    snapshot.data[index]);
-                                              },
-                                              child: const DecoratedBox(
-                                                decoration: BoxDecoration(
-                                                    color: Colors.teal,
-                                                    borderRadius: BorderRadius.only(
-                                                      topLeft: Radius.circular(0),
-                                                      topRight: Radius.circular(0),
-                                                      bottomLeft: Radius.circular(10),
-                                                      bottomRight: Radius.circular(10),
-                                                    )),
-                                                child: Center(
-                                                  child: Text(
-                                                    'تسجيل انجاز',
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 13,
-                                                    ),
-                                                    textAlign:
-                                                        TextAlign.center,
-                                                  ),
-                                                ),
-                                              )),
-                                            ),
-                                        ],
-                                      ),
-                                    ));
-                              },
-                              separatorBuilder: (context, index) =>
-                                  const Divider(),
-                            );
-                          }
-                      }
-                    },
-                  ),
+                  child: conn_paln(),
                 )
               ],
             )
@@ -3054,6 +2667,414 @@ class _Today_HomeState extends State<Today_Home> {
     );
   }
 
+  // الاتصال وجلب بيانات الخطة
+  Widget conn_paln(){
+    return FutureBuilder(
+      future: API.Plan_Data_Get(), // async work
+      builder: (BuildContext contextBook,
+          AsyncSnapshot<List<Plan_item_data>> snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+            return const Center(child: CircularProgressIndicator());
+          default:
+            if (snapshot.hasError) {
+              print(snapshot.error);
+              return conn_paln();
+//                            return Text('Error: ${snapshot.error}');
+            } else {
+              return ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+
+                itemCount: snapshot.data.length,
+                itemBuilder: (conx, index) {
+                  return Container(
+                      margin: const EdgeInsets.all(5.0),
+                      height: 270,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        elevation: 10,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(
+                                  flex: 8,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Text(
+                                      '${snapshot.data[index].title}',
+                                      maxLines: 1,
+                                      style: const TextStyle(
+                                          color: Colors.teal,
+                                          fontSize: 18),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: PopupMenuButton(
+                                        iconSize: 25,
+                                        itemBuilder: (BuildContext con) {
+                                          return [
+                                            PopupMenuItem(
+                                                child: const Text('تعديل'),
+                                                onTap: () {
+                                                  updataNew_Data_Plan(
+                                                      snapshot.data[index]);
+                                                }
+                                            ),
+                                            PopupMenuItem(
+                                                child: const Text('حذف'),
+                                                onTap: () {
+                                                  delete_plan(
+                                                      snapshot.data[index].id);
+                                                }
+                                            )
+                                          ];
+                                        }),
+                                  ),
+                                )
+                              ],
+                            ),
+                            const Divider(),
+                            Padding(
+                              padding:
+                              const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                height: 80,
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .spaceBetween,
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          const Expanded(
+                                              flex: 2,
+                                              child: DecoratedBox(
+                                                decoration: BoxDecoration(
+                                                    color: Color(0xFFF9FBE7),
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                      topLeft: Radius.circular(
+                                                          0),
+                                                      topRight: Radius.circular(
+                                                          5),
+                                                      bottomLeft: Radius
+                                                          .circular(0),
+                                                      bottomRight: Radius
+                                                          .circular(5),
+                                                    )),
+                                                child: Center(
+                                                  child: Text('نوع المحتوى :',
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 13,
+                                                    ),
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                              )),
+                                          Expanded(
+                                              flex: 1,
+                                              child: DecoratedBox(
+                                                decoration: const BoxDecoration(
+                                                    color: Colors.teal,
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                      topLeft: Radius.circular(
+                                                          5),
+                                                      topRight: Radius.circular(
+                                                          0),
+                                                      bottomLeft: Radius
+                                                          .circular(5),
+                                                      bottomRight: Radius
+                                                          .circular(0),
+                                                    )),
+                                                child: Center(
+                                                  child: Text(
+                                                    '${Plan_Data.plan_type_data(
+                                                        snapshot.data[index]
+                                                            .type)}',
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 13,),
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                              )),
+
+                                          const SizedBox(width: 5,),
+
+                                          const Expanded(
+                                              flex: 2,
+                                              child: DecoratedBox(
+                                                decoration:
+                                                BoxDecoration(
+                                                    color: Color(0xFFF9FBE7),
+                                                    borderRadius: BorderRadius.only(
+                                                      topLeft: Radius.circular(0),
+                                                      topRight: Radius.circular(5),
+                                                      bottomLeft: Radius.circular(0),
+                                                      bottomRight: Radius.circular(5),
+                                                    )),
+                                                child: Center(
+                                                  child: Text('الحالة :',
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 13,
+                                                    ),
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                              )),
+                                          Expanded(
+                                              flex: 1,
+                                              child: DecoratedBox(
+                                                decoration:
+                                                const BoxDecoration(
+                                                    color: Colors.teal,
+                                                    borderRadius:
+                                                    BorderRadius.only(
+                                                      topLeft: Radius.circular(5),
+                                                      topRight: Radius.circular(0),
+                                                      bottomLeft: Radius.circular(5),
+                                                      bottomRight: Radius.circular(0),
+                                                    )),
+                                                child: Center(
+                                                  child: Text(
+                                                    '${Plan_Data.plan_done_data(snapshot.data[index].done)}',
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 13,
+                                                    ),
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+
+                                    const SizedBox(height: 5,),
+
+                                    Expanded(
+                                      flex: 1,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment
+                                            .spaceBetween,
+                                        mainAxisSize:
+                                        MainAxisSize.max,
+                                        children: [
+                                          const Expanded(
+                                              flex: 2,
+                                              child:
+                                              DecoratedBox(
+                                                decoration:
+                                                BoxDecoration(
+                                                    color: Color(
+                                                        0xFFF9FBE7),
+                                                    borderRadius:
+                                                    BorderRadius.only(
+                                                      topLeft:
+                                                      Radius.circular(0),
+                                                      topRight:
+                                                      Radius.circular(5),
+                                                      bottomLeft:
+                                                      Radius.circular(0),
+                                                      bottomRight:
+                                                      Radius.circular(5),
+                                                    )),
+                                                child: Center(
+                                                  child: Text(
+                                                    'عدد الصفحات :',
+                                                    style:
+                                                    TextStyle(
+                                                      color: Colors
+                                                          .black,
+                                                      fontSize:
+                                                      13,
+                                                    ),
+                                                    textAlign:
+                                                    TextAlign
+                                                        .center,
+                                                  ),
+                                                ),
+                                              )),
+                                          Expanded(
+                                              flex: 1,
+                                              child:
+                                              DecoratedBox(
+                                                decoration:
+                                                const BoxDecoration(
+                                                    color: Colors
+                                                        .teal,
+                                                    borderRadius:
+                                                    BorderRadius.only(
+                                                      topLeft:
+                                                      Radius.circular(5),
+                                                      topRight:
+                                                      Radius.circular(0),
+                                                      bottomLeft:
+                                                      Radius.circular(5),
+                                                      bottomRight:
+                                                      Radius.circular(0),
+                                                    )),
+                                                child: Center(
+                                                  child: Text(
+                                                    '${snapshot.data[index]
+                                                        .number_page}',
+                                                    style:
+                                                    const TextStyle(
+                                                      color: Colors
+                                                          .white,
+                                                      fontSize:
+                                                      13,
+                                                    ),
+                                                    textAlign:
+                                                    TextAlign
+                                                        .center,
+                                                  ),
+                                                ),
+                                              )),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          const Expanded(
+                                              flex: 2,
+                                              child:
+                                              DecoratedBox(
+                                                decoration:
+                                                BoxDecoration(
+                                                    color: Color(
+                                                        0xFFF9FBE7),
+                                                    borderRadius:
+                                                    BorderRadius.only(
+                                                      topLeft:
+                                                      Radius.circular(0),
+                                                      topRight:
+                                                      Radius.circular(5),
+                                                      bottomLeft:
+                                                      Radius.circular(0),
+                                                      bottomRight:
+                                                      Radius.circular(5),
+                                                    )),
+                                                child: Center(
+                                                  child: Text(
+                                                    'المنجزة :',
+                                                    style:
+                                                    TextStyle(
+                                                      color: Colors
+                                                          .black,
+                                                      fontSize:
+                                                      13,
+                                                    ),
+                                                    textAlign:
+                                                    TextAlign
+                                                        .center,
+                                                  ),
+                                                ),
+                                              )),
+                                          Expanded(
+                                              flex: 1,
+                                              child:
+                                              DecoratedBox(
+                                                decoration:
+                                                const BoxDecoration(
+                                                    color: Colors
+                                                        .teal,
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                      topLeft: Radius.circular(
+                                                          5),
+                                                      topRight: Radius.circular(
+                                                          0),
+                                                      bottomLeft: Radius
+                                                          .circular(5),
+                                                      bottomRight: Radius
+                                                          .circular(0),
+                                                    )),
+                                                child: Center(
+                                                  child: Text(
+                                                    '${snapshot.data[index]
+                                                        .number_page_end}',
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 13,
+                                                    ),
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                                flex: 1,
+                                child: Center(
+                                    child: Text(
+                                      'تاريخ البدء : ${snapshot.data[index]
+                                          .start_date} ',
+                                      textAlign: TextAlign.center,
+                                      maxLines: 1,
+                                      style:
+                                      const TextStyle(fontSize: 13),
+                                    ))),
+                            Expanded(
+                              flex: 1,
+                              child: InkWell(
+                                  onTap: () {
+                                    updata_done_plan(
+                                        snapshot.data[index]);
+                                  },
+                                  child: const DecoratedBox(
+                                    decoration: BoxDecoration(
+                                        color: Colors.teal,
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(0),
+                                          topRight: Radius.circular(0),
+                                          bottomLeft: Radius.circular(10),
+                                          bottomRight: Radius.circular(10),
+                                        )),
+                                    child: Center(
+                                      child: Text(
+                                        'تسجيل انجاز',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 13,
+                                        ),
+                                        textAlign:
+                                        TextAlign.center,
+                                      ),
+                                    ),
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ));
+                },
+                separatorBuilder: (context, index) =>
+                const Divider(),
+              );
+            }
+        }
+      },
+    );
+  }
 // تعديل او اضافة سنة جديدة للبحث والتاليف
   addNew_year_Plan() {
     showDialog(
@@ -3562,7 +3583,7 @@ class _Today_HomeState extends State<Today_Home> {
                                   );
                                 }).toList(),
                                 hint: const Text(
-                                  "حدد نوع الحتوئ",
+                                  "حدد نوع الحتوى",
                                   style: TextStyle(
                                       color: Colors.teal,
                                       fontSize: 13,
@@ -3807,7 +3828,7 @@ class _Today_HomeState extends State<Today_Home> {
                                   );
                                 }).toList(),
                                 hint: const Text(
-                                  "حدد نوع الحتوئ",
+                                  "حدد نوع الحتوى",
                                   style: TextStyle(
                                       color: Colors.teal,
                                       fontSize: 13,
@@ -5642,7 +5663,7 @@ class _Today_HomeState extends State<Today_Home> {
               if (snapshot.hasError) {
                 print(snapshot.error);
 //                return Text('Error: ${snapshot.error}');
-                return getMy_mktbah_done(indx);
+                return  getMy_mktbah_done(indx);
               } else {
                 print(snapshot.data.length);
 
@@ -5739,7 +5760,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                       )),
                                                   child: Center(
                                                     child: Text(
-                                                      'نوع المحتوئ :',
+                                                      'نوع المحتوى :',
                                                       style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 13,
@@ -5765,7 +5786,7 @@ class _Today_HomeState extends State<Today_Home> {
                                                       style:
                                                       const TextStyle(
                                                         color: Colors.white,
-                                                        fontSize: 13,
+                                                        fontSize: 10,
                                                       ),
                                                       textAlign: TextAlign.center,
                                                     ),

@@ -497,17 +497,13 @@ class _Store_HomeState extends State<Store_Home> {
               width: 50,
               height: 50,
             ),
-            Text(
-              '   رصيد القراءة   ',
-              style: TextStyle(fontSize: 20),
+            const Text('   رصيد القراءة   ', style: TextStyle(fontSize: 20),
             )
           ],
         ),
       ),
 
-      SizedBox(
-        height: 40,
-      ),
+      const SizedBox(height: 40,),
 
       //انجاز اليوم
       Row(
@@ -516,10 +512,10 @@ class _Store_HomeState extends State<Store_Home> {
         children: [
           Expanded(
               flex: 1,
-              child: Container(
+              child: SizedBox(
                   width: 40,
                   height: 40,
-                  child: Center(child: Text(" يوم \n ${currDt.day} ")))),
+                  child: Center(child: Text(" يوم \n  ${currDt.day} ")))),
           Expanded(
               flex: 2,
               child: Center(
@@ -540,8 +536,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('صفحة'),
                         ),
                       ],
@@ -552,9 +548,7 @@ class _Store_HomeState extends State<Store_Home> {
         ],
       ),
 
-      Divider(
-        height: 40,
-      ),
+      const Divider(height: 40,),
 
       // انجاز الشهر
       Row(
@@ -563,10 +557,10 @@ class _Store_HomeState extends State<Store_Home> {
         children: [
           Expanded(
               flex: 1,
-              child: Container(
+              child: SizedBox(
                   width: 40,
                   height: 40,
-                  child: Center(child: Text(" شـهر \n  ${currDt.month} ")))),
+                  child: Center(child: Text(" شـهر \n   ${currDt.month} ")))),
           Expanded(
               flex: 2,
               child: Center(
@@ -587,8 +581,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('صفحة'),
                         ),
                       ],
@@ -608,8 +602,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('كتاب'),
                         ),
                       ],
@@ -620,9 +614,7 @@ class _Store_HomeState extends State<Store_Home> {
         ],
       ),
 
-      Divider(
-        height: 40,
-      ),
+      const Divider(height: 40,),
 
       // انجاز السنة
       Row(
@@ -631,10 +623,10 @@ class _Store_HomeState extends State<Store_Home> {
         children: [
           Expanded(
               flex: 1,
-              child: Container(
+              child: SizedBox(
                   width: 40,
                   height: 40,
-                  child: Center(child: Text(" سنــة \n  ${currDt.year} ")))),
+                  child: Center(child: Text(" سنــة \n${currDt.year} ")))),
           Expanded(
               flex: 2,
               child: Center(
@@ -655,8 +647,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('صفحة'),
                         ),
                       ],
@@ -676,8 +668,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('كتاب'),
                         ),
                       ],
@@ -688,18 +680,16 @@ class _Store_HomeState extends State<Store_Home> {
         ],
       ),
 
-      Divider(
-        height: 40,
-      ),
+      const Divider(height: 40,),
 
       // منذ البداية
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
-          Expanded(
+          const Expanded(
               flex: 1,
-              child: Container(
+              child: SizedBox(
                   width: 40,
                   height: 40,
                   child: Center(child: Text("منذ بداية التسجيل")))),
@@ -723,8 +713,8 @@ class _Store_HomeState extends State<Store_Home> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('صفحة'),
                         ),
                       ],
@@ -738,14 +728,14 @@ class _Store_HomeState extends State<Store_Home> {
                             color: Colors.teal[100],
                             width: 100,
                             child: Text(
-                              '${(max_num_book).roundToDouble()}',
+                              '${(max_num_book).round()}',
                               textAlign: TextAlign.center,
                               style: TextStyle(color: Colors.red[300]),
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text('كتاب'),
                         ),
                       ],
@@ -760,299 +750,287 @@ class _Store_HomeState extends State<Store_Home> {
 
   // الاستماع
   Widget getLisen() {
-    return Container(
-        child:
-            Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Image.asset(
-              'images/img_news_b_b.png',
-              width: 50,
-              height: 50,
-            ),
-            const Text(
-              '    رصيد الاستماع  ',
-              style: TextStyle(fontSize: 20),
-            )
-          ],
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Image.asset(
+          'images/img_news_b_b.png',
+          width: 50,
+          height: 50,
         ),
+        const Text(
+          '    رصيد الاستماع  ',
+          style: TextStyle(fontSize: 20),
+        )
+      ],
+    ),
       ),
 
-      SizedBox(
-        height: 40,
-      ),
+      const SizedBox(height: 40,),
 
       //انجاز اليوم
       Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Expanded(
-              flex: 1,
-              child: Container(
-                  width: 40,
-                  height: 40,
-                  child: Center(child: Text(" انجاز \n  ${currDt.day} ")))),
-          Expanded(
-              flex: 2,
-              child: Center(
-                child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisSize: MainAxisSize.max,
+    children: [
+      Expanded(
+          flex: 1,
+          child: SizedBox(
+              width: 40,
+              height: 40,
+              child: Center(child: Text(" انجاز \n   ${currDt.day} ")))),
+      Expanded(
+          flex: 2,
+          child: Center(
+            child: Column(
+              children: [
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '${(max_num_read_day_minute).roundToDouble()}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(5.0),
+                        color: Colors.teal[100],
+                        width: 100,
+                        child: Text(
+                          '${(max_num_read_day_minute).round()}',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.red[300]),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('دقيقة'),
-                        ),
-                      ],
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text('دقيقة'),
                     ),
                   ],
                 ),
-              ))
-        ],
+              ],
+            ),
+          ))
+    ],
       ),
 
-      Divider(
-        height: 40,
-      ),
+      const Divider(height: 40,),
 
       // انجاز الشهر
       Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Expanded(
-              flex: 1,
-              child: Container(
-                  width: 40,
-                  height: 40,
-                  child: Center(child: Text(" شـهر \n  ${currDt.month} ")))),
-          Expanded(
-              flex: 2,
-              child: Center(
-                child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisSize: MainAxisSize.max,
+    children: [
+      Expanded(
+          flex: 1,
+          child: SizedBox(
+              width: 40,
+              height: 40,
+              child: Center(child: Text(" شـهر \n   ${currDt.month} ")))),
+      Expanded(
+          flex: 2,
+          child: Center(
+            child: Column(
+              children: [
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '$max_num_read_month_minute',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(5.0),
+                        color: Colors.teal[100],
+                        width: 100,
+                        child: Text(
+                          '$max_num_read_month_minute',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.red[300]),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('دقيقة'),
-                        ),
-                      ],
+                      ),
                     ),
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '${(max_num_read_month_minute / 60).round()}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('ساعة'),
-                        ),
-                      ],
-                    )
+                    const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text('دقيقة'),
+                    ),
                   ],
                 ),
-              )),
-        ],
+                Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(5.0),
+                        color: Colors.teal[100],
+                        width: 100,
+                        child: Text(
+                          '${(max_num_read_month_minute / 60).round()}',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.red[300]),
+                        ),
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text('ساعة'),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )),
+    ],
       ),
 
-      Divider(
-        height: 40,
-      ),
+      const Divider(height: 40,),
 
       // انجاز السنة
       Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Expanded(
-              flex: 1,
-              child: Container(
-                  width: 40,
-                  height: 40,
-                  child: Center(child: Text(" سنــة \n  ${currDt.year} ")))),
-          Expanded(
-              flex: 2,
-              child: Center(
-                child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisSize: MainAxisSize.max,
+    children: [
+      Expanded(
+          flex: 1,
+          child: SizedBox(
+              width: 40,
+              height: 40,
+              child: Center(child: Text(" سنــة \n${currDt.year} ")))),
+      Expanded(
+          flex: 2,
+          child: Center(
+            child: Column(
+              children: [
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '$max_num_read_year_minute',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(5.0),
+                        color: Colors.teal[100],
+                        width: 100,
+                        child: Text(
+                          '$max_num_read_year_minute',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.red[300]),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('دقيقة'),
-                        ),
-                      ],
+                      ),
                     ),
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '${(max_num_read_year_minute / 60).round()}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('ساعة'),
-                        ),
-                      ],
-                    )
+                    const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text('دقيقة'),
+                    ),
                   ],
                 ),
-              )),
-        ],
+                Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(5.0),
+                        color: Colors.teal[100],
+                        width: 100,
+                        child: Text(
+                          '${(max_num_read_year_minute / 60).round()}',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.red[300]),
+                        ),
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text('ساعة'),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )),
+    ],
       ),
 
-      const Divider(
-        height: 40,
-      ),
+      const Divider(height: 40,),
 
       // منذ البداية
       Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Expanded(
-              flex: 1,
-              child: Container(
-                  width: 40,
-                  height: 40,
-                  child: const Center(child: Text("منذ بداية التسجيل")))),
-          Expanded(
-              flex: 2,
-              child: Center(
-                child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisSize: MainAxisSize.max,
+    children: [
+      const Expanded(
+          flex: 1,
+          child: SizedBox(
+              width: 40,
+              height: 40,
+              child: Center(child: Text("منذ بداية التسجيل")))),
+      Expanded(
+          flex: 2,
+          child: Center(
+            child: Column(
+              children: [
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '$max_num_minute',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(5.0),
+                        color: Colors.teal[100],
+                        width: 100,
+                        child: Text(
+                          '$max_num_minute',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.red[300]),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('دقيقة'),
-                        ),
-                      ],
+                      ),
                     ),
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '${(max_num_minute / 60).round()}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('ساعة'),
-                        ),
-                      ],
-                    )
+                    const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text('دقيقة'),
+                    ),
                   ],
                 ),
-              )),
-        ],
+                Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(5.0),
+                        color: Colors.teal[100],
+                        width: 100,
+                        child: Text(
+                          '${(max_num_minute / 60).round()}',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.red[300]),
+                        ),
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text('ساعة'),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )),
+    ],
       )
-    ]));
+    ]);
   }
 
   // التاليف
   Widget getPlan() {
-    return Container(
-        child:
-            Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Image.asset(
-              'images/img_news_b_d.png',
-              width: 50,
-              height: 50,
-            ),
-            const Text(
-              '    رصيد التاليف    ',
-              style: TextStyle(fontSize: 20),
-            )
+    Image.asset(
+      'images/img_news_b_d.png',
+      width: 50,
+      height: 50,
+    ),
+    const Text(
+      '    رصيد التاليف    ',
+      style: TextStyle(fontSize: 20),
+    )
           ],
         ),
       ),
@@ -1067,61 +1045,61 @@ class _Store_HomeState extends State<Store_Home> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
-              flex: 1,
-              child: Container(
-                  width: 40,
-                  height: 40,
-                  child: Center(child: Text(" انجاز \n  ${currDt.day} ")))),
+      flex: 1,
+      child: Container(
+          width: 40,
+          height: 40,
+          child: Center(child: Text(" انجاز \n    ${currDt.day} ")))),
           Expanded(
-              flex: 2,
-              child: Center(
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '${max_num_plan_day_pages}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('صفحة'),
-                        ),
-                      ],
+      flex: 2,
+      child: Center(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    color: Colors.teal[100],
+                    width: 100,
+                    child: Text(
+                      '${max_num_plan_day_pages}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red[300]),
                     ),
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '${max_num_plan_day_articles}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('مقال'),
-                        ),
-                      ],
-                    ),
-                  ],
+                  ),
                 ),
-              ))
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text('صفحة'),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    color: Colors.teal[100],
+                    width: 100,
+                    child: Text(
+                      '${max_num_plan_day_articles}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red[300]),
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text('مقال'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ))
         ],
       ),
 
@@ -1135,125 +1113,125 @@ class _Store_HomeState extends State<Store_Home> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
-              flex: 1,
-              child: Container(
-                  width: 40,
-                  height: 40,
-                  child: Center(child: Text(" شـهر \n  ${currDt.month} ")))),
+      flex: 1,
+      child: SizedBox(
+          width: 40,
+          height: 40,
+          child: Center(child: Text(" شـهر \n   ${currDt.month} ")))),
           Expanded(
-              flex: 2,
-              child: Center(
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '$max_num_plan_month_pages',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('صفحة'),
-                        ),
-                      ],
+      flex: 2,
+      child: Center(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    color: Colors.teal[100],
+                    width: 100,
+                    child: Text(
+                      '$max_num_plan_month_pages',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red[300]),
                     ),
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '${max_num_plan_month_articles}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('مقال'),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '${max_num_plan_month_search}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('بحث'),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '${max_num_plan_month_books}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('كتاب'),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '${max_num_plan_month_cook}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('اختصار كتاب'),
-                        ),
-                      ],
-                    )
-
-                  ],
+                  ),
                 ),
-              )),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text('صفحة'),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    color: Colors.teal[100],
+                    width: 100,
+                    child: Text(
+                      '${max_num_plan_month_articles}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red[300]),
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text('مقال'),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    color: Colors.teal[100],
+                    width: 100,
+                    child: Text(
+                      '${max_num_plan_month_search}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red[300]),
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text('بحث'),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    color: Colors.teal[100],
+                    width: 100,
+                    child: Text(
+                      '${max_num_plan_month_books}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red[300]),
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text('كتاب'),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    color: Colors.teal[100],
+                    width: 100,
+                    child: Text(
+                      '${max_num_plan_month_cook}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red[300]),
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text('اختصار كتاب'),
+                ),
+              ],
+            )
+
+          ],
+        ),
+      )),
         ],
       ),
 
@@ -1267,125 +1245,125 @@ class _Store_HomeState extends State<Store_Home> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
-              flex: 1,
-              child: Container(
-                  width: 40,
-                  height: 40,
-                  child: Center(child: Text(" سنــة \n  ${currDt.year} ")))),
+      flex: 1,
+      child: SizedBox(
+          width: 40,
+          height: 40,
+          child: Center(child: Text(" سنــة \n${currDt.year} ")))),
           Expanded(
-              flex: 2,
-              child: Center(
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '$max_num_plan_year_pages',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('صفحة'),
-                        ),
-                      ],
+      flex: 2,
+      child: Center(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    color: Colors.teal[100],
+                    width: 100,
+                    child: Text(
+                      '$max_num_plan_year_pages',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red[300]),
                     ),
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '${max_num_plan_year_articles}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('مقال'),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '${max_num_plan_year_search}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('بحث'),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '${max_num_plan_year_books}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('كتاب'),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '${max_num_plan_year_cook}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('اختصار كتاب'),
-                        ),
-                      ],
-                    )
-
-                  ],
+                  ),
                 ),
-              )),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text('صفحة'),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    color: Colors.teal[100],
+                    width: 100,
+                    child: Text(
+                      '${max_num_plan_year_articles}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red[300]),
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text('مقال'),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    color: Colors.teal[100],
+                    width: 100,
+                    child: Text(
+                      '${max_num_plan_year_search}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red[300]),
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text('بحث'),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    color: Colors.teal[100],
+                    width: 100,
+                    child: Text(
+                      '${max_num_plan_year_books}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red[300]),
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text('كتاب'),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    color: Colors.teal[100],
+                    width: 100,
+                    child: Text(
+                      '${max_num_plan_year_cook}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red[300]),
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text('اختصار كتاب'),
+                ),
+              ],
+            )
+
+          ],
+        ),
+      )),
         ],
       ),
 
@@ -1398,127 +1376,127 @@ class _Store_HomeState extends State<Store_Home> {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
+          const Expanded(
+      flex: 1,
+      child: SizedBox(
+          width: 40,
+          height: 40,
+          child: Center(child: Text("منذ بداية التسجيل")))),
           Expanded(
-              flex: 1,
-              child: Container(
-                  width: 40,
-                  height: 40,
-                  child: Center(child: Text("منذ بداية التسجيل")))),
-          Expanded(
-              flex: 2,
-              child: Center(
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '$max_num_pages_plan',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('صفحة'),
-                        ),
-                      ],
+      flex: 2,
+      child: Center(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    color: Colors.teal[100],
+                    width: 100,
+                    child: Text(
+                      '$max_num_pages_plan',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red[300]),
                     ),
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '${max_num_articles_plan}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('مقال'),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '${max_num_search_plan}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('بحث'),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '$max_num_books_plan',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('كتاب'),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            color: Colors.teal[100],
-                            width: 100,
-                            child: Text(
-                              '$max_num_cook_plan',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.red[300]),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('اختصار كتاب'),
-                        ),
-                      ],
-                    )
-                  ],
+                  ),
                 ),
-              )),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text('صفحة'),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    color: Colors.teal[100],
+                    width: 100,
+                    child: Text(
+                      '${max_num_articles_plan}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red[300]),
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text('مقال'),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    color: Colors.teal[100],
+                    width: 100,
+                    child: Text(
+                      '${max_num_search_plan}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red[300]),
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text('بحث'),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    color: Colors.teal[100],
+                    width: 100,
+                    child: Text(
+                      '$max_num_books_plan',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red[300]),
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text('كتاب'),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    color: Colors.teal[100],
+                    width: 100,
+                    child: Text(
+                      '$max_num_cook_plan',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red[300]),
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text('اختصار كتاب'),
+                ),
+              ],
+            )
+          ],
+        ),
+      )),
         ],
       )
-    ]));
+    ]);
   }
 }

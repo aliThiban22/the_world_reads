@@ -8,9 +8,9 @@ class Plan_Data {
     } else if (type == 3) {
       return "مقال";
     } else if (type == 4) {
-      return "اخرئ";
+      return "اختصار كتاب";
     } else {
-      return "اخرئ";
+      return "اخرى";
     }
   }
 

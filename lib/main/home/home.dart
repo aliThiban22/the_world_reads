@@ -368,58 +368,58 @@ class _HomeState extends State<Home> {
                           separatorBuilder: (context, index) => const Divider(),
                         ),
                       ),
-                      const Divider(),
-                      Padding(
-                          padding: EdgeInsets.all(1.0),
-                          child: InkWell(
-                            onTap: (){
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          Book_Lists('المستعذب من كتب الادب')));
-                            },
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child:Image.asset(
-                                    'images/img_esdarat_a.png',
-                                    width: 40.0,
-                                    height: 40.0,
-                                  )
-                                ),
-                                const Expanded(
-                                  flex: 3,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('المستعذب من كتب الادب'),
-                                  ),
-                                ),
-                                const Expanded(
-                                  flex: 2,
-                                  child: Text("المزيد",style: TextStyle(color: Colors.blue),
-                                    textDirection: TextDirection.ltr,),)
-                              ],
-                            ),
-                          )
-                      ),
-
-                      Container(
-                        margin: const EdgeInsets.all(2.0),
-                        height: 250,
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: listD.length,
-//                      shrinkWrap: true,
-//                      physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return Book_Item.bookItemWidget(
-                                listD[index], context);
-                          },
-                          separatorBuilder: (conx, index) => const Divider(),
-                        ),
-                      ),
+//                      const Divider(),
+//                      Padding(
+//                          padding: EdgeInsets.all(1.0),
+//                          child: InkWell(
+//                            onTap: (){
+//                              Navigator.push(
+//                                  context,
+//                                  MaterialPageRoute(
+//                                      builder: (context) =>
+//                                          Book_Lists('المستعذب من كتب الادب')));
+//                            },
+//                            child: Row(
+//                              children: [
+//                                Expanded(
+//                                  flex: 1,
+//                                  child:Image.asset(
+//                                    'images/img_esdarat_a.png',
+//                                    width: 40.0,
+//                                    height: 40.0,
+//                                  )
+//                                ),
+//                                const Expanded(
+//                                  flex: 3,
+//                                  child: Padding(
+//                                    padding: EdgeInsets.all(8.0),
+//                                    child: Text('المستعذب من كتب الادب'),
+//                                  ),
+//                                ),
+//                                const Expanded(
+//                                  flex: 2,
+//                                  child: Text("المزيد",style: TextStyle(color: Colors.blue),
+//                                    textDirection: TextDirection.ltr,),)
+//                              ],
+//                            ),
+//                          )
+//                      ),
+//
+//                      Container(
+//                        margin: const EdgeInsets.all(2.0),
+//                        height: 250,
+//                        child: ListView.separated(
+//                          scrollDirection: Axis.horizontal,
+//                          itemCount: listD.length,
+////                      shrinkWrap: true,
+////                      physics: NeverScrollableScrollPhysics(),
+//                          itemBuilder: (context, index) {
+//                            return Book_Item.bookItemWidget(
+//                                listD[index], context);
+//                          },
+//                          separatorBuilder: (conx, index) => const Divider(),
+//                        ),
+//                      ),
                       const Divider(),
                       Padding(
                           padding: EdgeInsets.all(1.0),
